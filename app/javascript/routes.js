@@ -12,6 +12,7 @@ export default (
     <Route path="/" name="Home" component={Full}>
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" name="Dashboard" component={Dashboard}/>
+      <Route path="courses" name="Courses" component={Dashboard}/>
     </Route>
   </Router>
 );
