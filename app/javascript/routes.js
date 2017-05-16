@@ -6,13 +6,16 @@ import Full from './containers/Full/'
 // import Simple from './containers/Simple/'
 
 import Dashboard from './views/Dashboard/'
+import Courses from './views/Courses'
+import Clients from './views/Clients/'
 
 export default (
   <Router history={browserHistory}>
     <Route path="/" name="Home" component={Full}>
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" name="Dashboard" component={Dashboard}/>
-      <Route path="courses" name="Courses" component={Dashboard}/>
+      <Route path="courses" name="Courses" component={Courses}/>
+      <Route path="clients" name="Clients" component={Clients}/>
     </Route>
   </Router>
 );

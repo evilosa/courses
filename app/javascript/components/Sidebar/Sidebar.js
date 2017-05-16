@@ -26,6 +26,9 @@ class Sidebar extends Component {
               <Link to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
             </li>
             <li className="nav-item">
+              <Link to={'/clients'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Clients</Link>
+            </li>
+            <li className="nav-item">
               <Link to={'/courses'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Courses</Link>
             </li>
           </ul>
