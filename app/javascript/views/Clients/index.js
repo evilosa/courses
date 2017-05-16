@@ -1,3 +1,5 @@
-import Clients from './Clients';
+//import Clients from './Clients';
+import List from './List';
+import New from './New';
 
-export default Clients;
+export default { List, New };

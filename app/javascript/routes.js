@@ -15,6 +15,11 @@ export default (
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" name="Dashboard" component={Dashboard}/>
       <Route path="courses" name="Courses" component={Courses}/>
+      <Route path="clients" name="Clients">
+        <IndexRoute component={Clients.List}/>
+        <Route path="list" name="Clients list" component={Clients.List}/>
+        <Route path="new" name="New client" component={Clients.New}/>
+      </Route>
       <Route path="clients" name="Clients" component={Clients}/>
     </Route>
   </Router>
