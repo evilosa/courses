@@ -13,20 +13,20 @@ class New extends Component {
               <div className="row">
                 <div className="col-sm-6 form-group">
                   <label for="title">Наименование</label>
-                  <input type="text" id="title" name="title" className="form-control" placeholder="Enter client title.."/>
+                  <input type="text" id="title" name="client[title]" className="form-control" placeholder="Enter client title.."/>
                 </div>
                 <div className="col-sm-6 from-group">
                   <label for="tax_number">ИНН</label>
-                  <input type="text" id="tax_number" name="tax_number" className="form-control" placeholder="Enter tax number"/>
+                  <input type="text" id="tax_number" name="client[tax_number]" className="form-control" placeholder="Enter tax number"/>
                 </div>
               </div>
               <div className="form-group">
                 <label for="full_name">Полное наименование</label>
-                <input type="password" id="full_name" name="full_name" className="form-control" placeholder="Enter full name.."/>
+                <input type="password" id="full_name" name="client[full_name]" className="form-control" placeholder="Enter full name.."/>
               </div>
               <div className="form-group">
                 <label for="description">Описание</label>
-                <textarea id="description" name="description" rows="7" className="form-control" placeholder="Описание"></textarea>
+                <textarea id="description" name="client[description]" rows="7" className="form-control" placeholder="Описание"></textarea>
               </div>
             </div>
             <div className="card-footer">

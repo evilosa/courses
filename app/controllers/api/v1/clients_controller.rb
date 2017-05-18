@@ -5,7 +5,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
 
   def create
     @client = Client.create(client_params)
-    respond_with(:api, :v1, @client)
+    render json: true
   end
 
   private
