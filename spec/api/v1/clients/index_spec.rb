@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Clients API' do
   describe 'GET #index' do
 

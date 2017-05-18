@@ -8,7 +8,7 @@ class New extends Component {
           <div className="card-header">
             <strong>Создание нового клиента</strong>
           </div>
-          <form action="/api/v1/clients/new" method="post">
+          <form action="/api/v1/clients" method="post">
             <div className="card-block">
               <div className="row">
                 <div className="col-sm-6 form-group">
