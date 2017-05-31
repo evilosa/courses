@@ -1,8 +1,8 @@
 export class Client {
   constructor() {
     this.id = null;
-    this.name = 'New client';
-    this.full_name = this.name;
+    this.title = 'New client';
+    this.full_name = this.title;
     this.tax_number = '';
     this.description = '';
     this.active = true;

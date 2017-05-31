@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import fetch from 'isomorphic-fetch';
 
-export class List extends Component {
+////////////////////////////////////////////////////////////////
+// Component
+////////////////////////////////////////////////////////////////
+
+export class ListComponent extends Component {
+  componentDidMount() {
+    this.props.fetch();
+  }
 
   render() {
     return (
@@ -84,3 +94,33 @@ export class List extends Component {
     )
   }
 }
+
+////////////////////////////////////////////////////////////////
+// Container
+////////////////////////////////////////////////////////////////
+
+const fetchClientsAction = dispatch => {
+  dispatch(actions.fetch());
+
+  return fetch('/api/v1/clients')
+    .then(response => response.json())
+    .then(items => dispatch(actions.fetchSuccess(items)))
+    .catch(error => dispatch(actions.fetchFailure(error)));
+};
+
+const mapStateToProps = state => {
+  return {
+    clients: state.clients
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetch: () => fetchClientsAction(dispatch)
+  };
+};
+
+export const List = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListComponent);

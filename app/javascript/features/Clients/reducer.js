@@ -10,7 +10,7 @@ export default (state = State, action) => {
     case t.FETCH_SUCCESS:
       return { ...state, itemsList: { items: action.items, error: null, isFetching: false }};
     case t.FETCH_FAILURE:
-      return { ...state, itemsList: { items: state.itemsList.items, error: action.error, isFetching: false}};
+      return { ...state, itemsList: { items: state.itemsList.items, error: action.error.message, isFetching: false}};
 
     default:
       return state;
