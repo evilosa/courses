@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import fetch from 'isomorphic-fetch';
 
+import { ListItem } from './ListItem';
+
 ////////////////////////////////////////////////////////////////
 // Component
 ////////////////////////////////////////////////////////////////
+
+const propTypes = {
+  actions: PropTypes.object.isRequired
+};
 
 export class ListComponent extends Component {
   componentDidMount() {
@@ -35,46 +41,7 @@ export class ListComponent extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Yiorgos Avraamu</td>
-                  <td>2012/01/01</td>
-                  <td>Member</td>
-                  <td>
-                    <span className="badge badge-success">Active</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Avram Tarasios</td>
-                  <td>2012/02/01</td>
-                  <td>Staff</td>
-                  <td>
-                    <span className="badge badge-danger">Banned</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Quintin Ed</td>
-                  <td>2012/02/01</td>
-                  <td>Admin</td>
-                  <td>
-                    <span className="badge badge-default">Inactive</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Enéas Kwadwo</td>
-                  <td>2012/03/01</td>
-                  <td>Member</td>
-                  <td>
-                    <span className="badge badge-warning">Pending</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Agapetus Tadeáš</td>
-                  <td>2012/01/21</td>
-                  <td>Staff</td>
-                  <td>
-                    <span className="badge badge-success">Active</span>
-                  </td>
-                </tr>
+                {this.props.list.items.map(t => <ListItem key={t.id} item={t}/>)}
                 </tbody>
               </table>
               <ul className="pagination">
@@ -95,6 +62,8 @@ export class ListComponent extends Component {
   }
 }
 
+ListComponent.propTypes = propTypes;
+
 ////////////////////////////////////////////////////////////////
 // Container
 ////////////////////////////////////////////////////////////////
@@ -110,7 +79,7 @@ const fetchClientsAction = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    clients: state.clients
+    list: state.list
   };
 };
 

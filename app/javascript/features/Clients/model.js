@@ -10,9 +10,11 @@ export class Client {
 }
 
 export const State = {
-  itemsList: { items: [], error: null, isFetching: false },
-  activeItem: { item: null, error: null, isFetching: false },
-  deletedItem: { item: null, error: null, isFetching: false}
+  items: [],
+  error: null,
+  isFetching: false,
+  activeItem: null,
+  deletedItem: null
 };
 
 export const filterActive = clients => clients.filter(t => t.active);
