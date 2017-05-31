@@ -24,6 +24,8 @@
 4) Login with postgresql user `sudo -i -u postgres`
 5) Open db console, run `psql`
 6) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';`
+7) To exit from psql type `\q`
+8) To logout from postgresql user type 'logout'
 7) Create `config/database.yml` from `config/database.sample` with your user and password
 
 ### Install QT5 for Capybara-webkit
