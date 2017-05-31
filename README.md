@@ -23,7 +23,7 @@
 3) Create db user `sudo -u postgres createuser --interactive`
 4) Login with postgresql user `sudo -i -u postgres`
 5) Open db console, run `psql`
-6) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';`
+6) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';` Change `username` and `password` to your operating system user and preferable password.
 7) To exit from psql type `\q`
 8) To logout from postgresql user type 'logout'
 7) Create `config/database.yml` from `config/database.sample` with your user and password
