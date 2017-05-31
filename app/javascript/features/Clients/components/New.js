@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class New extends Component {
+export class New extends Component {
   render() {
     return (
       <div>
@@ -8,7 +8,7 @@ class New extends Component {
           <div className="card-header">
             <strong>Создание нового клиента</strong>
           </div>
-          <form action="/api/v1/clients" method="post">
+          <form action="/api/v1/clients" method="post" data-remote="true">
             <div className="card-block">
               <div className="row">
                 <div className="col-sm-6 form-group">
@@ -22,7 +22,7 @@ class New extends Component {
               </div>
               <div className="form-group">
                 <label for="full_name">Полное наименование</label>
-                <input type="password" id="full_name" name="client[full_name]" className="form-control" placeholder="Enter full name.."/>
+                <input type="text" id="full_name" name="client[full_name]" className="form-control" placeholder="Enter full name.."/>
               </div>
               <div className="form-group">
                 <label for="description">Описание</label>
@@ -39,5 +39,3 @@ class New extends Component {
     );
   }
 }
-
-export default New;

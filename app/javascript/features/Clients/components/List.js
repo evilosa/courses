@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class List extends Component {
+export class List extends Component {
 
   render() {
     return (
@@ -11,7 +11,7 @@ class List extends Component {
             <div className="card-header">
               <i className="fa fa-align-justify"></i> Clients list
               <div className="card-actions">
-                <Link to={'/clients/new'}><i className="icon-speedometer"></i> {I18n.t('common.edit')}</Link>
+                <Link to={'/clients/new'}><i className="icon-speedometer"></i> {I18n.t('common.add')}</Link>
               </div>
             </div>
             <div className="card-block">
@@ -84,5 +84,3 @@ class List extends Component {
     )
   }
 }
-
-export default List;

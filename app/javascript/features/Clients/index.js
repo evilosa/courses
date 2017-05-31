@@ -1,5 +1,7 @@
-//import Clients from './Clients';
-import List from './List/index';
-import New from './New/index';
+import * as actions from './actions';
+import * as components from './components';
+import * as constants from './constants';
+import reducer from './reducer';
+import * as selectors from './selectors';
 
-export default { List, New };
+export default { actions, components, constants, reducer, selectors };
