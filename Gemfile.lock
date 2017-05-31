@@ -103,6 +103,8 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.1)
+    i18n-js (3.0.0)
+      i18n (~> 0.6, >= 0.6.6)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
@@ -259,6 +261,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   faker
+  i18n-js
   jbuilder (~> 2.5)
   json_spec
   launchy
@@ -284,4 +287,4 @@ DEPENDENCIES
   with_model
 
 BUNDLED WITH
-   1.14.6
+   1.15.0

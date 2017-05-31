@@ -11,7 +11,7 @@ class List extends Component {
             <div className="card-header">
               <i className="fa fa-align-justify"></i> Clients list
               <div className="card-actions">
-                <Link to={'/clients/new'}><i className="icon-speedometer"></i> Add</Link>
+                <Link to={'/clients/new'}><i className="icon-speedometer"></i> {I18n.t('common.edit')}</Link>
               </div>
             </div>
             <div className="card-block">

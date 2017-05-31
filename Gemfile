@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'responders'
 gem 'active_model_serializers'
-
+gem 'i18n-js'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
