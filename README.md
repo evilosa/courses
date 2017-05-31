@@ -46,16 +46,18 @@
 3) `sudo apt-get update && sudo apt-get install yarn`
 
 ### Common
-1) Create file `.env` in root folder from `.env-sample`
-2) `bundle`
-3) `npm install`
-4) `yarn install`
-5) `rake db:create db:migrate db:seed`
-6) `rake RAILS_ENV=test db:create db:migrate db:seed`
-7) Run in separate console:
+1) You must be in project folder
+2) Create file `.env` in root folder from `.env-sample`
+3) `gem install bundle'
+4) `bundle`
+5) `npm install`
+6) `yarn install`
+7) `rake db:create db:migrate db:seed`
+8) `rake RAILS_ENV=test db:create db:migrate db:seed`
+9) Run in separate console:
 * `rails server`
 * `bin/webpack-dev-server`
-8) Open `localhost:3000` in web browser
+10) Open `localhost:3000` in web browser
 
 ### Increasing the amount of inotify watchers for RubyMine
 
