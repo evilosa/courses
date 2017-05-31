@@ -2,9 +2,19 @@
 
 ## Full install for Ubuntu 16.04 LTS
 
-### Increasing the amount of inotify watchers for RubyMine
+### Install git
+1) `sudo apt install git`
 
-1) `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+### Install Ruby version manager (from rvm.io)
+1) `gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3`
+2) `\curl -sSL https://get.rvm.io | bash -s stable`
+3) In terminal open menu 'EDIT - Profile settings', select 'CMD' tab and check 'shell mode'
+4) Restart terminal
+5) `rvm install ruby-2.4.0`
+
+### Clone project
+1) In main projects folder type `git clone https://github.com/evilosa/sorc_courses`
+2) Move in to the project folder, it must create new rvm gemset 'ruby-2.4.0@sorc_courses'
 
 ### Install PostgreSQL 9.5
 
@@ -19,6 +29,14 @@
 ### Install QT5 for Capybara-webkit
 
 1) `sudo apt-get install qt5-default libqt5webkit5-dev`
+
+### Install NPM & Node
+1) `sudo apt install npm`
+2) `sudo apt install nodejs-legacy`
+3) Type `node -v`, if your version is smaller than 7.1, then type next commands
+* `sudo npm cache clean -f`
+* `sudo npm install -g n`
+* `sudo n stable`
 
 ### Install Yarn
 1) `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
@@ -36,3 +54,7 @@
 * `rails server`
 * `bin/webpack-dev-server`
 8) Open `localhost:3000` in web browser
+
+### Increasing the amount of inotify watchers for RubyMine
+
+1) `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
