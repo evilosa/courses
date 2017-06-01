@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class New extends Component {
+export class Item extends Component {
   render() {
     return (
       <div>

@@ -25,7 +25,7 @@ export class ListComponent extends Component {
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
-              <i className="fa fa-align-justify"></i> Clients list
+              <i className="fa fa-align-justify"></i> {I18n.t('client.header.list')}
               <div className="card-actions">
                 <Link to={'/clients/new'}><i className="icon-speedometer"></i> {I18n.t('common.add')}</Link>
               </div>
@@ -34,14 +34,16 @@ export class ListComponent extends Component {
               <table className="table table-striped">
                 <thead>
                 <tr>
-                  <th>Username</th>
-                  <th>Date registered</th>
-                  <th>Role</th>
+                  <th>#</th>
+                  <th>{I18n.t('client.field.title')}</th>
+                  <th>{I18n.t('client.field.tax_number')}</th>
+                  <th>{I18n.t('client.field.created_at')}</th>
                   <th>Status</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.list.items.map(t => <ListItem key={t.id} item={t}/>)}
+                {this.props.list.map(t => <ListItem key={t.id} item={t}/>)}
                 </tbody>
               </table>
               <ul className="pagination">
@@ -79,7 +81,7 @@ const fetchClientsAction = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    list: state.list
+    list: state.clients.items
   };
 };
 

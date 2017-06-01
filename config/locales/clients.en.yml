@@ -1,0 +1,16 @@
+en:
+  client:
+    header:
+      list: 'Clients list'
+      new: 'New client'
+      edit: 'Edit client'
+      remove: 'Remove client'
+    link:
+      list: 'Clients'
+      item: 'Client'
+    field:
+      title: 'Title'
+      full_name: 'Full name'
+      tax_number: 'Tax №'
+      description: 'Description'
+      created_at: 'Created at'

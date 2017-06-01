@@ -16,7 +16,7 @@ export default (
     <Route path="clients" name="Clients">
       <IndexRoute component={Clients.components.List}/>
       <Route path="list" name="Clients list" component={Clients.components.List}/>
-      <Route path="new" name="New client" component={Clients.components.New}/>
+      <Route path="new" name="New client" component={Clients.components.Item}/>
     </Route>
   </Route>
 );
