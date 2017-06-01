@@ -11,15 +11,15 @@ export const edit = (new_title, new_full_name, new_tax_number, new_description) 
 });
 
 export const fetch = () => ({
-  type: t.FETCH
+  type: t.FETCH_CLIENTS
 });
 
 export const fetchSuccess = items => ({
-  type: t.FETCH_SUCCESS,
+  type: t.FETCH_CLIENTS_SUCCESS,
   items: items
 });
 
 export const fetchFailure = error => ({
-  type: t.FETCH_FAILURE,
+  type: t.FETCH_CLIENTS_FAILURE,
   error: error
 });

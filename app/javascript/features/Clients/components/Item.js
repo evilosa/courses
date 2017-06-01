@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+
+const propTypes = {
+  item: PropTypes.object.PropTypes
+};
 
 export class Item extends Component {
   render() {
@@ -39,3 +43,5 @@ export class Item extends Component {
     );
   }
 }
+
+Item.propTypes = propTypes;

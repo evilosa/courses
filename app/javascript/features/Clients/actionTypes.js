@@ -10,6 +10,6 @@ export const DELETE = 'clients/DELETE';
 export const DELETE_SUCCESS = 'clients/DELETE_SUCCESS';
 export const DELETE_FAILURE = 'clients/DELETE_FAILURE';
 
-export const FETCH = 'clients/FETCH';
-export const FETCH_SUCCESS = 'clients/FETCH_SUCCESS';
-export const FETCH_FAILURE = 'clients/FETCH_FAILURE';
+export const FETCH_CLIENTS = 'clients/FETCH_CLIENTS';
+export const FETCH_CLIENTS_SUCCESS = 'clients/FETCH_CLIENTS_SUCCESS';
+export const FETCH_CLIENTS_FAILURE = 'clients/FETCH_CLIENTS_FAILURE';
