@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
-import Aside from '../Aside';
-import Footer from '../Footer';
+import Header from '../Header/index';
+import Sidebar from '../Sidebar/index';
+import Aside from '../Aside/index';
+import Footer from '../Footer/index';
 
 import Breadcrumbs from 'react-breadcrumbs';
 

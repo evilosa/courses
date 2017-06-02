@@ -1,23 +1,26 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as models from '../models';
 
 const propTypes = {
-  item: PropTypes.object.PropTypes
+  item: PropTypes.object.isRequired
 };
 
-export class Item extends Component {
+class ItemPresentation extends Component {
   render() {
+    const { item } = this.props;
     return (
       <div>
         <div className="card">
           <div className="card-header">
             <strong>Создание нового клиента</strong>
           </div>
-          <form action="/api/v1/clients" method="post" data-remote="true">
+          <form action="/api/v1/clients" method="post">
             <div className="card-block">
               <div className="row">
                 <div className="col-sm-6 form-group">
                   <label for="title">Наименование</label>
-                  <input type="text" id="title" name="client[title]" className="form-control" placeholder="Enter client title.."/>
+                  <input type="text" id="title" name="client[title]" className="form-control" placeholder="Enter client title.." value={item.title}/>
                 </div>
                 <div className="col-sm-6 from-group">
                   <label for="tax_number">ИНН</label>
@@ -44,4 +47,16 @@ export class Item extends Component {
   }
 }
 
-Item.propTypes = propTypes;
+ItemPresentation.propTypes = propTypes;
+
+const mapStateToProps = (state, ownProps) => {
+  let item = new models.Client();
+
+  const itemId = ownProps.params.id;
+
+  return {
+    item: item
+  };
+};
+
+export const Item = connect(mapStateToProps)(ItemPresentation);

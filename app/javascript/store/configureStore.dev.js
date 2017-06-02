@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import DevTools from '../features/DevTools';
+import DevTools from '../modules/core/DevTools';
 
 const configureStore = preloadedState => {
   const store = createStore(

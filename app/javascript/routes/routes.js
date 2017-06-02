@@ -2,11 +2,11 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 // Containers
-import Full from '../features/Full'
+import Full from '../modules/core/Full'
 
-import Dashboard from '../features/Dashboard'
-import Courses from '../features/Courses'
-import Clients from '../features/Clients'
+import Dashboard from '../modules/dashboard'
+import Courses from '../modules/courses'
+import Clients from '../modules/clients'
 
 export default (
   <Route path="/" name="Home" component={Full}>
@@ -14,9 +14,9 @@ export default (
     <Route path="dashboard" name="Dashboard" component={Dashboard}/>
     <Route path="courses" name="Courses" component={Courses}/>
     <Route path="clients" name="Clients">
-      <IndexRoute component={Clients.components.List}/>
-      <Route path="list" name="Clients list" component={Clients.components.List}/>
-      <Route path="new" name="New client" component={Clients.components.Item}/>
+      <IndexRoute component={Clients.components.ListPage}/>
+      <Route path="new" name="New client" component={Clients.components.ItemPage}/>
+      <Route path=":id" name="Edit client" components={Clients.components.ItemPage}/>
     </Route>
   </Route>
 );

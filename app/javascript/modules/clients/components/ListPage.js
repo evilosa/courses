@@ -3,17 +3,18 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import { ListItem } from './ListItem';
+import ListItem from './ListItem';
 
 ////////////////////////////////////////////////////////////////
 // Component
 ////////////////////////////////////////////////////////////////
 
 const propTypes = {
+  items: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 
-export class ListComponent extends Component {
+class List extends Component {
   componentDidMount() {
     this.props.loadClients();
   }
@@ -42,7 +43,7 @@ export class ListComponent extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.list.map(t => <ListItem key={t.id} item={t}/>)}
+                {this.props.items.map(t => <ListItem key={t.id} item={t}/>)}
                 </tbody>
               </table>
               <ul className="pagination">
@@ -63,7 +64,7 @@ export class ListComponent extends Component {
   }
 }
 
-ListComponent.propTypes = propTypes;
+List.propTypes = propTypes;
 
 ////////////////////////////////////////////////////////////////
 // Container
@@ -71,7 +72,7 @@ ListComponent.propTypes = propTypes;
 
 const mapStateToProps = state => {
   return {
-    list: state.clients.items
+    items: state.clients.items
   };
 };
 
@@ -81,7 +82,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const List = connect(
+export const ListPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListComponent);
+)(List);

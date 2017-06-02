@@ -16,6 +16,32 @@ export const edit = (new_title, new_full_name, new_tax_number, new_description) 
 ////////////////////////////////////////////////////////////////
 
 export const loadClients = dispatch => {
+  dispatch(fetchClients());
+
+  return api.getAll()
+    .then(items => dispatch(fetchClientsSuccess(items)))
+    .catch(error => dispatch(fetchClientsFailure(error)));
+};
+
+export const fetchClients = () => ({
+  type: t.FETCH_CLIENTS
+});
+
+export const fetchClientsSuccess = items => ({
+  type: t.FETCH_CLIENTS_SUCCESS,
+  items: items
+});
+
+export const fetchClientsFailure = error => ({
+  type: t.FETCH_CLIENTS_FAILURE,
+  error: error
+});
+
+////////////////////////////////////////////////////////////////
+// Load client
+////////////////////////////////////////////////////////////////
+
+export const loadClient = (dispatch, id) => {
   dispatch(fetch());
 
   return api.getAll()

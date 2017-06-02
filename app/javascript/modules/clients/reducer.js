@@ -1,5 +1,5 @@
 import * as t from './actionTypes';
-import { Client, State } from './model';
+import { Client, State } from './models';
 
 export default (state = State, action) => {
   switch (action.type) {

@@ -13,3 +13,7 @@ export const DELETE_FAILURE = 'clients/DELETE_FAILURE';
 export const FETCH_CLIENTS = 'clients/FETCH_CLIENTS';
 export const FETCH_CLIENTS_SUCCESS = 'clients/FETCH_CLIENTS_SUCCESS';
 export const FETCH_CLIENTS_FAILURE = 'clients/FETCH_CLIENTS_FAILURE';
+
+export const FETCH_CLIENT = 'clients/FETCH_CLIENT';
+export const FETCH_CLIENT_SUCCESS = 'clients/FETCH_CLIENT_SUCCESS';
+export const FETCH_CLIENT_FAILURE = 'clients/FETCH_CLIENT_FAILURE';

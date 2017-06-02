@@ -6,6 +6,12 @@ class Api {
       .then(response => response.json())
       .catch(error => error);
   }
+
+  static getById(id) {
+    return fetch('/api/v1/clients/' + id)
+      .then(response => response.json())
+      .catch(error => error);
+  }
 }
 
 export default Api;
