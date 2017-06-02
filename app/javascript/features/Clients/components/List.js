@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import fetch from 'isomorphic-fetch';
 
 import { ListItem } from './ListItem';
 
@@ -16,7 +15,7 @@ const propTypes = {
 
 export class ListComponent extends Component {
   componentDidMount() {
-    this.props.fetch();
+    this.props.loadClients();
   }
 
   render() {
@@ -70,15 +69,6 @@ ListComponent.propTypes = propTypes;
 // Container
 ////////////////////////////////////////////////////////////////
 
-const fetchClientsAction = dispatch => {
-  dispatch(actions.fetch());
-
-  return fetch('/api/v1/clients')
-    .then(response => response.json())
-    .then(items => dispatch(actions.fetchSuccess(items)))
-    .catch(error => dispatch(actions.fetchFailure(error)));
-};
-
 const mapStateToProps = state => {
   return {
     list: state.clients.items
@@ -87,7 +77,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetch: () => fetchClientsAction(dispatch)
+    loadClients: () => actions.loadClients(dispatch)
   };
 };
 
