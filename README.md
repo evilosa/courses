@@ -1,24 +1,63 @@
-# README
+# The "SORC courses" project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Full install for Ubuntu 16.04 LTS
 
-Things you may want to cover:
+### Install git
+1) `sudo apt install git`
 
-* Ruby version
+### Install Ruby version manager (from rvm.io)
+1) `gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3`
+2) `\curl -sSL https://get.rvm.io | bash -s stable`
+3) In terminal open menu 'EDIT - Profile settings', select 'CMD' tab and check 'shell mode'
+4) Restart terminal
+5) `rvm install ruby-2.4.0`
 
-* System dependencies
+### Clone project
+1) In main projects folder type `git clone https://github.com/evilosa/sorc_courses`
+2) Move in to the project folder, it must create new rvm gemset 'ruby-2.4.0@sorc_courses'
 
-* Configuration
+### Install PostgreSQL 9.5
 
-* Database creation
+1) `sudo apt-get update`
+2) `sudo apt-get install postgresql postgresql-contrib postgresql-server-dev-9.5 libpq-dev`
+3) Create db user `sudo -u postgres createuser --interactive`
+4) Login with postgresql user `sudo -i -u postgres`
+5) Open db console, run `psql`
+6) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';` Change `username` and `password` to your operating system user and preferable password.
+7) To exit from psql type `\q`
+8) To logout from postgresql user type 'logout'
+7) Create `config/database.yml` from `config/database.sample` with your user and password
 
-* Database initialization
+### Install QT5 for Capybara-webkit
 
-* How to run the test suite
+1) `sudo apt-get install qt5-default libqt5webkit5-dev`
 
-* Services (job queues, cache servers, search engines, etc.)
+### Install NPM & Node
+1) `sudo apt install npm`
+2) `sudo apt install nodejs-legacy`
+3) Type `node -v`, if your version is smaller than 7.1, then type next commands
+* `sudo npm cache clean -f`
+* `sudo npm install -g n`
+* `sudo n stable`
 
-* Deployment instructions
+### Install Yarn
+1) `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
+2) `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+3) `sudo apt-get update && sudo apt-get install yarn`
 
-* ...
+### Common
+1) You must be in project folder
+2) Create file `.env` in root folder from `.env-sample`
+3) `gem install bundle'
+4) `bundle`
+5) `yarn install`
+6) `rake db:create db:migrate db:seed`
+7) `rake RAILS_ENV=test db:create db:migrate db:seed`
+8) Run in separate console:
+* `rails server`
+* `bin/webpack-dev-server`
+9) Open `localhost:3000` in web browser
+
+### Increasing the amount of inotify watchers for RubyMine
+
+1) `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`

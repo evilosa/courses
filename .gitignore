@@ -22,6 +22,9 @@
 
 .byebug_history
 /public/packs
+/public/javascripts/i18n.js
+/public/javascripts/translations.js
 /node_modules
 
 .idea
+/config/database.yml

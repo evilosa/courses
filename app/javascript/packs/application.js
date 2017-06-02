@@ -11,7 +11,14 @@ console.log('Hello World from Webpacker');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-import routes from '../routes';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import Root from '../modules/core/Root';
+import configureStore from '../store';
 
-ReactDOM.render(<Router routes = {routes} history={browserHistory} />, document.getElementById('root'));
+import 'bootstrap/dist/css/bootstrap.css';
+
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
+
+ReactDOM.render(<Root store={store} history={history}/>, document.getElementById('root'));
