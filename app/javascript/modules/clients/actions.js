@@ -23,9 +23,9 @@ export const loadClients = dispatch => {
     .catch(error => dispatch(fetchClientsFailure(error)));
 };
 
-export const fetchClients = () => ({
+export const fetchClients = () => {
   type: t.FETCH_CLIENTS
-});
+};
 
 export const fetchClientsSuccess = items => ({
   type: t.FETCH_CLIENTS_SUCCESS,
@@ -42,23 +42,24 @@ export const fetchClientsFailure = error => ({
 ////////////////////////////////////////////////////////////////
 
 export const loadClient = (dispatch, id) => {
-  dispatch(fetch());
+  dispatch(fetchClient(id));
 
   return api.getAll()
-    .then(items => dispatch(fetchSuccess(items)))
-    .catch(error => dispatch(fetchFailure(error)));
+    .then(items => dispatch(fetchClientSuccess(items)))
+    .catch(error => dispatch(fetchClientFailure(error)));
 };
 
-export const fetch = () => ({
-  type: t.FETCH_CLIENTS
+export const fetchClient = id => ({
+  type: t.FETCH_CLIENT,
+  id: id
 });
 
-export const fetchSuccess = items => ({
-  type: t.FETCH_CLIENTS_SUCCESS,
-  items: items
+export const fetchClientSuccess = item => ({
+  type: t.FETCH_CLIENT_SUCCESS,
+  item: item
 });
 
-export const fetchFailure = error => ({
-  type: t.FETCH_CLIENTS_FAILURE,
+export const fetchClientFailure = error => ({
+  type: t.FETCH_CLIENT_FAILURE,
   error: error
 });

@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import ListItem from './ListItem';
+import { Table } from 'reactstrap';
 
 ////////////////////////////////////////////////////////////////
 // Component
 ////////////////////////////////////////////////////////////////
 
 const propTypes = {
-  items: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
+  // actions: PropTypes.object.isRequired
 };
 
 class List extends Component {
@@ -31,7 +32,7 @@ class List extends Component {
               </div>
             </div>
             <div className="card-block">
-              <table className="table table-striped">
+              <Table striped hover>
                 <thead>
                 <tr>
                   <th>#</th>
@@ -39,13 +40,12 @@ class List extends Component {
                   <th>{I18n.t('client.field.tax_number')}</th>
                   <th>{I18n.t('client.field.created_at')}</th>
                   <th>Status</th>
-                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {this.props.items.map(t => <ListItem key={t.id} item={t}/>)}
                 </tbody>
-              </table>
+              </Table>
               <ul className="pagination">
                 <li className="page-item"><a className="page-link" href="#">Prev</a></li>
                 <li className="page-item active">

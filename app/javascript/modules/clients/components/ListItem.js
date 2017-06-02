@@ -10,7 +10,6 @@ const ListItem = ({item}) => {
       <td>
         <span className="badge badge-success">Active</span>
       </td>
-      <td>Edit</td>
     </tr>
   );
 };
