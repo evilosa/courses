@@ -8,6 +8,11 @@ class Api::V1::ClientsController < Api::V1::BaseController
     render json: true
   end
 
+  def show
+    @client = Client.find(params[:id])
+    respond_with @client
+  end
+
   private
 
   def client_params
