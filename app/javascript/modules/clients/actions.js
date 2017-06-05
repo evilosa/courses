@@ -1,5 +1,6 @@
 import * as t from './actionTypes';
 import api from './api';
+import { browserHistory } from 'react-router';
 
 export const add = (title, full_name, tax_number, description) => ({
   type: t.ADD,
@@ -42,6 +43,8 @@ export const fetchClientsFailure = error => ({
 ////////////////////////////////////////////////////////////////
 
 export const loadClient = (dispatch, id) => {
+  browserHistory.push('/clients/' + id);
+
   dispatch(fetchClient(id));
 
   return api.getById(id)

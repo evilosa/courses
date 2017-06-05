@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const ListItem = ({item, onDblClick}) => {
   return (
-    <tr onDoubleClick={onDblClick}>
+    <tr onDoubleClick={() => onDblClick(item.id)}>
       <td>{item.id}</td>
       <td>{item.title}</td>
       <td>{item.tax_number}</td>

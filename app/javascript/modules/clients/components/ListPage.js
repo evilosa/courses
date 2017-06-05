@@ -42,19 +42,9 @@ class List extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick(t.id)}/>)}
+                {this.props.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick}/>)}
                 </tbody>
               </Table>
-              <ul className="pagination">
-                <li className="page-item"><a className="page-link" href="#">Prev</a></li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item"><a className="page-link" href="#">4</a></li>
-                <li className="page-item"><a className="page-link" href="#">Next</a></li>
-              </ul>
             </div>
           </div>
         </div>
