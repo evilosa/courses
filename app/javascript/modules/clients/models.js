@@ -11,7 +11,7 @@ export class Client {
 
 export const State = {
   list: { items: [], loading: false },
-  activeItem: { item: null, loading: false },
+  currentItem: { item: null, loading: false },
   error: null
 };
 

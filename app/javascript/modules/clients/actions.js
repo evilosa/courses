@@ -23,9 +23,9 @@ export const loadClients = dispatch => {
     .catch(error => dispatch(fetchClientsFailure(error)));
 };
 
-export const fetchClients = () => {
+export const fetchClients = () => ({
   type: t.FETCH_CLIENTS
-};
+});
 
 export const fetchClientsSuccess = items => ({
   type: t.FETCH_CLIENTS_SUCCESS,

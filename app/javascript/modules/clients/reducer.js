@@ -7,14 +7,18 @@ export default (state = State, action) => {
       return { ...state };
 
     case t.FETCH_CLIENTS:
-      return { ...state, items: [], error: null, isFetching: true };
+      return { ...state, error: null, list: { items: [], loading: true }};
     case t.FETCH_CLIENTS_SUCCESS:
-      return { ...state, items: action.items, error: null, isFetching: false };
+      return { ...state, error: null, list: { items: action.items, loading: false }};
     case t.FETCH_CLIENTS_FAILURE:
-      return { ...state, error: action.error.message, isFetching: false};
+      return { ...state, error: action.error };
 
     case t.FETCH_CLIENT:
-      return { ...state };
+      return { ...state, error: null, currentItem: { item: null, loading: true }};
+    case t.FETCH_CLIENT_SUCCESS:
+      return { ...state, error: null, currentItem: { item: action.item, loading: false }};
+    case t.FETCH_CLIENT_FAILURE:
+      return { ...state, error: action.error, currentItem: { item: null, loading: false }};
 
     default:
       return state;

@@ -12,7 +12,6 @@ import { Table } from 'reactstrap';
 
 const propTypes = {
   items: PropTypes.array.isRequired
-  // actions: PropTypes.object.isRequired
 };
 
 class List extends Component {
@@ -43,7 +42,7 @@ class List extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.items.map(t => <ListItem key={t.id} item={t}/>)}
+                {this.props.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick(t.id)}/>)}
                 </tbody>
               </Table>
               <ul className="pagination">
@@ -72,13 +71,14 @@ List.propTypes = propTypes;
 
 const mapStateToProps = state => {
   return {
-    items: state.clients.items
+    items: state.clients.list.items
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadClients: () => actions.loadClients(dispatch)
+    loadClients: () => actions.loadClients(dispatch),
+    onDblClick: (id) => actions.loadClient(dispatch, id)
   };
 };
 

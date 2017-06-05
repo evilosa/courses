@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const ListItem = ({item}) => {
+const ListItem = ({item, onDblClick}) => {
   return (
-    <tr>
+    <tr onDoubleClick={onDblClick}>
       <td>{item.id}</td>
       <td>{item.title}</td>
       <td>{item.tax_number}</td>
@@ -15,7 +15,8 @@ const ListItem = ({item}) => {
 };
 
 ListItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  onDblClick: PropTypes.func.isRequired
 };
 
 export default ListItem;
