@@ -44,8 +44,8 @@ export const fetchClientsFailure = error => ({
 export const loadClient = (dispatch, id) => {
   dispatch(fetchClient(id));
 
-  return api.getAll()
-    .then(items => dispatch(fetchClientSuccess(items)))
+  return api.getById(id)
+    .then(item => dispatch(fetchClientSuccess(item)))
     .catch(error => dispatch(fetchClientFailure(error)));
 };
 
