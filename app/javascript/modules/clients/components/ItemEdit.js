@@ -9,7 +9,8 @@ class ItemForm extends Component {
       <div>
         <form>
           <Input name="title" label="title" value={item.title} onChange={this.props.onChange}/>
-          <Input type="submit" disabled={this.props.saving} className="btn btn-primary" onClick={this.props.onSave}/>
+          <Input type="submit" disabled={this.props.loading} className="btn btn-primary" onClick={this.props.onSave}/>
+          <button onClick={this.toggleEdit}>{I18n.t('common.cancel')}</button>
         </form>
       </div>
     );
@@ -17,7 +18,7 @@ class ItemForm extends Component {
 };
 
 ItemForm.propTypes = {
-  item: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 };

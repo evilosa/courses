@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import api from '../api';
+import { browserHistory } from 'react-router';
 
 import ListItem from './ListItem';
 import { Table } from 'reactstrap';
@@ -11,13 +13,12 @@ import { Table } from 'reactstrap';
 ////////////////////////////////////////////////////////////////
 
 const propTypes = {
-  items: PropTypes.array.isRequired
-  // actions: PropTypes.object.isRequired
+  list: PropTypes.object.isRequired
 };
 
 class List extends Component {
   componentDidMount() {
-    this.props.loadClients();
+    this.props.fetchClients();
   }
 
   render() {
@@ -43,19 +44,9 @@ class List extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.items.map(t => <ListItem key={t.id} item={t}/>)}
+                {this.props.list.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick}/>)}
                 </tbody>
               </Table>
-              <ul className="pagination">
-                <li className="page-item"><a className="page-link" href="#">Prev</a></li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item"><a className="page-link" href="#">4</a></li>
-                <li className="page-item"><a className="page-link" href="#">Next</a></li>
-              </ul>
             </div>
           </div>
         </div>
@@ -70,15 +61,26 @@ List.propTypes = propTypes;
 // Container
 ////////////////////////////////////////////////////////////////
 
+const fetchClients = dispatch => {
+  dispatch(actions.fetchClients());
+
+  api.getAll()
+    .then(items => dispatch(actions.fetchClientsSuccess(items)))
+    .catch(error => dispatch(actions.fetchClientFailure(error)));
+};
+
+
+
 const mapStateToProps = state => {
   return {
-    items: state.clients.items
+    list: state.clients.list
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadClients: () => actions.loadClients(dispatch)
+    fetchClients: () => fetchClients(dispatch),
+    onDblClick: id => browserHistory.push(`/clients/${id}`)
   };
 };
 

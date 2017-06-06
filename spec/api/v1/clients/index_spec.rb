@@ -1,4 +1,4 @@
-describe 'clients API' do
+describe 'Client API' do
   describe 'GET #index' do
 
     context 'unauthorized' do

@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  catalog: clients.reducer
+  [clients.constants.NAME]: clients.reducer
 });
 
 export default rootReducer;

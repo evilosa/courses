@@ -1,4 +1,4 @@
-describe 'Create API' do
+describe 'Client API' do
   describe 'POST #create' do
 
     let(:valid_params) { { client: attributes_for(:client), format: :json } }
