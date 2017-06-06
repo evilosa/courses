@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :courses
+
   get '*path', to: 'home#index'
 end

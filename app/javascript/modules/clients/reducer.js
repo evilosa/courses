@@ -20,6 +20,13 @@ export default (state = State, action) => {
     case t.FETCH_CLIENT_FAILURE:
       return { ...state, error: action.error, currentItem: { item: null, loading: false }};
 
+    case t.UPDATE:
+      return { ...state, error: null, currentItem: { item: action.item, loading: true }};
+    case t.UPDATE_SUCCESS:
+      return { ...state, error: null, currentItem: { item: action.item, loading: false }};
+    case t.UPDATE_FAILURE:
+      return { ...state, error: action.error, currentItem: { item: null, loading: false }};
+
     default:
       return state;
   }

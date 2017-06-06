@@ -6,6 +6,10 @@ export const EDIT = 'clients/EDIT';
 export const EDIT_SUCCESS = 'clients/EDIT_SUCCESS';
 export const EDIT_FAILURE = 'clients/EDIT_FAILURE';
 
+export const UPDATE = 'clients/UPDATE';
+export const UPDATE_SUCCESS = 'clients/UPDATE_SUCCESS';
+export const UPDATE_FAILURE = 'clients/UPDATE_FAILURE';
+
 export const DELETE = 'clients/DELETE';
 export const DELETE_SUCCESS = 'clients/DELETE_SUCCESS';
 export const DELETE_FAILURE = 'clients/DELETE_FAILURE';

@@ -21,7 +21,7 @@ export const loadClients = dispatch => {
 
   return api.getAll()
     .then(items => dispatch(fetchClientsSuccess(items)))
-    .catch(error => dispatch(fetchClientsFailure(error)));
+    .catch(error => dispatch(fetchClientsFailure(error.message)));
 };
 
 export const fetchClients = () => ({
@@ -49,7 +49,7 @@ export const loadClient = (dispatch, id) => {
 
   return api.getById(id)
     .then(item => dispatch(fetchClientSuccess(item)))
-    .catch(error => dispatch(fetchClientFailure(error)));
+    .catch(error => dispatch(fetchClientFailure(error.message)));
 };
 
 export const fetchClient = id => ({
@@ -64,5 +64,32 @@ export const fetchClientSuccess = item => ({
 
 export const fetchClientFailure = error => ({
   type: t.FETCH_CLIENT_FAILURE,
+  error: error
+});
+
+////////////////////////////////////////////////////////////////
+// Update client
+////////////////////////////////////////////////////////////////
+
+export const updateClient = (dispatch, item) => {
+  dispatch(update(item));
+
+  return api.update(item)
+    .then(result => dispatch(updateSuccess(result)))
+    .catch(error => dispatch(updateFailure(error.message)));
+};
+
+export const update = client => ({
+  type: t.UPDATE,
+  client: client
+});
+
+export const updateSuccess = item => ({
+  type: t.UPDATE_SUCCESS,
+  item: item
+});
+
+export const updateFailure = error => ({
+  type: t.UPDATE_FAILURE,
   error: error
 });
