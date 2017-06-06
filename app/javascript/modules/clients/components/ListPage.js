@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
+import { browserHistory } from 'react-router';
 
 import ListItem from './ListItem';
 import { Table } from 'reactstrap';
@@ -68,6 +69,8 @@ const fetchClients = dispatch => {
     .catch(error => dispatch(actions.fetchClientFailure(error)));
 };
 
+
+
 const mapStateToProps = state => {
   return {
     list: state.clients.list
@@ -77,7 +80,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchClients: () => fetchClients(dispatch),
-    onDblClick: (id) => actions.loadClient(dispatch, id)
+    onDblClick: id => browserHistory.push(`/clients/${id}`)
   };
 };
 

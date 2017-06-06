@@ -18,6 +18,10 @@ class Item extends Component {
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchClient(this.props.id);
+  }
+
   componentWillReceiveProps(nextProps) {
     // If component's props are updated with new item, change the internal state
     this.setState({item: nextProps.item})
@@ -72,16 +76,33 @@ class Item extends Component {
   }
 }
 
+/////////////////////////////////////////////////////////////
+// Functions
+/////////////////////////////////////////////////////////////
+
+const fetchClient = (dispatch, id) => {
+  dispatch(actions.fetchClient(id));
+
+  api.getById(id)
+    .then(item => dispatch(actions.fetchClientSuccess(item)))
+    .catch(error => dispatch(actions.fetchClientFailure(error)));
+};
+
+//////////////////////////////////////////////////////////////
+// Container
+//////////////////////////////////////////////////////////////
+
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: state.clients.currentItem.item,
-    loading: state.clients.currentItem.loading
+    item: state.clients.activeItem.item,
+    loading: state.clients.activeItem.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return ({
+    fetchClient: (id) => fetchClient(dispatch, id),
     actions: {
       updateClient: (client) => actions.updateClient(dispatch, client)
     }

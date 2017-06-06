@@ -1,6 +1,5 @@
 import * as t from './actionTypes';
 import api from './api';
-import { browserHistory } from 'react-router';
 
 ////////////////////////////////////////////////////////////////
 // Load clients
@@ -24,28 +23,18 @@ export const fetchClientsFailure = error => ({
 // Load client
 ////////////////////////////////////////////////////////////////
 
-export const loadClient = (dispatch, id) => {
-  browserHistory.push('/clients/' + id);
-
-  dispatch(fetchClient(id));
-
-  return api.getById(id)
-    .then(item => dispatch(fetchClientSuccess(item)))
-    .catch(error => dispatch(fetchClientFailure(error.message)));
-};
-
 export const fetchClient = id => ({
-  type: t.FETCH_CLIENT,
+  type: t.FETCH_ITEM,
   id: id
 });
 
 export const fetchClientSuccess = item => ({
-  type: t.FETCH_CLIENT_SUCCESS,
+  type: t.FETCH_ITEM_SUCCESS,
   item: item
 });
 
 export const fetchClientFailure = error => ({
-  type: t.FETCH_CLIENT_FAILURE,
+  type: t.FETCH_ITEM_FAILURE,
   error: error
 });
 
