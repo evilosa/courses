@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as models from '../models';
 import * as actions from '../actions';
 import api from '../api';
 import ItemForm from './ItemEdit';
-import { Link } from 'react-router';
 
 class Item extends Component {
   constructor(props, context) {
@@ -66,7 +64,7 @@ class Item extends Component {
             <i className="fa fa-align-justify"></i> {I18n.t('client.header.list')}
             <div className="card-actions">
               <button onClick={this.toggleEdit}>{I18n.t('common.edit')}</button>
-              {/*<Link to={'/clients/' + this.props.id + '/edit'}><i className="icon-speedometer"></i> {I18n.t('common.edit')}</Link>*/}
+
             </div>
           </div>
           {itemPresentation}
