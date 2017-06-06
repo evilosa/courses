@@ -15,7 +15,8 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def update
-    respond_with @client.update(client_params)
+    @client.update(client_params)
+    respond_with @client
   end
 
   private
@@ -25,6 +26,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def client_params
-    params.require(:client).permit(:title, :full_name, :tax_number, :description)
+    params.require(:client).permit(:id, :updated_at, :title, :full_name, :tax_number, :description)
   end
 end

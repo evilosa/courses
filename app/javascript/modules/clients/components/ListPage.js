@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import api from '../api';
 
 import ListItem from './ListItem';
 import { Table } from 'reactstrap';
@@ -11,12 +12,12 @@ import { Table } from 'reactstrap';
 ////////////////////////////////////////////////////////////////
 
 const propTypes = {
-  items: PropTypes.array.isRequired
+  list: PropTypes.object.isRequired
 };
 
 class List extends Component {
   componentDidMount() {
-    this.props.loadClients();
+    this.props.fetchClients();
   }
 
   render() {
@@ -42,7 +43,7 @@ class List extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick}/>)}
+                {this.props.list.items.map(t => <ListItem key={t.id} item={t} onDblClick={this.props.onDblClick}/>)}
                 </tbody>
               </Table>
             </div>
@@ -59,15 +60,23 @@ List.propTypes = propTypes;
 // Container
 ////////////////////////////////////////////////////////////////
 
+const fetchClients = dispatch => {
+  dispatch(actions.fetchClients());
+
+  api.getAll()
+    .then(items => dispatch(actions.fetchClientsSuccess(items)))
+    .catch(error => dispatch(actions.fetchClientFailure(error)));
+};
+
 const mapStateToProps = state => {
   return {
-    items: state.clients.list.items
+    list: state.clients.list
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadClients: () => actions.loadClients(dispatch),
+    fetchClients: () => fetchClients(dispatch),
     onDblClick: (id) => actions.loadClient(dispatch, id)
   };
 };

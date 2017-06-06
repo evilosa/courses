@@ -2,12 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as models from '../models';
 import * as actions from '../actions';
+import api from '../api';
 import ItemForm from './ItemEdit';
 import { Link } from 'react-router';
-
-const propTypes = {
-  item: PropTypes.object.isRequired
-};
 
 class Item extends Component {
   constructor(props, context) {
@@ -23,9 +20,7 @@ class Item extends Component {
 
   componentWillReceiveProps(nextProps) {
     // If component's props are updated with new item, change the internal state
-    if (this.props.item.id != nextProps.item.id) {
-      this.setState({item: nextProps.item})
-    }
+    this.setState({item: nextProps.item})
   }
 
   toggleEdit() {
@@ -49,7 +44,7 @@ class Item extends Component {
     let itemPresentation = null;
 
     if (this.state.isEditing) {
-      itemPresentation = <ItemForm item={this.state.item} onSave={this.saveItem} onChange={this.updateItemState}/>
+      itemPresentation = <ItemForm item={this.state.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
     }
     else {
       itemPresentation = (
@@ -66,7 +61,8 @@ class Item extends Component {
           <div className="card-header">
             <i className="fa fa-align-justify"></i> {I18n.t('client.header.list')}
             <div className="card-actions">
-              <Link to={'/clients/' + this.state.item.id + '/edit'}><i className="icon-speedometer"></i> {I18n.t('common.edit')}</Link>
+              <button onClick={this.toggleEdit}>{I18n.t('common.edit')}</button>
+              {/*<Link to={'/clients/' + this.props.id + '/edit'}><i className="icon-speedometer"></i> {I18n.t('common.edit')}</Link>*/}
             </div>
           </div>
           {itemPresentation}
@@ -76,23 +72,11 @@ class Item extends Component {
   }
 }
 
-Item.propTypes = propTypes;
-
-function getClientById(items, id) {
-  let item = items.find(item => item.id == id)
-  return Object.assign({}, item)
-}
-
 const mapStateToProps = (state, ownProps) => {
-  let item = new models.Client();
-
-  const itemId = ownProps.params.id;
-
-  if (itemId && state.clients.list.items.length > 0)
-    item = getClientById(state.clients.list.items, ownProps.params.id);
-
   return {
-    item: item
+    id: ownProps.params.id,
+    item: state.clients.currentItem.item,
+    loading: state.clients.currentItem.loading
   };
 };
 

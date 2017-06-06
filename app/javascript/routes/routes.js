@@ -17,7 +17,6 @@ export default (
       <IndexRoute component={Clients.components.ListPage}/>
       <Route path="new" name="New client" component={Clients.components.ItemPage}/>
       <Route path=":id" name="Client detail" components={Clients.components.ItemPage}/>
-      <Route path=":id/edit" name="Edit client" component={Clients.components.ItemPage}/>
     </Route>
   </Route>
 );

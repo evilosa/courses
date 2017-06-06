@@ -2,39 +2,21 @@ import * as t from './actionTypes';
 import api from './api';
 import { browserHistory } from 'react-router';
 
-export const add = (title, full_name, tax_number, description) => ({
-  type: t.ADD,
-  client: { title, full_name, tax_number, description }
-});
-
-export const edit = (new_title, new_full_name, new_tax_number, new_description) => ({
-  type: t.EDIT,
-  new_data: { new_title, new_full_name, new_tax_number, new_description }
-});
-
 ////////////////////////////////////////////////////////////////
 // Load clients
 ////////////////////////////////////////////////////////////////
 
-export const loadClients = dispatch => {
-  dispatch(fetchClients());
-
-  return api.getAll()
-    .then(items => dispatch(fetchClientsSuccess(items)))
-    .catch(error => dispatch(fetchClientsFailure(error.message)));
-};
-
 export const fetchClients = () => ({
-  type: t.FETCH_CLIENTS
+  type: t.FETCH_ITEMS
 });
 
 export const fetchClientsSuccess = items => ({
-  type: t.FETCH_CLIENTS_SUCCESS,
+  type: t.FETCH_ITEMS_SUCCESS,
   items: items
 });
 
 export const fetchClientsFailure = error => ({
-  type: t.FETCH_CLIENTS_FAILURE,
+  type: t.FETCH_ITEMS_FAILURE,
   error: error
 });
 
@@ -71,17 +53,16 @@ export const fetchClientFailure = error => ({
 // Update client
 ////////////////////////////////////////////////////////////////
 
-export const updateClient = (dispatch, item) => {
-  dispatch(update(item));
+export const updateClient = (dispatch, newValues) => {
+  dispatch(update(newValues));
 
-  return api.update(item)
-    .then(result => dispatch(updateSuccess(result)))
-    .catch(error => dispatch(updateFailure(error.message)));
+  return api.update(newValues)
+    .then(response => dispatch(updateSuccess(response)))
+    .catch(error => dispatch(updateFailure(item.id, error.message)));
 };
 
-export const update = client => ({
+export const update = item => ({
   type: t.UPDATE,
-  client: client
 });
 
 export const updateSuccess = item => ({
@@ -89,7 +70,8 @@ export const updateSuccess = item => ({
   item: item
 });
 
-export const updateFailure = error => ({
+export const updateFailure = (id, error) => ({
   type: t.UPDATE_FAILURE,
+  id: id,
   error: error
 });
