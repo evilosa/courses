@@ -4,7 +4,10 @@ import api from '../api';
 import { browserHistory } from 'react-router';
 import ListPage from '../components/ListPage';
 
-// State to props
+////////////////////////////////////////////////////////////////////
+// To props
+////////////////////////////////////////////////////////////////////
+
 const mapStateToProps = (state) => {
   return {
     list: state.clients.list
