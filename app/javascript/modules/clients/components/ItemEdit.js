@@ -10,23 +10,23 @@ class ItemForm extends Component {
         <div className="card-block">
           <div className="row">
             <div className="form-group col-sm-6">
-              <label for="title">{I18n.t('client.fields.title')}</label>
+              <label>{I18n.t('client.fields.title')}</label>
               <Input name="title" value={item.title} onChange={onChange}/>
             </div>
             <div className="form-group col-sm-6">
-              <label for="tax_number">{I18n.t('client.fields.tax_number')}</label>
+              <label>{I18n.t('client.fields.tax_number')}</label>
               <Input name="tax_number" value={item.tax_number} onChange={onChange}/>
             </div>
           </div>
           <div className="row">
             <div className="form-group col-sm-12">
-              <label for="full_name">{I18n.t('client.fields.full_name')}</label>
+              <label>{I18n.t('client.fields.full_name')}</label>
               <Input name="full_name" value={item.full_name} onChange={onChange}/>
             </div>
           </div>
           <div className="row">
             <div className="form-group col-sm-12">
-              <label for="description">{I18n.t('client.fields.description')}</label>
+              <label>{I18n.t('client.fields.description')}</label>
               <Input type="textarea" rows="7" name="description" value={item.description} onChange={onChange}/>
             </div>
           </div>

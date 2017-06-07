@@ -1,8 +1,11 @@
 import * as t from './actionTypes';
-import { Client, State } from './models';
+import { State } from './models';
 
 export default (state = State, action) => {
   switch (action.type) {
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // List actions
 
     // fetch items
     case t.FETCH_ITEMS:
@@ -14,57 +17,63 @@ export default (state = State, action) => {
     case t.RESET_ITEMS:
       return { ...state, list: { items: [], error: null, loading: false }};
 
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // Item actions
+    case t.RESET_ITEM_ACTION:
+      return { ...state, activeItem: { ...state.activeItem, error: null, loading: false }};
+
+
     // fetch item
     case t.FETCH_ITEM:
-      return { ...state, activeItem: { ...state.activeItem, loading: true}};
+      return { ...state, activeItem: { ...state.activeItem, deleted: false, loading: true}};
     case t.FETCH_ITEM_SUCCESS:
-      return { ...state, activeItem: { item: action.item, error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, item: action.item, error: null, deleted: false, loading: false }};
     case t.FETCH_ITEM_FAILURE:
-      return { ...state, activeItem: { item: null, error: action.error, loading: false }};
-    case t.RESET_ACTIVE_ITEM:
-      return { ...state, activeItem: { item: null, error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, item: null,  error: action.error, deleted: false, loading: false }};
+
 
     // create item
     case t.CREATE:
-      return { ...state, newItem: { ...state.newItem, loading: true }};
+      return { ...state, activeItem: { ...state.activeItem, error: null, edit: true, deleted: false, loading: true }};
     case t.CREATE_SUCCESS:
-      return { ...state, newItem: { item: action.item, error: null, loading: false }};
+      return { ...state, activeItem: { item: action.item, error: null, edit: false, deleted: false, loading: false }};
     case t.CREATE_FAILURE:
-      return { ...state, newItem: { item: null, error: action.error, loading: false }};
-    case t.RESET_CREATE:
-      return { ...state, newItem: { item: new Client(), error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, error: action.error, edit: true, deleted: false, loading: false }};
+
 
     // validate item
     case t.VALIDATE:
-      return { ...state, newItem: { ...state.newItem, error: null, loading: true }};
+      return { ...state, activeItem: { ...state.activeItem, error: null, loading: true }};
     case t.VALIDATE_SUCCESS:
-      return { ...state, newItem: { ...state.newItem, error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, error: null, loading: false }};
     case t.VALIDATE_FAILURE:
-      return { ...state, newItem: { ...state.newItem, error: action.error, loading: false }};
-    case t.RESET_VALIDATE:
-      return { ...state, newItem: { ...state.newItem, error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, error: action.error, loading: false }};
+
+    // edit item
+    case t.BEGIN_EDIT:
+      return { ...state, activeItem: { ...state.activeItem, edit: true }};
+    case t.TOGGLE_EDIT:
+      return { ...state, activeItem: { ...state.activeItem, edit: !state.activeItem.edit }};
+    case t.FINISH_EDIT:
+      return { ...state, activeItem: { ...state.activeItem, edit: false }};
 
     // update item
     case t.UPDATE:
-      return { ...state, editedItem: { ...state.editedItem, loading: true }};
+      return { ...state, activeItem: { ...state.activeItem, error: null, deleted: false, loading: true }};
     case t.UPDATE_SUCCESS:
-      return { ...state, editedItem: { item: action.item, error: null, loading: false }};
+      return { ...state, activeItem: { item: action.item, error: null, deleted: false, loading: false }};
     case t.UPDATE_FAILURE:
-      return { ...state, editedItem: { ...state.editedItem, error: action.error, loading: false }};
-    case t.RESET_UPDATE:
-      return { ...state, editedItem: { item: null, error: null, loading: false }};
-
+      return { ...state, activeItem: { ...state.activeItem, error: action.error, deleted: false, loading: false }};
 
 
     // delete item
     case t.DELETE:
-      return { ...state, deletedItem: { ...state.deletedItem, loading: true }};
+      return { ...state, activeItem: { ...state.activeItem, error: null, edit: false, deleted: false, loading: true }};
     case t.DELETE_SUCCESS:
-      return { ...state, deletedItem: { item: action.item, error: null, loading: false }};
+      return { ...state, activeItem: { item: action.item, error: null, edit: false, deleted: true, loading: false }};
     case t.DELETE_FAILURE:
-      return { ...state, deletedItem: { item: null, error: action.error, loading: false }};
-    case t.RESET_DELETED_ITEM:
-      return { ...state, deletedItem: { item:null, error: null, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem, error: action.error, edit: false, deleted: false, loading: false }};
 
     default:
       return state;

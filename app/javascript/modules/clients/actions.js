@@ -45,6 +45,10 @@ export const beginEdit = () => ({
   type: t.BEGIN_EDIT
 });
 
+export const toggleEdit = () => ({
+  type: t.TOGGLE_EDIT
+});
+
 export const finishEdit = () => ({
   type: t.FINISH_EDIT
 });
