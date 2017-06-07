@@ -18,6 +18,10 @@ export const VALIDATE_SUCCESS = constants.NAME + '/VALIDATE_SUCCESS';
 export const VALIDATE_FAILURE = constants.NAME + '/VALIDATE_FAILURE';
 export const RESET_VALIDATE = constants.NAME + '/RESET_VALIDATE';
 
+// Edit item
+export const BEGIN_EDIT = constants.NAME + '/BEGIN_EDIT';
+export const FINISH_EDIT = constants.NAME + '/FINISH_EDIT';
+
 // Update item
 export const UPDATE = constants.NAME + '/UPDATE';
 export const UPDATE_SUCCESS = constants.NAME + '/UPDATE_SUCCESS';

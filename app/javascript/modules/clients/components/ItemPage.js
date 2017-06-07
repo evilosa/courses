@@ -38,7 +38,7 @@ class Item extends Component {
 
   saveItem(event) {
     event.preventDefault();
-    this.props.actions.updateClient(this.state.item);
+    this.props.updateClient(this.state.item);
   }
 
   render() {
@@ -46,7 +46,7 @@ class Item extends Component {
     let itemPresentation = null;
 
     if (this.state.isEditing) {
-      itemPresentation = <ItemForm item={this.state.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
+      itemPresentation = <ItemForm item={item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
     }
     else {
       itemPresentation = (
@@ -79,11 +79,25 @@ class Item extends Component {
 /////////////////////////////////////////////////////////////
 
 const fetchClient = (dispatch, id) => {
-  dispatch(actions.fetchClient(id));
+  dispatch(actions.fetchItem(id));
 
   api.getById(id)
-    .then(item => dispatch(actions.fetchClientSuccess(item)))
-    .catch(error => dispatch(actions.fetchClientFailure(error)));
+    .then(item => dispatch(actions.fetchItemSuccess(item)))
+    .catch(error => dispatch(actions.fetchItemFailure(error)));
+};
+
+const updateClient = (dispatch, updatedItem) => {
+  dispatch(actions.update(updatedItem));
+
+  return api.update(updatedItem)
+    .then(response => {
+      if (response && response.status == 204) {
+        dispatch(actions.updateSuccess(updatedItem));
+      }
+      else
+        dispatch(actions.updateFailure(updatedItem.id, result.payload.response));
+    })
+    .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
 };
 
 //////////////////////////////////////////////////////////////
@@ -101,9 +115,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return ({
     fetchClient: (id) => fetchClient(dispatch, id),
-    actions: {
-      updateClient: (client) => actions.updateClient(dispatch, client)
-    }
+    updateClient: (updatedItem) => updateClient(dispatch, updatedItem)
   });
 };
 

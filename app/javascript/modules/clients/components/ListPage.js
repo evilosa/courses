@@ -62,11 +62,11 @@ List.propTypes = propTypes;
 ////////////////////////////////////////////////////////////////
 
 const fetchClients = dispatch => {
-  dispatch(actions.fetchClients());
+  dispatch(actions.fetchItems());
 
   api.getAll()
-    .then(items => dispatch(actions.fetchClientsSuccess(items)))
-    .catch(error => dispatch(actions.fetchClientFailure(error)));
+    .then(items => dispatch(actions.fetchItemsSuccess(items)))
+    .catch(error => dispatch(actions.fetchItemsFailure(error)));
 };
 
 
