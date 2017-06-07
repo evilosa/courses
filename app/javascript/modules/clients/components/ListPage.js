@@ -37,9 +37,9 @@ class List extends Component {
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>{I18n.t('client.field.title')}</th>
-                  <th>{I18n.t('client.field.tax_number')}</th>
-                  <th>{I18n.t('client.field.created_at')}</th>
+                  <th>{I18n.t('client.fields.title')}</th>
+                  <th>{I18n.t('client.fields.tax_number')}</th>
+                  <th>{I18n.t('client.fields.created_at')}</th>
                   <th>Status</th>
                 </tr>
                 </thead>
