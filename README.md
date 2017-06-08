@@ -48,15 +48,14 @@
 ### Common
 1) You must be in project folder
 2) Create file `.env` in root folder from `.env-sample`
-3) `gem install bundle'
+3) `gem install bundle`
 4) `bundle`
 5) `yarn install`
 6) `rake db:create db:migrate db:seed`
-7) `rake RAILS_ENV=test db:create db:migrate db:seed`
-8) Run in separate console:
+7) Run in separate console:
 * `rails server`
 * `bin/webpack-dev-server`
-9) Open `localhost:3000` in web browser
+8) Open `localhost:3000` in web browser
 
 ### Increasing the amount of inotify watchers for RubyMine
 
