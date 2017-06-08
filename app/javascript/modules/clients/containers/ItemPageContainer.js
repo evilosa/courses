@@ -1,8 +1,59 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
 import { browserHistory } from 'react-router';
-import ItemPage from '../components/ItemPage';
+import ItemEdit from '../components/ItemEdit';
+import ItemDetails from '../components/ItemDetails';
+
+class ItemPageContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      item: this.props.item,
+      isEditing: false
+    };
+    this.updateItemState = this.updateItemState.bind(this);
+    this.saveItem = this.saveItem.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchClient(this.props.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // If component's props are updated with new item, change the internal state
+    this.setState({item: nextProps.item})
+  }
+
+  toggleEdit() {
+    this.setState({isEditing: !this.state.isEditing})
+  }
+
+  updateItemState(event) {
+    const field = event.target.name;
+    const item = this.state.item;
+    item[field] = event.target.value;
+    return this.setState({item: item});
+  }
+
+  saveItem(event) {
+    event.preventDefault();
+    this.props.updateClient(this.state.item);
+  }
+
+  render() {
+    let ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
+
+    if (this.state.isEditing)
+      ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
+
+    return (
+      {ItemPresentation}
+    );
+  }
+}
 
 // State to props
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +71,7 @@ const mapDispatchToProps = dispatch => {
   });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer);
 
 ////////////////////////////////////////////////////////////////////
 // Functions

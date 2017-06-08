@@ -7,7 +7,6 @@ export default (state = State, action) => {
     //////////////////////////////////////////////////////////////////////////////////
     // List actions
 
-    // fetch items
     case t.FETCH_ITEMS:
       return { ...state, list: { items: [], error: null, loading: true }};
     case t.FETCH_ITEMS_SUCCESS:

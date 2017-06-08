@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Input } from 'reactstrap';
 
-class ItemForm extends Component {
+class ItemEdit extends Component {
   render() {
     const { item, onChange } = this.props;
 
@@ -40,10 +40,10 @@ class ItemForm extends Component {
   };
 };
 
-ItemForm.propTypes = {
+ItemEdit.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
-export default ItemForm;
+export default ItemEdit;
