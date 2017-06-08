@@ -1,22 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-import api from '../api';
-import { browserHistory } from 'react-router';
 
 import ListItem from './ListItem';
 import { Table } from 'reactstrap';
-
-////////////////////////////////////////////////////////////////
-// Component
-////////////////////////////////////////////////////////////////
 
 const propTypes = {
   list: PropTypes.object.isRequired
 };
 
-class List extends Component {
+class ListPage extends Component {
   componentDidMount() {
     this.props.fetchClients();
   }
@@ -37,9 +29,9 @@ class List extends Component {
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>{I18n.t('client.field.title')}</th>
-                  <th>{I18n.t('client.field.tax_number')}</th>
-                  <th>{I18n.t('client.field.created_at')}</th>
+                  <th>{I18n.t('client.fields.title')}</th>
+                  <th>{I18n.t('client.fields.tax_number')}</th>
+                  <th>{I18n.t('client.fields.created_at')}</th>
                   <th>Status</th>
                 </tr>
                 </thead>
@@ -55,36 +47,7 @@ class List extends Component {
   }
 }
 
-List.propTypes = propTypes;
+ListPage.propTypes = propTypes;
 
-////////////////////////////////////////////////////////////////
-// Container
-////////////////////////////////////////////////////////////////
+export default ListPage;
 
-const fetchClients = dispatch => {
-  dispatch(actions.fetchClients());
-
-  api.getAll()
-    .then(items => dispatch(actions.fetchClientsSuccess(items)))
-    .catch(error => dispatch(actions.fetchClientFailure(error)));
-};
-
-
-
-const mapStateToProps = state => {
-  return {
-    list: state.clients.list
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchClients: () => fetchClients(dispatch),
-    onDblClick: id => browserHistory.push(`/clients/${id}`)
-  };
-};
-
-export const ListPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(List);

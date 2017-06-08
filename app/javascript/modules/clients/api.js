@@ -21,7 +21,7 @@ class Api {
       }),
       body: JSON.stringify({client: item})
     })
-      .then(response => response.json())
+      .then(response => response)
       .catch(error => { throw(error) });
   }
 }

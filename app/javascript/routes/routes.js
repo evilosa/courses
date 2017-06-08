@@ -14,9 +14,9 @@ export default (
     <Route path="dashboard" name="Dashboard" component={Dashboard}/>
     <Route path="courses" name="Courses" component={Courses}/>
     <Route path="clients" name="Clients">
-      <IndexRoute component={Clients.components.ListPage}/>
-      <Route path="new" name="New client" component={Clients.components.ItemPage}/>
-      <Route path=":id" name="Client detail" components={Clients.components.ItemPage}/>
+      <IndexRoute component={Clients.containers.ListPage}/>
+      <Route path="new" name="New client" component={Clients.containers.ItemPage}/>
+      <Route path=":id" name="Client detail" components={Clients.containers.ItemPage}/>
     </Route>
   </Route>
 );

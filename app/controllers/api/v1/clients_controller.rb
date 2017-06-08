@@ -1,5 +1,5 @@
 class Api::V1::ClientsController < Api::V1::BaseController
-  before_action :load_client, only: [:show, :update, :destroy]
+  before_action :load_client, only: [:show, :destroy]
 
   def index
     respond_with @clients = Client.all
@@ -15,8 +15,16 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def update
-    @client.update(client_params)
-    respond_with @client
+    begin
+      @client = Client.find(params[:id])
+      if @client.update(client_params)
+        head :no_content
+      else
+        raise @client.errors
+      end
+    rescue Exception => ex
+      render json: { error: ex.message }, status: :unprocessable_entity
+    end
   end
 
   private
@@ -26,6 +34,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def client_params
-    params.require(:client).permit(:id, :updated_at, :title, :full_name, :tax_number, :description)
+    params.require(:client).permit(:id, :created_at, :updated_at, :title, :full_name, :tax_number, :description)
   end
 end

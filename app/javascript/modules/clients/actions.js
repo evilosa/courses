@@ -1,20 +1,19 @@
 import * as t from './actionTypes';
-import api from './api';
 
 ////////////////////////////////////////////////////////////////
-// Load clients
+// Load items
 ////////////////////////////////////////////////////////////////
 
-export const fetchClients = () => ({
+export const fetchItems = () => ({
   type: t.FETCH_ITEMS
 });
 
-export const fetchClientsSuccess = items => ({
+export const fetchItemsSuccess = items => ({
   type: t.FETCH_ITEMS_SUCCESS,
   items: items
 });
 
-export const fetchClientsFailure = error => ({
+export const fetchItemsFailure = error => ({
   type: t.FETCH_ITEMS_FAILURE,
   error: error
 });
@@ -23,32 +22,40 @@ export const fetchClientsFailure = error => ({
 // Load client
 ////////////////////////////////////////////////////////////////
 
-export const fetchClient = id => ({
+export const fetchItem = id => ({
   type: t.FETCH_ITEM,
   id: id
 });
 
-export const fetchClientSuccess = item => ({
+export const fetchItemSuccess = item => ({
   type: t.FETCH_ITEM_SUCCESS,
   item: item
 });
 
-export const fetchClientFailure = error => ({
+export const fetchItemFailure = error => ({
   type: t.FETCH_ITEM_FAILURE,
   error: error
 });
 
 ////////////////////////////////////////////////////////////////
-// Update client
+// Edit
 ////////////////////////////////////////////////////////////////
 
-export const updateClient = (dispatch, newValues) => {
-  dispatch(update(newValues));
+export const beginEdit = () => ({
+  type: t.BEGIN_EDIT
+});
 
-  return api.update(newValues)
-    .then(response => dispatch(updateSuccess(response)))
-    .catch(error => dispatch(updateFailure(item.id, error.message)));
-};
+export const toggleEdit = () => ({
+  type: t.TOGGLE_EDIT
+});
+
+export const finishEdit = () => ({
+  type: t.FINISH_EDIT
+});
+
+////////////////////////////////////////////////////////////////
+// Update client
+////////////////////////////////////////////////////////////////
 
 export const update = item => ({
   type: t.UPDATE,
