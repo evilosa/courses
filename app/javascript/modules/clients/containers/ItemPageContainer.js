@@ -44,13 +44,15 @@ class ItemPageContainer extends Component {
   }
 
   render() {
-    let ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
+    let ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>
+      ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>;
 
     return (
-      {ItemPresentation}
+      <div>
+        {ItemPresentation}
+      </div>
     );
   }
 }

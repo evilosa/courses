@@ -29,7 +29,7 @@ export default (state = State, action) => {
     case t.FETCH_ITEM_SUCCESS:
       return { ...state, activeItem: { ...state.activeItem, item: action.item, error: null, deleted: false, loading: false }};
     case t.FETCH_ITEM_FAILURE:
-      return { ...state, activeItem: { ...state.activeItem, item: null,  error: action.error, deleted: false, loading: false }};
+      return { ...state, activeItem: { ...state.activeItem,  error: action.error, deleted: false, loading: false }};
 
 
     // create item

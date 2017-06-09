@@ -11,7 +11,7 @@ export class Client {
 
 export const State = {
   list: { items: [], error: null, loading: false },
-  activeItem: { item: null, error: null, edit: false, deleted: false, loading: false }
+  activeItem: { item: new Client(), error: null, edit: false, deleted: false, loading: false }
 };
 
 export const filterActive = clients => clients.filter(t => t.active);

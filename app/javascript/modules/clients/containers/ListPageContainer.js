@@ -1,12 +1,36 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
 import { browserHistory } from 'react-router';
-import ListPage from '../components/ListPage';
+import Page from '../../common/Page';
 
-////////////////////////////////////////////////////////////////////
-// To props
-////////////////////////////////////////////////////////////////////
+// Page actions
+const addNew = {title: I18n.t('common.add'), link: '/clients/new', icon: 'icon-speedometer' };
+const pageActions = [ addNew ];
+
+// Container
+class ListPageContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      item: this.props.item,
+      isEditing: false
+    };
+  }
+
+  componentWillMount() {
+    this.props.fetchClients();
+  }
+
+  render() {
+    return (
+      <Page header={I18n.t('client.header.list')} actions={pageActions}>
+        <h1>List page container</h1>
+      </Page>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -21,7 +45,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ListPageContainer);
 
 ////////////////////////////////////////////////////////////////////
 // Functions

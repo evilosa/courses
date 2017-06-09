@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import Header from '../Header/index';
-import Sidebar from '../Sidebar/index';
+import NavTop from '../NavTop/index';
+import Navigation from '../Navigation/index';
 import Aside from '../Aside/index';
 import Footer from '../Footer/index';
 
 import Breadcrumbs from 'react-breadcrumbs';
 
-class Full extends Component {
+class MainLayout extends Component {
   render() {
     return (
       <div className="app">
-        <Header />
+        <NavTop />
         <div className="app-body">
-          <Sidebar {...this.props}/>
+          <Navigation {...this.props}/>
           <main className="main">
             <Breadcrumbs
               wrapperElement="ol"
@@ -34,4 +34,4 @@ class Full extends Component {
   }
 }
 
-export default Full;
+export default MainLayout;

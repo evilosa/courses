@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 
-class Sidebar extends Component {
+class Navigation extends Component {
 
   handleClick(e) {
     e.preventDefault();
@@ -38,4 +38,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default Navigation;
