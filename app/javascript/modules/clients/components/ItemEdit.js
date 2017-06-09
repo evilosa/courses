@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Input } from 'reactstrap';
 
 class ItemEdit extends Component {
@@ -10,6 +11,7 @@ class ItemEdit extends Component {
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
+              <i className="fa fa-align-justify"></i> {item.id !== 'new' ? I18n.t('client.header.edit') : I18n.t('client.header.new')}
             </div>
             <div className="card-block">
               <div className="row">
