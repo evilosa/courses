@@ -2,21 +2,24 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
+import { PageAction } from '../../../models/pageActions/pageActions';
 import { browserHistory } from 'react-router';
 import Page from '../../common/Page';
+import ItemsList from '../components/ItemsList';
 
 // Page actions
-const addNew = {title: I18n.t('common.add'), link: '/clients/new', icon: 'icon-speedometer' };
+const addNew = new PageAction(I18n.t('common.add'), '/clients/new', 'icon-speedometer');
 const pageActions = [ addNew ];
 
 // Container
 class ListPageContainer extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      item: this.props.item,
-      isEditing: false
-    };
+    this.selectItem = this.selectItem.bind(this);
+  }
+
+  selectItem(id) {
+    browserHistory.push(`/clients/${id}`);
   }
 
   componentWillMount() {
@@ -27,6 +30,7 @@ class ListPageContainer extends Component {
     return (
       <Page header={I18n.t('client.header.list')} actions={pageActions}>
         <h1>List page container</h1>
+        <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
       </Page>
     );
   }

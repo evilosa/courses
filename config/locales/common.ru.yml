@@ -1,5 +1,6 @@
 ru:
   common:
+    back: 'Назад'
     add: 'Создать'
     edit: 'Изменить'
     cancel: 'Отменить'
