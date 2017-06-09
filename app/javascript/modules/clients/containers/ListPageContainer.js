@@ -2,14 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
-import { PageAction } from '../../../models/pageActions/pageActions';
 import { browserHistory } from 'react-router';
-import Page from '../../common/Page';
+
+import { Link } from 'react-router';
 import ItemsList from '../components/ItemsList';
 
-// Page actions
-const addNew = new PageAction(I18n.t('common.add'), '/clients/new', 'icon-speedometer');
-const pageActions = [ addNew ];
 
 // Container
 class ListPageContainer extends Component {
@@ -28,10 +25,21 @@ class ListPageContainer extends Component {
 
   render() {
     return (
-      <Page header={I18n.t('client.header.list')} actions={pageActions}>
-        <h1>List page container</h1>
-        <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
-      </Page>
+      <div className="animated fadeIn">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-header">
+              <i className="fa fa-align-justify"></i> {I18n.t('client.header.list')}
+              <div className="card-actions">
+                <Link to='/clients/new'><i className="icon-plus"></i> {I18n.t('common.add')} </Link>
+              </div>
+            </div>
+            <div className="card-block">
+              <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import * as models from '../models';
 import api from '../api';
 import { browserHistory } from 'react-router';
+
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
@@ -51,7 +53,7 @@ class ItemPageContainer extends Component {
 
     return (
       <div>
-        {ItemPresentation}
+      {ItemPresentation}
       </div>
     );
   }
@@ -61,7 +63,7 @@ class ItemPageContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: state.clients.activeItem.item,
+    item: ownProps.route.path == 'new' ? new models.Client() : state.clients.activeItem.item,
     loading: state.clients.activeItem.loading
   };
 };
