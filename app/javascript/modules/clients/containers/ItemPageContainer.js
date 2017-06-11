@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
-import { ROUTING_PATH } from '../constants';
 import api from '../api';
-import { browserHistory } from 'react-router';
 
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
@@ -17,15 +15,16 @@ const propTypes = {
 };
 
 class ItemPageContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
-      item: this.props.item,
-      isEditing: false
+      localItem: { ...this.props.item },
+      isEditing: this.props.isEditing
     };
     this.updateItemState = this.updateItemState.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
   componentDidMount() {
@@ -34,34 +33,42 @@ class ItemPageContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     // If component's props are updated with new item, change the internal state
-    this.setState({item: nextProps.item});
+    this.setState({localItem: nextProps.item});
   }
 
-  toggleEdit() {
+  toggleEdit(event) {
+    event.preventDefault();
     this.setState({isEditing: !this.state.isEditing});
+  }
+
+  cancelEdit(event) {
+    event.preventDefault();
+    this.setState({isEditing: false, localItem: this.props.item});
   }
 
   updateItemState(event) {
     const field = event.target.name;
-    const item = this.state.item;
-    item[field] = event.target.value;
-    return this.setState({item: item});
+    const localItem = { ...this.state.localItem };
+    localItem[field] = event.target.value;
+    return this.setState({localItem: localItem});
   }
 
   saveItem(event) {
     event.preventDefault();
-    this.props.updateClient(this.state.item);
+    if (this.props.updateClient(this.state.localItem))
+      this.setState({isEditing: false});
   }
 
   render() {
-    let ItemPresentation = <ItemDetails item={this.props.item}/>;
+    let ItemPresentation = <ItemDetails item={this.state.localItem} onEdit={this.toggleEdit}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>;
+      ItemPresentation = <ItemEdit item={this.state.localItem} disabled={this.props.loading} onSave={this.saveItem}
+                                   onChange={this.updateItemState} onCancel={this.cancelEdit}/>;
 
     return (
       <div>
-      {ItemPresentation}
+        {ItemPresentation}
       </div>
     );
   }
@@ -73,7 +80,8 @@ ItemPageContainer.propTypes = propTypes;
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: ownProps.route.path == 'new' ? new models.Client() : state.clients.activeItem.item,
+    item: ownProps.route.path == 'new' ? new models.Client() :  { ...state.clients.activeItem.item},
+    isEditing: ownProps.route.path == 'new',
     loading: state.clients.activeItem.loading
   };
 };

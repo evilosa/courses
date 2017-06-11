@@ -40,7 +40,7 @@ class ItemEdit extends Component {
             <div className="card-footer">
               <button type="submit" className="btn btn-sm btn-primary" disabled={this.props.loading}
                       onClick={this.props.onSave}><i className="fa fa-save"></i> {I18n.t('common.save')}</button>&nbsp;
-              <button type="reset" className="btn btn-sm btn-danger" onClick={this.toggleEdit}>
+              <button type="reset" className="btn btn-sm btn-danger" onClick={this.props.onCancel}>
                 <i className="fa fa-ban"></i> {I18n.t('common.cancel')}</button>&nbsp;
             </div>
           </div>
