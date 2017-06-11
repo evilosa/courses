@@ -54,7 +54,7 @@ class ItemPageContainer extends Component {
   }
 
   render() {
-    let ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>;
+    let ItemPresentation = <ItemDetails item={this.props.item}/>;
 
     if (this.state.isEditing)
       ItemPresentation = <ItemEdit item={this.props.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState}/>;
