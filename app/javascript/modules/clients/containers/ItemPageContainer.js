@@ -18,7 +18,7 @@ class ItemPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localItem: { ...this.props.item },
+      item: this.props.item,
       isEditing: this.props.isEditing
     };
     this.updateItemState = this.updateItemState.bind(this);
@@ -33,7 +33,7 @@ class ItemPageContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     // If component's props are updated with new item, change the internal state
-    this.setState({localItem: nextProps.item});
+    this.setState({item: nextProps.item});
   }
 
   toggleEdit(event) {
@@ -43,27 +43,27 @@ class ItemPageContainer extends Component {
 
   cancelEdit(event) {
     event.preventDefault();
-    this.setState({isEditing: false, localItem: this.props.item});
+    this.setState({isEditing: false, item: this.props.item});
   }
 
   updateItemState(event) {
     const field = event.target.name;
-    const localItem = { ...this.state.localItem };
+    const localItem = { ...this.state.item };
     localItem[field] = event.target.value;
-    return this.setState({localItem: localItem});
+    return this.setState({item: localItem});
   }
 
   saveItem(event) {
     event.preventDefault();
-    if (this.props.updateClient(this.state.localItem))
+    if (this.props.updateClient(this.state.item))
       this.setState({isEditing: false});
   }
 
   render() {
-    let ItemPresentation = <ItemDetails item={this.state.localItem} onEdit={this.toggleEdit}/>;
+    let ItemPresentation = <ItemDetails item={this.state.item} onEdit={this.toggleEdit}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.state.localItem} disabled={this.props.loading} onSave={this.saveItem}
+      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.loading} onSave={this.saveItem}
                                    onChange={this.updateItemState} onCancel={this.cancelEdit}/>;
 
     return (
@@ -80,7 +80,7 @@ ItemPageContainer.propTypes = propTypes;
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: ownProps.route.path == 'new' ? new models.Client() :  { ...state.clients.activeItem.item},
+    item: ownProps.route.path == 'new' ? new models.Client() :  state.clients.activeItem.item,
     isEditing: ownProps.route.path == 'new',
     loading: state.clients.activeItem.loading
   };
