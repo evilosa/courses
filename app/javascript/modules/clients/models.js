@@ -5,13 +5,14 @@ export class Client {
     this.full_name = this.title;
     this.tax_number = '';
     this.description = '';
+    this.logo = '';
     this.active = true;
   }
 }
 
 export const State = {
   list: { items: [], error: null, loading: false },
-  activeItem: { item: null, error: null, edit: false, deleted: false, loading: false }
+  activeItem: { item: new Client(), error: null, edit: false, deleted: false, loading: false }
 };
 
 export const filterActive = clients => clients.filter(t => t.active);

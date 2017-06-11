@@ -1,44 +1,46 @@
-import { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const propTypes = {
   item: PropTypes.object.isRequired
 };
 
-const ItemDetails = () => {
-  const { item } = this.props;
+const ItemDetails = props => {
+  const {item} = props;
 
   return (
-    <div>
-      <div className="card">
-        <div className="card-header">
-          <strong>Создание нового клиента</strong>
+    <div className="row">
+      <div className="col-md-10">
+        <h3>{item.title}</h3>
+        <hr/>
+        <div className="row">
+          <div className="col-md-2">
+            <img src={item.logo} alt="logo" className="img-fluid"/>
+          </div>
+          <div className="col-md-8">
+            <h4>Description</h4>
+            <p>{item.description}</p>
+            <h4>Details</h4>
+
+            <dl className="row">
+              <dt className="col-sm-3">Tax number</dt>
+              <dd className="col-sm-9">{item.tax_number}</dd>
+
+              <dt className="col-sm-3">Full name</dt>
+              <dd className="col-sm-9">{item.full_name}</dd>
+            </dl>
+          </div>
         </div>
-        <form action="/api/v1/clients" method="post">
-          <div className="card-block">
-            <div className="row">
-              <div className="col-sm-6 form-group">
-                <label for="title">Наименование</label>
-                <input type="text" id="title" name="client[title]" className="form-control" placeholder="Enter client title.." value={item.title}/>
-              </div>
-              <div className="col-sm-6 from-group">
-                <label for="tax_number">ИНН</label>
-                <input type="text" id="tax_number" name="client[tax_number]" className="form-control" placeholder="Enter tax number"/>
-              </div>
-            </div>
-            <div className="form-group">
-              <label for="full_name">Полное наименование</label>
-              <input type="text" id="full_name" name="client[full_name]" className="form-control" placeholder="Enter full name.."/>
-            </div>
-            <div className="form-group">
-              <label for="description">Описание</label>
-              <textarea id="description" name="client[description]" rows="7" className="form-control" placeholder="Описание"></textarea>
-            </div>
-          </div>
-          <div className="card-footer">
-            <button type="submit" className="btn btn-sm btn-primary"><i className="fa fa-dot-circle-o"></i> Готово</button>&nbsp;
-            <button type="reset" className="btn btn-sm btn-danger"><i className="fa fa-ban"></i> Очистить</button>&nbsp;
-          </div>
-        </form>
+      </div>
+      <div className="col-md-2">
+        <h3>Actions</h3>
+        <hr/>
+        <div className="row">
+          <a href="" onClick={props.onEdit}>Edit</a>
+        </div>
+        <div className="row">
+          <a href="" >Remove</a>
+        </div>
       </div>
     </div>
   );

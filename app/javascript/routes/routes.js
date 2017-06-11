@@ -1,15 +1,15 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 // Containers
-import Full from '../modules/core/Full'
+import MainLayout from '../modules/common/MainLayout';
 
-import Dashboard from '../modules/dashboard'
-import Courses from '../modules/courses'
-import Clients from '../modules/clients'
+import Dashboard from '../modules/dashboard';
+import Courses from '../modules/courses';
+import Clients from '../modules/clients';
 
 export default (
-  <Route path="/" name="Home" component={Full}>
+  <Route path="/admin" name="Home" component={MainLayout}>
     <IndexRoute component={Dashboard}/>
     <Route path="dashboard" name="Dashboard" component={Dashboard}/>
     <Route path="courses" name="Courses" component={Courses}/>

@@ -1,12 +1,52 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import api from '../api';
 import { browserHistory } from 'react-router';
-import ListPage from '../components/ListPage';
 
-////////////////////////////////////////////////////////////////////
-// To props
-////////////////////////////////////////////////////////////////////
+import { ROUTING_PATH } from '../constants';
+
+import { Link } from 'react-router';
+import ItemsList from '../components/ItemsList';
+
+
+// Container
+class ListPageContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.selectItem = this.selectItem.bind(this);
+  }
+
+  selectItem(id) {
+    browserHistory.push(`${ROUTING_PATH}/${id}`);
+  }
+
+  componentWillMount() {
+    this.props.fetchClients();
+  }
+
+  render() {
+    return (
+      <div className="animated fadeIn">
+        <div className="row">
+          <div className="col-md-11">
+            <h3>{I18n.t('client.header.list')}</h3>
+            <hr/>
+            <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
+          </div>
+          <div className="col-md-1">
+            <h3>Actions</h3>
+            <hr/>
+            <div className="row">
+              <Link to='/admin/clients/new'><i className="icon-plus"></i> {I18n.t('common.add')} </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -17,11 +57,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchClients: () => fetchClients(dispatch),
-    onDblClick: id => browserHistory.push(`/clients/${id}`)
+    onDblClick: id => browserHistory.push(`${ROUTING_PATH}/${id}`)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ListPageContainer);
 
 ////////////////////////////////////////////////////////////////////
 // Functions

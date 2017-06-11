@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import clients from '../../clients';
 
-class Sidebar extends Component {
+class Navigation extends Component {
 
   handleClick(e) {
     e.preventDefault();
@@ -23,13 +24,13 @@ class Sidebar extends Component {
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-item">
-              <Link to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-home"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
+              <Link to={'/admin/dashboard'} className="nav-link" activeClassName="active"><i className="icon-home"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
             </li>
             <li className="nav-item">
-              <Link to={'/clients'} className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>
+              <Link to={ clients.constants.ROUTING_PATH } className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>
             </li>
             <li className="nav-item">
-              <Link to={'/courses'} className="nav-link" activeClassName="active"><i className="icon-graduation"></i> Courses</Link>
+              <Link to={'/admin/courses'} className="nav-link" activeClassName="active"><i className="icon-graduation"></i> Courses</Link>
             </li>
           </ul>
         </nav>
@@ -38,4 +39,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default Navigation;
