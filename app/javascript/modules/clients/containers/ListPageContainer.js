@@ -29,16 +29,17 @@ class ListPageContainer extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <div className="col-lg-12">
-          <div className="card">
-            <div className="card-header">
-              <i className="fa fa-align-justify"></i> {I18n.t('client.header.list')}
-              <div className="card-actions">
-                <Link to='/clients/new'><i className="icon-plus"></i> {I18n.t('common.add')} </Link>
-              </div>
-            </div>
-            <div className="card-block">
-              <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
+        <div className="row">
+          <div className="col-md-11">
+            <h3>{I18n.t('client.header.list')}</h3>
+            <hr/>
+            <ItemsList items={this.props.list.items} onDblClick={this.selectItem}/>
+          </div>
+          <div className="col-md-1">
+            <h3>Actions</h3>
+            <hr/>
+            <div className="row">
+              <Link to='/admin/clients/new'><i className="icon-plus"></i> {I18n.t('common.add')} </Link>
             </div>
           </div>
         </div>

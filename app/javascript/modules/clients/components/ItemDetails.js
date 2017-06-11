@@ -15,19 +15,19 @@ const ItemDetails = props => {
         <hr/>
         <div className="row">
           <div className="col-md-2">
-            <img src="/img/default_logo.png" alt="logo" className="img-fluid"/>
+            <img src={item.logo} alt="logo" className="img-fluid"/>
           </div>
           <div className="col-md-8">
-            <div className="row">
-              <h4>Description</h4>
-              <p>{item.description}</p>
-            </div>
-            <div className="row">
-              <h4>Details</h4>
-            </div>
+            <h4>Description</h4>
+            <p>{item.description}</p>
+            <h4>Details</h4>
+
             <dl className="row">
               <dt className="col-sm-3">Tax number</dt>
               <dd className="col-sm-9">{item.tax_number}</dd>
+
+              <dt className="col-sm-3">Full name</dt>
+              <dd className="col-sm-9">{item.full_name}</dd>
             </dl>
           </div>
         </div>

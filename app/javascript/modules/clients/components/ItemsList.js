@@ -12,7 +12,7 @@ const propTypes = {
 
 const ItemsList = (props) => {
   return (
-    <Table striped hover>
+    <Table  hover>
       <thead>
       <tr>
         <th>#</th>

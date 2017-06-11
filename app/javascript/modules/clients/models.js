@@ -5,6 +5,7 @@ export class Client {
     this.full_name = this.title;
     this.tax_number = '';
     this.description = '';
+    this.logo = '';
     this.active = true;
   }
 }
