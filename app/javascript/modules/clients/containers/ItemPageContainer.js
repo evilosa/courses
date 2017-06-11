@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
+import { ROUTING_PATH } from '../constants';
 import api from '../api';
 import { browserHistory } from 'react-router';
 
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
+
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
+  updateClient: PropTypes.func.isRequired
+};
 
 class ItemPageContainer extends Component {
   constructor(props, context) {
@@ -27,11 +34,11 @@ class ItemPageContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     // If component's props are updated with new item, change the internal state
-    this.setState({item: nextProps.item})
+    this.setState({item: nextProps.item});
   }
 
   toggleEdit() {
-    this.setState({isEditing: !this.state.isEditing})
+    this.setState({isEditing: !this.state.isEditing});
   }
 
   updateItemState(event) {
@@ -59,6 +66,8 @@ class ItemPageContainer extends Component {
     );
   }
 }
+
+ItemPageContainer.propTypes = propTypes;
 
 // State to props
 const mapStateToProps = (state, ownProps) => {
@@ -100,7 +109,7 @@ const updateClient = (dispatch, updatedItem) => {
         dispatch(actions.updateSuccess(updatedItem));
       }
       else
-        dispatch(actions.updateFailure(updatedItem.id, result.payload.response));
+        dispatch(actions.updateFailure(updatedItem.id, response.payload.response));
     })
     .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
 };

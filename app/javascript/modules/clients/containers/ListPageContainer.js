@@ -5,6 +5,8 @@ import * as actions from '../actions';
 import api from '../api';
 import { browserHistory } from 'react-router';
 
+import { ROUTING_PATH } from '../constants';
+
 import { Link } from 'react-router';
 import ItemsList from '../components/ItemsList';
 
@@ -17,7 +19,7 @@ class ListPageContainer extends Component {
   }
 
   selectItem(id) {
-    browserHistory.push(`/clients/${id}`);
+    browserHistory.push(`${ROUTING_PATH}/${id}`);
   }
 
   componentWillMount() {
@@ -54,7 +56,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchClients: () => fetchClients(dispatch),
-    onDblClick: id => browserHistory.push(`/clients/${id}`)
+    onDblClick: id => browserHistory.push(`${ROUTING_PATH}/${id}`)
   };
 };
 

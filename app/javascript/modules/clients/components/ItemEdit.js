@@ -51,6 +51,7 @@ class ItemEdit extends Component {
 };
 
 ItemEdit.propTypes = {
+  item: PropTypes.object.isRequired,
   disabled: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired

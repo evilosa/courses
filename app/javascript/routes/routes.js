@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 // Containers
-import MainLayout from '../modules/common/MainLayout'
+import MainLayout from '../modules/common/MainLayout';
 
-import Dashboard from '../modules/dashboard'
-import Courses from '../modules/courses'
-import Clients from '../modules/clients'
+import Dashboard from '../modules/dashboard';
+import Courses from '../modules/courses';
+import Clients from '../modules/clients';
 
 export default (
-  <Route path="/" name="Home" component={MainLayout}>
+  <Route path="/admin" name="Home" component={MainLayout}>
     <IndexRoute component={Dashboard}/>
     <Route path="dashboard" name="Dashboard" component={Dashboard}/>
     <Route path="courses" name="Courses" component={Courses}/>

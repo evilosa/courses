@@ -17,7 +17,7 @@ const ItemDetails = () => {
           <div className="card-block">
             <div className="row">
               <div className="col-sm-6 form-group">
-                <label for="title">Наименование</label>
+                <label>Наименование</label>
                 <input type="text" id="title" name="client[title]" className="form-control" placeholder="Enter client title.." value={item.title}/>
               </div>
               <div className="col-sm-6 from-group">
