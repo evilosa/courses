@@ -1,7 +1,12 @@
 en:
   common:
-    back: 'Back'
-    add: 'Add'
-    edit: 'Edit'
-    cancel: 'Cancel'
-    save: 'Save'
+    headers:
+      actions: 'Actions'
+      details: 'Details'
+    buttons:
+      back: 'Back'
+      add: 'Add'
+      edit: 'Edit'
+      remove: 'Remove'
+      cancel: 'Cancel'
+      save: 'Save'

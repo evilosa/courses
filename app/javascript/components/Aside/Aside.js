@@ -7,7 +7,7 @@ class Aside extends Component {
       <aside className="aside-menu">
         Aside Menu
       </aside>
-    )
+    );
   }
 }
 

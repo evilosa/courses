@@ -1,53 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'reactstrap';
 
-class ItemEdit extends Component {
-  render() {
-    const {item, onChange} = this.props;
+import common from '../../../components/index';
 
-    return (
-      <div className="animated fadeIn">
-        <div className="col-lg-12">
-          <div className="card">
-            <div className="card-header">
-              <i className="fa fa-align-justify"></i> {item.id !== 'new' ? I18n.t('client.header.edit') : I18n.t('client.header.new')}
-            </div>
-            <div className="card-block">
-              <div className="row">
-                <div className="form-group col-sm-6">
-                  <label>{I18n.t('client.fields.title')}</label>
-                  <Input name="title" value={item.title} onChange={onChange}/>
-                </div>
-                <div className="form-group col-sm-6">
-                  <label>{I18n.t('client.fields.tax_number')}</label>
-                  <Input name="tax_number" value={item.tax_number} onChange={onChange}/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="form-group col-sm-12">
-                  <label>{I18n.t('client.fields.full_name')}</label>
-                  <Input name="full_name" value={item.full_name} onChange={onChange}/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="form-group col-sm-12">
-                  <label>{I18n.t('client.fields.description')}</label>
-                  <Input type="textarea" rows="7" name="description" value={item.description} onChange={onChange}/>
-                </div>
-              </div>
-            </div>
-            <div className="card-footer">
-              <button type="submit" className="btn btn-sm btn-primary" disabled={this.props.loading}
-                      onClick={this.props.onSave}><i className="fa fa-save"></i> {I18n.t('common.save')}</button>&nbsp;
-              <button type="reset" className="btn btn-sm btn-danger" onClick={this.props.onCancel}>
-                <i className="fa fa-ban"></i> {I18n.t('common.cancel')}</button>&nbsp;
-            </div>
+const { FormInput } = common;
+
+
+const ItemEdit = props => {
+  const {item, onChange} = props;
+
+  return (
+      <div className="row">
+        <div className="col-md-10">
+          <h3>{I18n.t('client.header.edit')}</h3>
+          <hr/>
+          <div className="row">
+            <FormInput classNames='col-sm-6' name="title" title={I18n.t('client.fields.title')} value={item.title} onChange={onChange} ownRow={false}/>
+            <FormInput classNames='col-sm-6' name="tax_number" title={I18n.t('client.fields.tax_number')} value={item.tax_number} onChange={onChange} ownRow={false}/>
+          </div>
+          <FormInput name="full_name" title={I18n.t('client.fields.full_name')} value={item.full_name} onChange={onChange}/>
+          <FormInput name="description" title={I18n.t('client.fields.description')} value={item.description} onChange={onChange} type="textarea"/>
+        </div>
+        <div className="col-md-2">
+          <h3>Actions</h3>
+          <hr/>
+          <div className="row">
+            <a href="" onClick={props.onSave}><i className="fa fa-save"></i> Save</a>
+          </div>
+          <div className="row">
+            <a href="" onClick={props.onCancel}><i className="fa fa-ban"></i> Cancel</a>
           </div>
         </div>
       </div>
-    );
-  };
+  );
 };
 
 ItemEdit.propTypes = {

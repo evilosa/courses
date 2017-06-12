@@ -13,7 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Root from '../modules/common/Root';
+import Root from '../components/Root';
 import configureStore from '../store';
 
 import 'bootstrap/dist/css/bootstrap.css';

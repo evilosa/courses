@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 // Containers
-import MainLayout from '../modules/common/MainLayout';
+import MainLayout from '../components/MainLayout';
 
 import Dashboard from '../modules/dashboard';
 import Courses from '../modules/courses';

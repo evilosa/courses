@@ -3,4 +3,4 @@ import ItemEdit from './ItemEdit';
 import ItemsList from './ItemsList';
 import ListItem from './ListItem';
 
-export { ItemDetails, ItemEdit, ItemsList, ListItem }
+export default { ItemDetails, ItemEdit, ItemsList, ListItem }

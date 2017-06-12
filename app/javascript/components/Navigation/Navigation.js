@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import clients from '../../clients';
+import clients from '../../modules/clients/index';
 
 class Navigation extends Component {
 
@@ -35,7 +35,7 @@ class Navigation extends Component {
           </ul>
         </nav>
       </div>
-    )
+    );
   }
 }
 

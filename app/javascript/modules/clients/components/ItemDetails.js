@@ -18,28 +18,28 @@ const ItemDetails = props => {
             <img src={item.logo} alt="logo" className="img-fluid"/>
           </div>
           <div className="col-md-8">
-            <h4>Description</h4>
+            <h4>{I18n.t('clients.fields.description')}</h4>
             <p>{item.description}</p>
-            <h4>Details</h4>
+            <h4>{I18n.t('common.headers.details')}</h4>
 
             <dl className="row">
-              <dt className="col-sm-3">Tax number</dt>
+              <dt className="col-sm-3">{I18n.t('clients.fields.tax_number')}</dt>
               <dd className="col-sm-9">{item.tax_number}</dd>
 
-              <dt className="col-sm-3">Full name</dt>
+              <dt className="col-sm-3">{I18n.t('clients.fields.full_name')}</dt>
               <dd className="col-sm-9">{item.full_name}</dd>
             </dl>
           </div>
         </div>
       </div>
       <div className="col-md-2">
-        <h3>Actions</h3>
+        <h3>{I18n.t('common.headers.actions')}</h3>
         <hr/>
         <div className="row">
-          <a href="" onClick={props.onEdit}>Edit</a>
+          <a href="" onClick={props.onEdit}><i className="fa fa-edit"></i> {I18n.t('common.buttons.edit')}</a>
         </div>
         <div className="row">
-          <a href="" >Remove</a>
+          <a href="" ><i className="fa fa-remove"></i> {I18n.t('common.buttons.remove')}</a>
         </div>
       </div>
     </div>

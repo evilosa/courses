@@ -4,18 +4,18 @@ import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 class NavTop extends Component {
 
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.toggle = this.toggle.bind(this);
-      this.state = {
-          dropdownOpen: false
-      };
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
   }
 
   toggle() {
-      this.setState({
-          dropdownOpen: !this.state.dropdownOpen
-      });
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
   }
 
   sidebarToggle(e) {
@@ -104,7 +104,7 @@ class NavTop extends Component {
           </li>
         </ul>
       </header>
-    )
+    );
   }
 }
 
