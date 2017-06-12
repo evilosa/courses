@@ -36,10 +36,10 @@ const ItemDetails = props => {
         <h3>Actions</h3>
         <hr/>
         <div className="row">
-          <a href="" onClick={props.onEdit}>Edit</a>
+          <a href="" onClick={props.onEdit}><i className="fa fa-edit"></i> Edit</a>
         </div>
         <div className="row">
-          <a href="" >Remove</a>
+          <a href="" ><i className="fa fa-remove"></i> Remove</a>
         </div>
       </div>
     </div>
