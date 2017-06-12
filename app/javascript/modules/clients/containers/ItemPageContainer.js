@@ -21,7 +21,7 @@ class ItemPageContainer extends Component {
       item: this.props.item,
       isEditing: this.props.isEditing
     };
-    this.updateItemState = this.updateItemState.bind(this);
+    this.fieldChange = this.fieldChange.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
@@ -46,7 +46,7 @@ class ItemPageContainer extends Component {
     this.setState({isEditing: false, item: this.props.item});
   }
 
-  updateItemState(event) {
+  fieldChange(event) {
     const field = event.target.name;
     const localItem = { ...this.state.item };
     localItem[field] = event.target.value;
@@ -63,7 +63,7 @@ class ItemPageContainer extends Component {
     let ItemPresentation = <ItemDetails item={this.state.item} onEdit={this.toggleEdit}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.updateItemState} onCancel={this.cancelEdit}/>;
+      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.fieldChange} onCancel={this.cancelEdit}/>;
 
     return (
       <div>
