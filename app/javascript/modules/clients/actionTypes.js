@@ -22,11 +22,6 @@ export const VALIDATE = constants.NAME + '/VALIDATE';
 export const VALIDATE_SUCCESS = constants.NAME + '/VALIDATE_SUCCESS';
 export const VALIDATE_FAILURE = constants.NAME + '/VALIDATE_FAILURE';
 
-// Edit item
-export const BEGIN_EDIT = constants.NAME + '/BEGIN_EDIT';
-export const TOGGLE_EDIT = constants.NAME + '/TOGGLE_EDIT';
-export const FINISH_EDIT = constants.NAME + '/FINISH_EDIT';
-
 // Update item
 export const UPDATE = constants.NAME + '/UPDATE';
 export const UPDATE_SUCCESS = constants.NAME + '/UPDATE_SUCCESS';

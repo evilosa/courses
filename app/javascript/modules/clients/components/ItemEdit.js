@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'reactstrap';
+
+import common from '../../../components/index';
+
+const { FormInput } = common;
+
 
 const ItemEdit = props => {
   const {item, onChange} = props;
@@ -8,30 +12,14 @@ const ItemEdit = props => {
   return (
       <div className="row">
         <div className="col-md-10">
-          <h3>Редактирование клиента</h3>
+          <h3>{I18n.t('client.header.edit')}</h3>
           <hr/>
           <div className="row">
-                <div className="form-group col-sm-6">
-                  <label>{I18n.t('client.fields.title')}</label>
-                  <Input name="title" value={item.title} onChange={onChange}/>
-                </div>
-                <div className="form-group col-sm-6">
-                  <label>{I18n.t('client.fields.tax_number')}</label>
-                  <Input name="tax_number" value={item.tax_number} onChange={onChange}/>
-                </div>
-              </div>
-          <div className="row">
-                <div className="form-group col-sm-12">
-                  <label>{I18n.t('client.fields.full_name')}</label>
-                  <Input name="full_name" value={item.full_name} onChange={onChange}/>
-                </div>
-              </div>
-          <div className="row">
-                <div className="form-group col-sm-12">
-                  <label>{I18n.t('client.fields.description')}</label>
-                  <Input type="textarea" rows="7" name="description" value={item.description} onChange={onChange}/>
-                </div>
-              </div>
+            <FormInput classNames='col-sm-6' name="title" title={I18n.t('client.fields.title')} value={item.title} onChange={onChange} ownRow={false}/>
+            <FormInput classNames='col-sm-6' name="tax_number" title={I18n.t('client.fields.tax_number')} value={item.tax_number} onChange={onChange} ownRow={false}/>
+          </div>
+          <FormInput name="full_name" title={I18n.t('client.fields.full_name')} value={item.full_name} onChange={onChange}/>
+          <FormInput name="description" title={I18n.t('client.fields.description')} value={item.description} onChange={onChange} type="textarea"/>
         </div>
         <div className="col-md-2">
           <h3>Actions</h3>

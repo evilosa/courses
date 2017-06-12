@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import routes from '../../../routes/index';
+import routes from '../../routes/index';
 import { Router } from 'react-router';
 
 const Root = ({ store, history }) => (
@@ -10,8 +11,8 @@ const Root = ({ store, history }) => (
 );
 
 Root.propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object.isPluginRequired
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isPluginRequired
 };
 
 export default Root;

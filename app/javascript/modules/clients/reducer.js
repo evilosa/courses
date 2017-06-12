@@ -49,13 +49,6 @@ export default (state = State, action) => {
     case t.VALIDATE_FAILURE:
       return { ...state, activeItem: { ...state.activeItem, error: action.error, loading: false }};
 
-    // edit item
-    case t.BEGIN_EDIT:
-      return { ...state, activeItem: { ...state.activeItem, edit: true }};
-    case t.TOGGLE_EDIT:
-      return { ...state, activeItem: { ...state.activeItem, edit: !state.activeItem.edit }};
-    case t.FINISH_EDIT:
-      return { ...state, activeItem: { ...state.activeItem, edit: false }};
 
     // update item
     case t.UPDATE:

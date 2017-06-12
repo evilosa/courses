@@ -1,11 +1,11 @@
 en:
-  client:
-    header:
+  clients:
+    headers:
       list: 'Clients list'
       new: 'New client'
       edit: 'Edit client'
       remove: 'Remove client'
-    link:
+    links:
       list: 'Clients'
       item: 'Client'
     fields:
@@ -14,3 +14,4 @@ en:
       tax_number: 'Tax number'
       description: 'Description'
       created_at: 'Created at'
+      status: 'Status'

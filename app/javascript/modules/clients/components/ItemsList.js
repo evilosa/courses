@@ -16,18 +16,18 @@ const ItemsList = (props) => {
       <thead>
       <tr>
         <th>#</th>
-        <th>{I18n.t('client.fields.title')}</th>
-        <th>{I18n.t('client.fields.tax_number')}</th>
-        <th>{I18n.t('client.fields.created_at')}</th>
-        <th>Status</th>
+        <th>{I18n.t('clients.fields.title')}</th>
+        <th>{I18n.t('clients.fields.tax_number')}</th>
+        <th>{I18n.t('clients.fields.created_at')}</th>
+        <th>{I18n.t('clients.fields.status')}</th>
       </tr>
       </thead>
       <tbody>
-      {props.items.map(t => <ListItem key={t.id} item={t} onDblClick={() => props.onDblClick(t.id)}/>)}
+        {props.items.map(t => <ListItem key={t.id} item={t} onDblClick={() => props.onDblClick(t.id)}/>)}
       </tbody>
     </Table>
   );
-}
+};
 
 ItemsList.propTypes = propTypes;
 
