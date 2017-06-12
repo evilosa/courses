@@ -12,7 +12,7 @@ const ItemEdit = props => {
   return (
       <div className="row">
         <div className="col-md-10">
-          <h3>{I18n.t('client.header.edit')}</h3>
+          <h3>{I18n.t('client.headers.edit')}</h3>
           <hr/>
           <div className="row">
             <FormInput classNames='col-sm-6' name="title" title={I18n.t('client.fields.title')} value={item.title} onChange={onChange} ownRow={false}/>
