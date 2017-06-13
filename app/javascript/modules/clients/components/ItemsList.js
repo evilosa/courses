@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import ListItem from './ListItem';
 import { Table } from 'reactstrap';
 
-const propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func,
-  onDblClick: PropTypes.func.isRequired
-};
-
 const ItemsList = (props) => {
   return (
     <Table  hover>
@@ -29,7 +23,11 @@ const ItemsList = (props) => {
   );
 };
 
-ItemsList.propTypes = propTypes;
+ItemsList.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func,
+  onDblClick: PropTypes.func.isRequired
+};
 
 export default ItemsList;
 
