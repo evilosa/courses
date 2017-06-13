@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ListItem from './ListItem';
 import { Table } from 'reactstrap';
 
-const propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func,
-  onDblClick: PropTypes.func.isRequired
-};
+import ListItem from './ListItem';
+
 
 const ItemsList = (props) => {
   return (
@@ -29,7 +24,11 @@ const ItemsList = (props) => {
   );
 };
 
-ItemsList.propTypes = propTypes;
+ItemsList.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func,
+  onDblClick: PropTypes.func.isRequired
+};
 
 export default ItemsList;
 

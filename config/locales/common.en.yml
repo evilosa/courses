@@ -3,6 +3,8 @@ en:
     headers:
       actions: 'Actions'
       details: 'Details'
+    questions:
+      remove: 'Are you sure want to remove %{subject}: %{title}?'
     buttons:
       back: 'Back'
       add: 'Add'

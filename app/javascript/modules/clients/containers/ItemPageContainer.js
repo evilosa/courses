@@ -4,27 +4,32 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
 import api from '../api';
+import { ROUTING_PATH } from '../constants';
+import { browserHistory } from 'react-router';
+
+import common from '../../../components';
 
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
-const propTypes = {
-  id: PropTypes.string.isRequired,
-  item: PropTypes.object.isRequired,
-  updateClient: PropTypes.func.isRequired
-};
+const { RemoveConfirm } = common;
 
 class ItemPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       item: this.props.item,
-      isEditing: this.props.isEditing
+      isEditing: this.props.isEditing,
+      isRemoving: false
     };
     this.fieldChange = this.fieldChange.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
+
+    this.toggleRemove = this.toggleRemove.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.cancelRemove = this.cancelRemove.bind(this);
   }
 
   componentDidMount() {
@@ -59,21 +64,51 @@ class ItemPageContainer extends Component {
       this.setState({isEditing: false});
   }
 
+  // Remove item
+  toggleRemove(event) {
+    event.preventDefault();
+    this.setState({isRemoving: !this.state.isRemoving});
+  }
+
+  removeItem(event) {
+    event.preventDefault();
+    if (this.props.destroyClient(this.state.item))
+      browserHistory.push(ROUTING_PATH);
+  }
+
+  cancelRemove(event) {
+    if (event)
+      event.preventDefault();
+    this.setState({isRemoving: false});
+  }
+
   render() {
-    let ItemPresentation = <ItemDetails item={this.state.item} onEdit={this.toggleEdit}/>;
+    let ItemPresentation = <ItemDetails item={this.state.item} isLoading={this.props.isLoading} onEdit={this.toggleEdit} onRemove={this.toggleRemove}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.loading} onSave={this.saveItem} onChange={this.fieldChange} onCancel={this.cancelEdit}/>;
+      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.isLoading} onSave={this.saveItem} onChange={this.fieldChange} onCancel={this.cancelEdit}/>;
 
     return (
       <div>
         {ItemPresentation}
+        <RemoveConfirm isOpen={this.state.isRemoving}
+                       header={I18n.t('clients.headers.remove')}
+                       question={I18n.t('common.questions.remove',
+                         { subject: 'client',
+                           title: this.state.item.title
+                         })}
+                       onRemove={this.removeItem}
+                       onCancel={this.cancelRemove}/>
       </div>
     );
   }
 }
 
-ItemPageContainer.propTypes = propTypes;
+ItemPageContainer.propTypes = {
+  id: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
+  updateClient: PropTypes.func.isRequired
+};
 
 // State to props
 const mapStateToProps = (state, ownProps) => {
@@ -81,14 +116,15 @@ const mapStateToProps = (state, ownProps) => {
     id: ownProps.params.id,
     item: ownProps.route.path == 'new' ? new models.Client() :  state.clients.activeItem.item,
     isEditing: ownProps.route.path == 'new',
-    loading: state.clients.activeItem.loading
+    isLoading: state.clients.activeItem.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return ({
     fetchClient: (id) => fetchClient(dispatch, id),
-    updateClient: (updatedItem) => updateClient(dispatch, updatedItem)
+    updateClient: (updatedItem) => updateClient(dispatch, updatedItem),
+    destroyClient: (item) => destroyClient(dispatch, item)
   });
 };
 
@@ -117,6 +153,20 @@ const updateClient = (dispatch, updatedItem) => {
       }
       else
         dispatch(actions.updateFailure(updatedItem.id, response.payload.response));
+    })
+    .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
+};
+
+const destroyClient = (dispatch, item) => {
+  dispatch(actions.destroy(item));
+
+  return api.destroy(item)
+    .then(response => {
+      if (response && response.status == 204) {
+        dispatch(actions.destroySuccess(item));
+      }
+      else
+        dispatch(actions.destroyFailure(item.id, response.payload.response));
     })
     .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
 };
