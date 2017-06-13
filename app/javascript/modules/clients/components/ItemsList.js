@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Table } from 'reactstrap';
 
 import ListItem from './ListItem';
-import { Table } from 'reactstrap';
+
 
 const ItemsList = (props) => {
   return (

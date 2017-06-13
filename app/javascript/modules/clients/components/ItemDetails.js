@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import common from '../../../components';
-
 const { Spinner } = common;
 
 const ItemDetails = ({item, isLoading, onEdit, onRemove}) => {

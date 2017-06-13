@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
 import api from '../api';
+import { ROUTING_PATH } from '../constants';
 import { browserHistory } from 'react-router';
 
 import common from '../../../components';
@@ -72,7 +73,7 @@ class ItemPageContainer extends Component {
   removeItem(event) {
     event.preventDefault();
     if (this.props.destroyClient(this.state.item))
-      browserHistory.push('/admin/clients');
+      browserHistory.push(ROUTING_PATH);
   }
 
   cancelRemove(event) {

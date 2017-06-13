@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import common from '../../../components/index';
+import common from '../../../components';
 
 const { FormInput } = common;
 
