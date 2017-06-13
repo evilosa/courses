@@ -9,6 +9,9 @@
 
 ## Vendor Conventions ##
 
+# Public
+- (^|/)public/
+
 # Caches
 - (^|/)cache/
 
