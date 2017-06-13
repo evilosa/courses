@@ -27,6 +27,10 @@ class Api::V1::ClientsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    respond_with (@client.destroy)
+  end
+
   private
 
   def load_client
