@@ -60,11 +60,11 @@ export default (state = State, action) => {
 
 
     // delete item
-    case t.DELETE:
+    case t.DESTROY:
       return { ...state, activeItem: { ...state.activeItem, error: null, edit: false, deleted: false, loading: true }};
-    case t.DELETE_SUCCESS:
+    case t.DESTROY_SUCCESS:
       return { ...state, activeItem: { item: action.item, error: null, edit: false, deleted: true, loading: false }};
-    case t.DELETE_FAILURE:
+    case t.DESTROY_FAILURE:
       return { ...state, activeItem: { ...state.activeItem, error: action.error, edit: false, deleted: false, loading: false }};
 
     default:

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
 import api from '../api';
+import { browserHistory } from 'react-router';
 
 import common from '../../../components';
 
@@ -68,9 +69,10 @@ class ItemPageContainer extends Component {
     this.setState({isRemoving: !this.state.isRemoving});
   }
 
-  removeItem() {
-    this.setState({isRemoving: false});
-    alert('removed');
+  removeItem(event) {
+    event.preventDefault();
+    if (this.props.destroyClient(this.state.item))
+      browserHistory.push('/admin/clients');
   }
 
   cancelRemove(event) {
@@ -120,7 +122,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return ({
     fetchClient: (id) => fetchClient(dispatch, id),
-    updateClient: (updatedItem) => updateClient(dispatch, updatedItem)
+    updateClient: (updatedItem) => updateClient(dispatch, updatedItem),
+    destroyClient: (item) => destroyClient(dispatch, item)
   });
 };
 
@@ -149,6 +152,20 @@ const updateClient = (dispatch, updatedItem) => {
       }
       else
         dispatch(actions.updateFailure(updatedItem.id, response.payload.response));
+    })
+    .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
+};
+
+const destroyClient = (dispatch, item) => {
+  dispatch(actions.destroy(item));
+
+  return api.destroy(item)
+    .then(response => {
+      if (response && response.status == 204) {
+        dispatch(actions.destroySuccess(item));
+      }
+      else
+        dispatch(actions.destroyFailure(item.id, response.payload.response));
     })
     .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
 };

@@ -33,6 +33,6 @@ export const FETCH_ITEM_SUCCESS = constants.NAME + '/FETCH_ITEM_SUCCESS';
 export const FETCH_ITEM_FAILURE = constants.NAME + '/FETCH_ITEM_FAILURE';
 
 // Delete item
-export const DELETE = constants.NAME + '/DELETE';
-export const DELETE_SUCCESS = constants.NAME + '/DELETE_SUCCESS';
-export const DELETE_FAILURE = constants.NAME + '/DELETE_FAILURE';
+export const DESTROY = constants.NAME + '/DESTROY';
+export const DESTROY_SUCCESS = constants.NAME + '/DESTROY_SUCCESS';
+export const DESTROY_FAILURE = constants.NAME + '/DESTROY_FAILURE';

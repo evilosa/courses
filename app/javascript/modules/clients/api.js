@@ -23,7 +23,18 @@ class Api {
       body: JSON.stringify({client: item})
     })
       .then(response => response)
-      .catch(error => { throw(error) });
+      .catch(error => { throw(error); });
+  }
+
+  static destroy(item) {
+    return fetch(`${ROUTING_PATH_API}/${item.id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+      .then(response => response)
+      .catch(error => { throw(error); });
   }
 }
 

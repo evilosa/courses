@@ -56,27 +56,11 @@ export const createFailure = error => ({
 });
 
 ////////////////////////////////////////////////////////////////
-// Edit
-////////////////////////////////////////////////////////////////
-
-export const beginEdit = () => ({
-  type: t.BEGIN_EDIT
-});
-
-export const toggleEdit = () => ({
-  type: t.TOGGLE_EDIT
-});
-
-export const finishEdit = () => ({
-  type: t.FINISH_EDIT
-});
-
-////////////////////////////////////////////////////////////////
 // Update client
 ////////////////////////////////////////////////////////////////
 
 export const update = item => ({
-  type: t.UPDATE,
+  type: t.UPDATE
 });
 
 export const updateSuccess = item => ({
@@ -86,6 +70,25 @@ export const updateSuccess = item => ({
 
 export const updateFailure = (id, error) => ({
   type: t.UPDATE_FAILURE,
+  id: id,
+  error: error
+});
+
+////////////////////////////////////////////////////////////////
+// Delete client
+////////////////////////////////////////////////////////////////
+
+export const destroy = item => ({
+  type: t.DESTROY
+});
+
+export const destroySuccess = item => ({
+  type: t.DESTROY_SUCCESS,
+  item: item
+});
+
+export const destroyFailure = (id, error) => ({
+  type: t.DESTROY_FAILURE,
   id: id,
   error: error
 });
