@@ -10,7 +10,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
     if (@client.save)
       render json: @client
     else
-      render json: {errors: @client.errors}, status: 422
+      render json: {errors: @client.errors.full_messages}, status: 422
     end
   end
 
@@ -23,7 +23,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
     if (@client.update(client_params))
       render json: @client
     else
-      render json: {errors: @client.errors}, status: 422
+      render json: {errors: @client.errors.full_messages}, status: 422
     end
   end
 

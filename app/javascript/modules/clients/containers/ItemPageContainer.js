@@ -162,7 +162,7 @@ const createItem = (dispatch, item) => {
       else
         dispatch(actions.createFailure(response.payload.response));
     })
-    .catch(error => dispatch(actions.createFailure(error.message)));
+    .catch(errors => dispatch(actions.createFailure(errors.join())));
 };
 
 const updateItem = (dispatch, item) => {
@@ -176,7 +176,7 @@ const updateItem = (dispatch, item) => {
       else
         dispatch(actions.updateFailure(item.id, response.payload.response));
     })
-    .catch(error => dispatch(actions.updateFailure(item.id, error.message)));
+    .catch(errors => dispatch(actions.updateFailure(item.id, errors.join())));
 };
 
 const destroyItem = (dispatch, item) => {
@@ -190,5 +190,5 @@ const destroyItem = (dispatch, item) => {
       else
         dispatch(actions.destroyFailure(item.id, response.payload.response));
     })
-    .catch(error => dispatch(actions.destroyFailure(item.id, error.message)));
+    .catch(errors => dispatch(actions.destroyFailure(item.id, errors.join())));
 };
