@@ -14,18 +14,6 @@ class Api {
       .catch(error => { throw(error); });
   }
 
-  static create(item) {
-    return fetch(ROUTING_PATH_API, {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({client: item})
-    })
-      .then(response => response)
-      .catch(error => { throw(error); });
-  }
-
   static update(item) {
     return fetch(`${ROUTING_PATH_API}/${item.id}`, {
       method: 'PUT',

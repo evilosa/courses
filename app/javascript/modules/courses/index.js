@@ -1,3 +1,10 @@
-import Courses from './Courses';
+import api from './api';
+import * as actions from './actions';
+import components from './components';
+import containers from './containers';
+import * as constants from './constants';
+import * as models from './models';
+import reducer from './reducer';
+import * as selectors from './selectors';
 
-export default Courses;
+export default { api, actions, components, containers, constants, models, reducer, selectors };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as models from '../models';
 import api from '../api';
-import { ROUTING_PATH } from '../constants';
+import { NAME, ROUTING_PATH } from '../constants';
 import { browserHistory } from 'react-router';
 
 import common from '../../../components';
@@ -61,12 +61,8 @@ class ItemPageContainer extends Component {
 
   saveItem(event) {
     event.preventDefault();
-    if (this.props.id === undefined)
-      if (this.props.createItem(this.state.item))
-        this.setState({isEdititng: false});
-    else
-      if (this.props.updateItem(this.state.item))
-        this.setState({isEditing: false});
+    if (this.props.updateItem(this.state.item))
+      this.setState({isEditing: false});
   }
 
   // Remove item
@@ -111,27 +107,22 @@ class ItemPageContainer extends Component {
 
 ItemPageContainer.propTypes = {
   id: PropTypes.string,
-  item: PropTypes.object.isRequired,
-  fetchItem: PropTypes.func.isRequired,
-  createItem: PropTypes.func.isRequired,
-  updateItem: PropTypes.func.isRequired,
-  destroyItem: PropTypes.func.isRequired
+  item: PropTypes.object.isRequired
 };
 
 // State to props
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: ownProps.route.path == 'new' ? new models.Client() :  state.clients.activeItem.item,
+    item: ownProps.route.path == 'new' ? new models.Course() :  state[NAME].activeItem.item,
     isEditing: ownProps.route.path == 'new',
-    isLoading: state.clients.activeItem.loading
+    isLoading: state[NAME].activeItem.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return ({
     fetchItem: (id) => fetchItem(dispatch, id),
-    createItem: (item) => createItem(dispatch, item),
     updateItem: (updatedItem) => updateItem(dispatch, updatedItem),
     destroyItem: (item) => destroyItem(dispatch, item)
   });
@@ -150,19 +141,6 @@ const fetchItem = (dispatch, id) => {
   api.getById(id)
     .then(item => dispatch(actions.fetchItemSuccess(item)))
     .catch(error => dispatch(actions.fetchItemFailure(error)));
-};
-
-const createItem = (dispatch, item) => {
-  dispatch(actions.create(item));
-
-  return api.create(item)
-    .then(response => {
-      if (response && response.status == 200)
-        dispatch(actions.createSuccess(item))
-      else
-        dispatch(actions.createFailure(response.payload.response));
-    })
-    .catch(error => dispatch(actions.createFailure(error.message)));
 };
 
 const updateItem = (dispatch, item) => {
