@@ -108,9 +108,13 @@ class ItemPageContainer extends Component {
     catalogApi.remove(item)
       .then(response => {
         actions.removeSuccess(item);
+        toastr.success('Success', 'Item removed successfully');
         catalogApi.navigateToList();
       })
-      .catch(errors => actions.removeFailure(item.id, errors));
+      .catch(errors => {
+        actions.removeFailure(item.id, errors);
+        errors.map(error => toastr.error('Error', error));
+      });
   };
 
   onToggleEdit(event) {
