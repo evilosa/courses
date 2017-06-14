@@ -8,12 +8,13 @@ import * as models from '../models';
 import api from '../../../api';
 
 import * as constants from '../constants';
-import { browserHistory } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 
 import common from '../../../components';
 
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
+
 
 const catalogApi = new api.CatalogApi(constants.API_PATH, constants.CATALOG_PATH);
 const { RemoveConfirm } = common;
@@ -73,11 +74,12 @@ class ItemPageContainer extends Component {
       .then(newItem => {
         actions.createSuccess(newItem);
         this.setState({isEditing: false});
+        toastr.success('Success', 'Item created successfully');
         catalogApi.navigateToItem(newItem.id);
       })
       .catch(errors => {
         actions.createFailure(errors);
-        alert(errors.join());
+        errors.map(error => toastr.error('Error', error));
       });
   }
 
@@ -89,11 +91,12 @@ class ItemPageContainer extends Component {
     catalogApi.update(item)
       .then(response => {
         actions.updateSuccess(response);
+        toastr.success('Success', 'Item updated successfully');
         this.setState({isEditing: false});
       })
       .catch(errors => {
         actions.updateFailure(item.id, errors);
-        alert(errors.join());
+        errors.map(error => toastr.error('Error', error));
       });
   }
 

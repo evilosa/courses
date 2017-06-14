@@ -27,7 +27,7 @@ class Navigation extends Component {
               <Link to={'/admin/dashboard'} className="nav-link" activeClassName="active"><i className="icon-home"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
             </li>
             <li className="nav-item">
-              <Link to={ clients.constants.ROUTING_PATH } className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>
+              <Link to={ clients.constants.CATALOG_PATH } className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>
             </li>
             <li className="nav-item">
               <Link to={'/admin/courses'} className="nav-link" activeClassName="active"><i className="icon-graduation"></i> Courses</Link>

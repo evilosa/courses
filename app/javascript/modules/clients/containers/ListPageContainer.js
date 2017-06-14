@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import api from '../../../api';
 import * as actionCreators from '../actionCreators';
 import * as constants from '../constants';
+import { toastr } from 'react-redux-toastr';
 
 import ItemsList from '../components/ItemsList';
 
@@ -34,7 +35,10 @@ class ListPageContainer extends Component {
 
     catalogApi.getAll()
       .then(items => actions.fetchItemsSuccess(items))
-      .catch(error => actions.fetchItemsFailure(error));
+      .catch(errors => {
+        actions.fetchItemsFailure(errors);
+        errors.map(error => toastr.warning('Warning', error));
+      });
   }
 
   /////////////////////////////////////////////
