@@ -13,9 +13,9 @@ export const fetchItemsSuccess = items => ({
   items: items
 });
 
-export const fetchItemsFailure = error => ({
+export const fetchItemsFailure = errors => ({
   type: t.FETCH_ITEMS_FAILURE,
-  error: error
+  errors: errors
 });
 
 ////////////////////////////////////////////////////////////////
@@ -32,9 +32,9 @@ export const fetchItemSuccess = item => ({
   item: item
 });
 
-export const fetchItemFailure = error => ({
+export const fetchItemFailure = errors => ({
   type: t.FETCH_ITEM_FAILURE,
-  error: error
+  errors: errors
 });
 
 ////////////////////////////////////////////////////////////////
@@ -51,9 +51,9 @@ export const createSuccess = item => ({
   item: item
 });
 
-export const createFailure = error => ({
+export const createFailure = errors => ({
   type: t.CREATE_FAILURE,
-  error: error
+  errors: errors
 });
 
 ////////////////////////////////////////////////////////////////
@@ -69,27 +69,27 @@ export const updateSuccess = item => ({
   item: item
 });
 
-export const updateFailure = (id, error) => ({
+export const updateFailure = (id, errors) => ({
   type: t.UPDATE_FAILURE,
   id: id,
-  error: error
+  errors: errors
 });
 
 ////////////////////////////////////////////////////////////////
 // Delete client
 ////////////////////////////////////////////////////////////////
 
-export const destroy = item => ({
-  type: t.DESTROY
+export const remove = item => ({
+  type: t.REMOVE
 });
 
-export const destroySuccess = item => ({
-  type: t.DESTROY_SUCCESS,
+export const removeSuccess = item => ({
+  type: t.REMOVE_SUCCESS,
   item: item
 });
 
-export const destroyFailure = (id, error) => ({
-  type: t.DESTROY_FAILURE,
+export const removeFailure = (id, errors) => ({
+  type: t.REMOVE_FAILURE,
   id: id,
-  error: error
+  errors: errors
 });

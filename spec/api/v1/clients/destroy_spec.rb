@@ -1,11 +1,11 @@
 describe 'Client API' do
-  describe 'DELETE #destroy' do
+  describe 'DELETE #remove' do
 
     context 'unauthorized' do
       let!(:clients) { create_list(:client, 10) }
       let!(:last) { clients.last }
 
-      it 'destroy client in database' do
+      it 'remove client in database' do
         expect{ delete_request }.to change(Client, :count).by(-1)
       end
     end

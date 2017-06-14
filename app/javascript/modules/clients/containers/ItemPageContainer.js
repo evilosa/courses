@@ -61,12 +61,12 @@ class ItemPageContainer extends Component {
 
   saveItem(event) {
     event.preventDefault();
-    if (this.props.id === undefined)
-      if (this.props.createItem(this.state.item))
-        this.setState({isEdititng: false});
+    if (this.props.id == undefined)
+      this.props.createItem(this.state.item)
+        .then(this.setState({isEditing: false}));
     else
-      if (this.props.updateItem(this.state.item))
-        this.setState({isEditing: false});
+      this.props.updateItem(this.state.item)
+        .then(this.setState({isEditing: false}));
   }
 
   // Remove item
@@ -77,7 +77,7 @@ class ItemPageContainer extends Component {
 
   removeItem(event) {
     event.preventDefault();
-    if (this.props.destroyItem(this.state.item))
+    if (this.props.removeItem(this.state.item))
       browserHistory.push(ROUTING_PATH);
   }
 
@@ -115,7 +115,7 @@ ItemPageContainer.propTypes = {
   fetchItem: PropTypes.func.isRequired,
   createItem: PropTypes.func.isRequired,
   updateItem: PropTypes.func.isRequired,
-  destroyItem: PropTypes.func.isRequired
+  removeItem: PropTypes.func.isRequired
 };
 
 // State to props
@@ -132,8 +132,8 @@ const mapDispatchToProps = dispatch => {
   return ({
     fetchItem: (id) => fetchItem(dispatch, id),
     createItem: (item) => createItem(dispatch, item),
-    updateItem: (updatedItem) => updateItem(dispatch, updatedItem),
-    destroyItem: (item) => destroyItem(dispatch, item)
+    updateItem: (item) => updateItem(dispatch, item),
+    removeItem: (item) => removeItem(dispatch, item)
   });
 };
 
@@ -147,48 +147,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer);
 const fetchItem = (dispatch, id) => {
   dispatch(actions.fetchItem(id));
 
-  api.getById(id)
+  return api.getById(id)
     .then(item => dispatch(actions.fetchItemSuccess(item)))
-    .catch(error => dispatch(actions.fetchItemFailure(error)));
+    .catch(errors => dispatch(actions.fetchItemFailure(errors)));
 };
 
 const createItem = (dispatch, item) => {
   dispatch(actions.create(item));
 
   return api.create(item)
-    .then(response => {
-      if (response && response.status == 200)
-        dispatch(actions.createSuccess(item))
-      else
-        dispatch(actions.createFailure(response.payload.response));
-    })
-    .catch(errors => dispatch(actions.createFailure(errors.join())));
+    .then(newItem => dispatch(actions.createSuccess(newItem)))
+    .catch(errors => {
+      dispatch(actions.createFailure(errors));
+      throw errors;
+    });
 };
 
 const updateItem = (dispatch, item) => {
   dispatch(actions.update(item));
 
   return api.update(item)
-    .then(response => {
-      if (response && response.status == 204) {
-        dispatch(actions.updateSuccess(item));
-      }
-      else
-        dispatch(actions.updateFailure(item.id, response.payload.response));
-    })
-    .catch(errors => dispatch(actions.updateFailure(item.id, errors.join())));
+    .then(response => dispatch(actions.updateSuccess(item)))
+    .catch(errors => {
+      dispatch(actions.updateFailure(item.id, errors));
+      throw errors;
+    });
 };
 
-const destroyItem = (dispatch, item) => {
-  dispatch(actions.destroy(item));
+const removeItem = (dispatch, item) => {
+  dispatch(actions.remove(item));
 
-  return api.destroy(item)
-    .then(response => {
-      if (response && response.status == 204) {
-        dispatch(actions.destroySuccess(item));
-      }
-      else
-        dispatch(actions.destroyFailure(item.id, response.payload.response));
-    })
-    .catch(errors => dispatch(actions.destroyFailure(item.id, errors.join())));
+  return api.remove(item)
+    .then(response => dispatch(actions.removeSuccess(item)))
+    .catch(errors => dispatch(actions.removeFailure(item.id, errors)));
 };

@@ -1,11 +1,11 @@
 describe 'Course API' do
-  describe 'DELETE #destroy' do
+  describe 'DELETE #remove' do
 
     context 'unauthorized' do
       let!(:courses) { create_list(:course, 10) }
       let!(:last) { courses.last }
 
-      it 'destroy course in database' do
+      it 'remove course in database' do
         expect{ delete_request }.to change(Course, :count).by(-1)
       end
     end

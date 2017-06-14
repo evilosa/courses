@@ -28,7 +28,11 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def destroy
-    respond_with (@client.destroy)
+    if (@client.destroy)
+      render json: @client.id
+    else
+      render json: {errors: @client.errors.full_messages}, status: 422
+    end
   end
 
   private
@@ -38,6 +42,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def client_params
-    params.require(:client).permit(:id, :created_at, :updated_at, :title, :full_name, :tax_number, :description)
+    params.require(:client).permit(:id, :created_at, :updated_at, :title, :full_name, :tax_number, :description, :logo)
   end
 end
