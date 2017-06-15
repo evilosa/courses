@@ -1,0 +1,26 @@
+en:
+  activerecord:
+    models:
+      client: 'Clients'
+    attributes:
+      client:
+        title: 'Title'
+        full_name: 'Full name'
+        tax_number: 'Tax number'
+        description: 'Description'
+        status: 'Status'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+    errors:
+      models:
+        client:
+          attributes:
+            title:
+              required: 'is required'
+              blank: 'blank'
+            full_name:
+              required: 'is required'
+              blank: 'blank'
+            tax_number:
+              required: 'is required'
+              blank: 'blank'

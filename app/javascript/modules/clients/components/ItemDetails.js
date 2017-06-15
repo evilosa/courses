@@ -17,15 +17,15 @@ const ItemDetails = ({item, isLoading, onEdit, onRemove}) => {
               <img src={item.logo} alt="logo" className="img-fluid"/>
             </div>
             <div className="col-md-8">
-              <h4>{I18n.t('clients.fields.description')}</h4>
+              <h4>{I18n.t('activerecord.attributes.client.description')}</h4>
               <p>{item.description}</p>
               <h4>{I18n.t('common.headers.details')}</h4>
 
               <dl className="row">
-                <dt className="col-sm-3">{I18n.t('clients.fields.tax_number')}</dt>
+                <dt className="col-sm-3">{I18n.t('activerecord.attributes.client.tax_number')}</dt>
                 <dd className="col-sm-9">{item.tax_number}</dd>
 
-                <dt className="col-sm-3">{I18n.t('clients.fields.full_name')}</dt>
+                <dt className="col-sm-3">{I18n.t('activerecord.attributes.client.full_name')}</dt>
                 <dd className="col-sm-9">{item.full_name}</dd>
               </dl>
             </div>

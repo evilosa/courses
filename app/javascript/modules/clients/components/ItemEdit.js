@@ -11,15 +11,15 @@ const ItemEdit = ({item, isLoading, onChange, onSave, onCancel}) => {
         <h3>{I18n.t('clients.headers.edit')}</h3>
         <hr/>
         <div className="row">
-          <FormInput classNames='col-sm-6' name="title" title={I18n.t('clients.fields.title')} value={item.title}
-                     onChange={onChange} ownRow={false}/>
-          <FormInput classNames='col-sm-6' name="tax_number" title={I18n.t('clients.fields.tax_number')}
-                     value={item.tax_number} onChange={onChange} ownRow={false}/>
+          <FormInput name="title" classNames='col-sm-6' value={item.title} onChange={onChange} ownRow={false}
+                     title={I18n.t('activerecord.attributes.client.title')}/>
+          <FormInput name="tax_number" classNames='col-sm-6' value={item.tax_number} onChange={onChange} ownRow={false}
+                     title={I18n.t('activerecord.attributes.client.tax_number')}/>
         </div>
-        <FormInput name="full_name" title={I18n.t('clients.fields.full_name')} value={item.full_name}
-                   onChange={onChange}/>
-        <FormInput name="description" title={I18n.t('clients.fields.description')} value={item.description}
-                   onChange={onChange} type="textarea"/>
+        <FormInput name="full_name" value={item.full_name} onChange={onChange}
+                   title={I18n.t('activerecord.attributes.client.full_name')}/>
+        <FormInput name="description" value={item.description} onChange={onChange} type="textarea"
+                   title={I18n.t('activerecord.attributes.client.description')}/>
       </div>
       <div className="col-md-2">
         <h3>Actions</h3>

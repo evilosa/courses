@@ -37,7 +37,7 @@ class ListPageContainer extends Component {
       .then(items => actions.fetchItemsSuccess(items))
       .catch(errors => {
         actions.fetchItemsFailure(errors);
-        errors.map(error => toastr.warning('Warning', error));
+        errors.map(error => toastr.error(I18n.t('common.headers.toastr.error'), error));
       });
   }
 

@@ -8,10 +8,3 @@ en:
     links:
       list: 'Clients'
       item: 'Client'
-    fields:
-      title: 'Title'
-      full_name: 'Full name'
-      tax_number: 'Tax number'
-      description: 'Description'
-      created_at: 'Created at'
-      status: 'Status'
