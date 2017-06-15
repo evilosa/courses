@@ -24,9 +24,10 @@ describe 'Client API' do
           tax_number: 'New tax number',
           description: 'New description'}});
 
-        expect(response.status).to eq 204
+        expect(response.status).to eq 200
 
         get_request
+
         expect(parsed_response['title']).to eq('New title')
         expect(parsed_response['full_name']).to eq('New full name')
         expect(parsed_response['tax_number']).to eq('New tax number')
@@ -34,17 +35,10 @@ describe 'Client API' do
       end
 
       it 'return 422 code to invalid attributes' do
-        invalid_request({ client: {
-              title: 'New title',
-              full_name: {name: 'name'}}});
-
-          expect(response.status).to eq 422
+        update_request({ client: { title: ''}})
+        expect(response.status).to eq 422
       end
     end
-  end
-
-  def invalid_request(params = {})
-    put "/api/v1/clients/999999", params: { format: :json }.merge(params)
   end
 
   def update_request(params = {})

@@ -74,12 +74,12 @@ class ItemPageContainer extends Component {
       .then(newItem => {
         actions.createSuccess(newItem);
         this.setState({isEditing: false});
-        toastr.success('Success', 'Item created successfully');
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.created'));
         catalogApi.navigateToItem(newItem.id);
       })
       .catch(errors => {
         actions.createFailure(errors);
-        errors.map(error => toastr.error('Error', error));
+        errors.map(error => toastr.error(I18n.t('common.headers.toastr.error'), error));
       });
   }
 
@@ -91,12 +91,12 @@ class ItemPageContainer extends Component {
     catalogApi.update(item)
       .then(response => {
         actions.updateSuccess(response);
-        toastr.success('Success', 'Item updated successfully');
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.updated'));
         this.setState({isEditing: false});
       })
       .catch(errors => {
         actions.updateFailure(item.id, errors);
-        errors.map(error => toastr.error('Error', error));
+        errors.map(error => toastr.error(I18n.t('common.headers.toastr.error'), error));
       });
   }
 
@@ -108,12 +108,12 @@ class ItemPageContainer extends Component {
     catalogApi.remove(item)
       .then(response => {
         actions.removeSuccess(item);
-        toastr.success('Success', 'Item removed successfully');
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.removed'));
         catalogApi.navigateToList();
       })
       .catch(errors => {
         actions.removeFailure(item.id, errors);
-        errors.map(error => toastr.error('Error', error));
+        errors.map(error => toastr.error(I18n.t('common.headers.toastr.error'), error));
       });
   };
 

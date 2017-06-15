@@ -22,7 +22,7 @@ describe 'Course API' do
           full_name: 'New full name',
           description: 'New description'}});
 
-        expect(response.status).to eq 204
+        expect(response.status).to eq 200
 
         get_request
         expect(parsed_response['title']).to eq('New title')
@@ -31,17 +31,11 @@ describe 'Course API' do
       end
 
       it 'return 422 code to invalid attributes' do
-        invalid_request({ course: {
-              title: 'New title',
-              full_name: {name: 'name'}}});
+        update_request({ course: { title: ''}})
 
-          expect(response.status).to eq 422
+        expect(response.status).to eq 422
       end
     end
-  end
-
-  def invalid_request(params = {})
-    put "/api/v1/courses/999999", params: { format: :json }.merge(params)
   end
 
   def update_request(params = {})

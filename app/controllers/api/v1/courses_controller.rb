@@ -1,13 +1,17 @@
 class Api::V1::CoursesController < Api::V1::BaseController
-  before_action :load_course, only: [:show, :destroy]
+  before_action :load_course, only: [:show, :update, :destroy]
 
   def index
     respond_with @courses = Course.all
   end
 
   def create
-    @course = Course.create(course_params)
-    render json: true
+    @course = Course.new(course_params)
+    if (@course.save)
+      render json: @course
+    else
+      render json: {errors: @course.errors.full_messages}, status: 422
+    end
   end
 
   def show
@@ -15,20 +19,19 @@ class Api::V1::CoursesController < Api::V1::BaseController
   end
 
   def update
-    begin
-      @course = Course.find(params[:id])
-      if @course.update(course_params)
-        head :no_content
-      else
-        raise @course.errors
-      end
-    rescue Exception => ex
-      render json: { error: ex.message }, status: :unprocessable_entity
+    if (@course.update(course_params))
+      render json: @course
+    else
+      render json: {errors: @course.errors.full_messages}, status: 422
     end
   end
 
   def destroy
-    respond_with (@course.destroy)
+    if (@course.destroy)
+      render json: @course
+    else
+      render json: {errors: @course.errors.full_messages}, status: 422
+    end
   end
 
   private

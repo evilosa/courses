@@ -11,10 +11,10 @@ const ItemsList = (props) => {
       <thead>
       <tr>
         <th>#</th>
-        <th>{I18n.t('clients.fields.title')}</th>
-        <th>{I18n.t('clients.fields.tax_number')}</th>
-        <th>{I18n.t('clients.fields.created_at')}</th>
-        <th>{I18n.t('clients.fields.status')}</th>
+        <th>{I18n.t('activerecord.attributes.client.title')}</th>
+        <th>{I18n.t('activerecord.attributes.client.tax_number')}</th>
+        <th>{I18n.t('activerecord.attributes.client.created_at')}</th>
+        <th>{I18n.t('activerecord.attributes.client.status')}</th>
       </tr>
       </thead>
       <tbody>
