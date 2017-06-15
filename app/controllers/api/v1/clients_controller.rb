@@ -1,5 +1,5 @@
 class Api::V1::ClientsController < Api::V1::BaseController
-  before_action :load_client, only: [:show, :destroy]
+  before_action :load_client, only: [:show, :update, :destroy]
 
   def index
     respond_with @clients = Client.all
@@ -19,7 +19,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def update
-    @client = Client.find(params[:id])
     if (@client.update(client_params))
       render json: @client
     else
