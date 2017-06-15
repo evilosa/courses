@@ -6,8 +6,12 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def create
-    @client = Client.create(client_params)
-    render json: true
+    @client = Client.new(client_params)
+    if (@client.save)
+      render json: @client
+    else
+      render json: {errors: @client.errors.full_messages}, status: 422
+    end
   end
 
   def show
@@ -15,20 +19,20 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def update
-    begin
-      @client = Client.find(params[:id])
-      if @client.update(client_params)
-        head :no_content
-      else
-        raise @client.errors
-      end
-    rescue Exception => ex
-      render json: { error: ex.message }, status: :unprocessable_entity
+    @client = Client.find(params[:id])
+    if (@client.update(client_params))
+      render json: @client
+    else
+      render json: {errors: @client.errors.full_messages}, status: 422
     end
   end
 
   def destroy
-    respond_with (@client.destroy)
+    if (@client.destroy)
+      render json: @client.id
+    else
+      render json: {errors: @client.errors.full_messages}, status: 422
+    end
   end
 
   private
@@ -38,6 +42,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def client_params
-    params.require(:client).permit(:id, :created_at, :updated_at, :title, :full_name, :tax_number, :description)
+    params.require(:client).permit(:id, :created_at, :updated_at, :title, :full_name, :tax_number, :description, :logo)
   end
 end

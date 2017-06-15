@@ -1,3 +1,3 @@
-export const ROUTING_PATH_API = '/api/v1/clients';
-export const ROUTING_PATH = '/admin/clients';
 export const NAME = 'clients';
+export const API_PATH = '/api/v1/clients';
+export const CATALOG_PATH = '/admin/clients';

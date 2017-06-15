@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+
+import * as actionCreators from '../actionCreators';
 import * as models from '../models';
-import api from '../api';
-import { ROUTING_PATH } from '../constants';
-import { browserHistory } from 'react-router';
+import api from '../../../api';
+
+import * as constants from '../constants';
+import { toastr } from 'react-redux-toastr';
 
 import common from '../../../components';
 
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
+
+const catalogApi = new api.CatalogApi(constants.API_PATH, constants.CATALOG_PATH);
 const { RemoveConfirm } = common;
 
 class ItemPageContainer extends Component {
@@ -22,18 +27,27 @@ class ItemPageContainer extends Component {
       isEditing: this.props.isEditing,
       isRemoving: false
     };
-    this.fieldChange = this.fieldChange.bind(this);
-    this.saveItem = this.saveItem.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
 
-    this.toggleRemove = this.toggleRemove.bind(this);
+    this.fetchItem = this.fetchItem.bind(this);
+    this.createItem = this.createItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    this.cancelRemove = this.cancelRemove.bind(this);
+
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.onSaveItem = this.onSaveItem.bind(this);
+    this.onToggleEdit = this.onToggleEdit.bind(this);
+    this.onCancelEdit = this.onCancelEdit.bind(this);
+
+    this.onToggleRemove = this.onToggleRemove.bind(this);
+    this.onRemoveItem = this.onRemoveItem.bind(this);
+    this.onCancelRemove = this.onCancelRemove.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchClient(this.props.id);
+    const { id } = this.props;
+
+    if (id)
+      this.fetchItem(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,52 +55,121 @@ class ItemPageContainer extends Component {
     this.setState({item: nextProps.item});
   }
 
-  toggleEdit(event) {
+  fetchItem(id) {
+    const { actions } = this.props;
+
+    actions.fetchItem(id);
+
+    catalogApi.getById(id)
+      .then(item => actions.fetchItemSuccess(item))
+      .catch(errors => actions.fetchItemFailure(errors));
+  }
+
+  createItem(item) {
+    const { actions } = this.props;
+
+    actions.create(item);
+
+    catalogApi.create(item)
+      .then(newItem => {
+        actions.createSuccess(newItem);
+        this.setState({isEditing: false});
+        toastr.success('Success', 'Item created successfully');
+        catalogApi.navigateToItem(newItem.id);
+      })
+      .catch(errors => {
+        actions.createFailure(errors);
+        errors.map(error => toastr.error('Error', error));
+      });
+  }
+
+  updateItem(item) {
+    const { actions } = this.props;
+
+    actions.update(item);
+
+    catalogApi.update(item)
+      .then(response => {
+        actions.updateSuccess(response);
+        toastr.success('Success', 'Item updated successfully');
+        this.setState({isEditing: false});
+      })
+      .catch(errors => {
+        actions.updateFailure(item.id, errors);
+        errors.map(error => toastr.error('Error', error));
+      });
+  }
+
+  removeItem(item) {
+    const { actions } = this.props;
+
+    actions.remove(item);
+
+    catalogApi.remove(item)
+      .then(response => {
+        actions.removeSuccess(item);
+        toastr.success('Success', 'Item removed successfully');
+        catalogApi.navigateToList();
+      })
+      .catch(errors => {
+        actions.removeFailure(item.id, errors);
+        errors.map(error => toastr.error('Error', error));
+      });
+  };
+
+  onToggleEdit(event) {
     event.preventDefault();
     this.setState({isEditing: !this.state.isEditing});
   }
 
-  cancelEdit(event) {
+  onCancelEdit(event) {
     event.preventDefault();
-    this.setState({isEditing: false, item: this.props.item});
+    const { item } = this.state;
+
+    if (item.id === null)
+      catalogApi.navigateToList();
+    else
+      this.setState({isEditing: false, item: this.props.item});
   }
 
-  fieldChange(event) {
+  onFieldChange(event) {
     const field = event.target.name;
     const localItem = { ...this.state.item };
     localItem[field] = event.target.value;
     return this.setState({item: localItem});
   }
 
-  saveItem(event) {
+  onSaveItem(event) {
     event.preventDefault();
-    if (this.props.updateClient(this.state.item))
-      this.setState({isEditing: false});
+
+    if (this.props.id === undefined)
+      this.createItem(this.state.item);
+    else
+      this.updateItem(this.state.item);
   }
 
   // Remove item
-  toggleRemove(event) {
+  onToggleRemove(event) {
     event.preventDefault();
     this.setState({isRemoving: !this.state.isRemoving});
   }
 
-  removeItem(event) {
+  onRemoveItem(event) {
     event.preventDefault();
-    if (this.props.destroyClient(this.state.item))
-      browserHistory.push(ROUTING_PATH);
+    this.removeItem(this.state.item);
   }
 
-  cancelRemove(event) {
+  onCancelRemove(event) {
     if (event)
       event.preventDefault();
     this.setState({isRemoving: false});
   }
 
   render() {
-    let ItemPresentation = <ItemDetails item={this.state.item} isLoading={this.props.isLoading} onEdit={this.toggleEdit} onRemove={this.toggleRemove}/>;
+    let ItemPresentation = <ItemDetails item={this.state.item} isLoading={this.props.isLoading} onEdit={this.onToggleEdit} onRemove={this.onToggleRemove}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.isLoading} onSave={this.saveItem} onChange={this.fieldChange} onCancel={this.cancelEdit}/>;
+      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.isLoading} onSave={this.onSaveItem} onChange={this.onFieldChange} onCancel={this.onCancelEdit}/>;
 
     return (
       <div>
@@ -97,17 +180,16 @@ class ItemPageContainer extends Component {
                          { subject: 'client',
                            title: this.state.item.title
                          })}
-                       onRemove={this.removeItem}
-                       onCancel={this.cancelRemove}/>
+                       onRemove={this.onRemoveItem}
+                       onCancel={this.onCancelRemove}/>
       </div>
     );
   }
 }
 
 ItemPageContainer.propTypes = {
-  id: PropTypes.string.isRequired,
-  item: PropTypes.object.isRequired,
-  updateClient: PropTypes.func.isRequired
+  id: PropTypes.string,
+  item: PropTypes.object.isRequired
 };
 
 // State to props
@@ -122,51 +204,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return ({
-    fetchClient: (id) => fetchClient(dispatch, id),
-    updateClient: (updatedItem) => updateClient(dispatch, updatedItem),
-    destroyClient: (item) => destroyClient(dispatch, item)
+    actions: bindActionCreators(actionCreators, dispatch)
   });
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer);
-
-////////////////////////////////////////////////////////////////////
-// Functions
-////////////////////////////////////////////////////////////////////
-
-
-const fetchClient = (dispatch, id) => {
-  dispatch(actions.fetchItem(id));
-
-  api.getById(id)
-    .then(item => dispatch(actions.fetchItemSuccess(item)))
-    .catch(error => dispatch(actions.fetchItemFailure(error)));
-};
-
-const updateClient = (dispatch, updatedItem) => {
-  dispatch(actions.update(updatedItem));
-
-  return api.update(updatedItem)
-    .then(response => {
-      if (response && response.status == 204) {
-        dispatch(actions.updateSuccess(updatedItem));
-      }
-      else
-        dispatch(actions.updateFailure(updatedItem.id, response.payload.response));
-    })
-    .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
-};
-
-const destroyClient = (dispatch, item) => {
-  dispatch(actions.destroy(item));
-
-  return api.destroy(item)
-    .then(response => {
-      if (response && response.status == 204) {
-        dispatch(actions.destroySuccess(item));
-      }
-      else
-        dispatch(actions.destroyFailure(item.id, response.payload.response));
-    })
-    .catch(error => dispatch(actions.updateFailure(updatedItem.id, error.message)));
-};

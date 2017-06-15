@@ -18,7 +18,7 @@ const ItemsList = (props) => {
       </tr>
       </thead>
       <tbody>
-        {props.items.map(t => <ListItem key={t.id} item={t} onDblClick={() => props.onDblClick(t.id)}/>)}
+        {props.items.map(t => <ListItem key={t.id} item={t} onDblClick={() => props.onOpenItem(t.id)}/>)}
       </tbody>
     </Table>
   );
@@ -27,7 +27,7 @@ const ItemsList = (props) => {
 ItemsList.propTypes = {
   items: PropTypes.array.isRequired,
   onClick: PropTypes.func,
-  onDblClick: PropTypes.func.isRequired
+  onOpenItem: PropTypes.func.isRequired
 };
 
 export default ItemsList;

@@ -32,7 +32,7 @@ export const FETCH_ITEM = constants.NAME + '/FETCH_ITEM';
 export const FETCH_ITEM_SUCCESS = constants.NAME + '/FETCH_ITEM_SUCCESS';
 export const FETCH_ITEM_FAILURE = constants.NAME + '/FETCH_ITEM_FAILURE';
 
-// Delete item
-export const DESTROY = constants.NAME + '/DESTROY';
-export const DESTROY_SUCCESS = constants.NAME + '/DESTROY_SUCCESS';
-export const DESTROY_FAILURE = constants.NAME + '/DESTROY_FAILURE';
+// Remove item
+export const REMOVE = constants.NAME + '/REMOVE';
+export const REMOVE_SUCCESS = constants.NAME + '/REMOVE_SUCCESS';
+export const REMOVE_FAILURE = constants.NAME + '/REMOVE_FAILURE';
