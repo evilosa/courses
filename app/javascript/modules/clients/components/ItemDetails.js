@@ -9,7 +9,7 @@ const ItemDetails = ({item, isLoading, onEdit, onRemove}) => {
   return (
     <Spinner isLoading={isLoading}>
       <div className="row">
-        <div className="col-md-10">
+        <div className="col-md-11">
           <h3>{item.title}</h3>
           <hr/>
           <div className="row">
@@ -31,13 +31,13 @@ const ItemDetails = ({item, isLoading, onEdit, onRemove}) => {
             </div>
           </div>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-1">
           <h3>{I18n.t('common.headers.actions')}</h3>
           <hr/>
-          <div className="row">
+          <div className="row justify-content-center">
             <a href="" onClick={onEdit}><i className="fa fa-edit"></i> {I18n.t('common.buttons.edit')}</a>
           </div>
-          <div className="row">
+          <div className="row justify-content-center">
             <a href="" onClick={onRemove}><i className="fa fa-remove"></i> {I18n.t('common.buttons.remove')}</a>
           </div>
         </div>

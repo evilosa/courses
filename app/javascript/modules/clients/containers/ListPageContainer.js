@@ -70,7 +70,7 @@ class ListPageContainer extends Component {
           <div className="col-md-1">
             <h3>{I18n.t('common.headers.actions')}</h3>
             <hr/>
-            <div className="row">
+            <div className="row justify-content-center">
               <a href="" onClick={this.onAdd}><i className="icon-plus"></i> {I18n.t('common.buttons.add')} </a>
             </div>
           </div>
