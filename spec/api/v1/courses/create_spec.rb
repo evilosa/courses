@@ -19,12 +19,8 @@ describe 'Course API' do
     end
 
     context 'with invalid attributes' do
-      # it 'returns 422 status code' do
-      #   create_client.call(invalid_params)
-      #   expect(response).to eq 422
-      # end
-
       it 'not save in database' do
+        expect(response.status).to eq 422
         expect{ create_course.call(invalid_params) }.not_to change(Course, :count)
       end
     end
