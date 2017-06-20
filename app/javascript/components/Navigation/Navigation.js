@@ -25,7 +25,7 @@ class Navigation extends Component {
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-item">
-              <Link to={'/admin/dashboard'} className="nav-link" activeClassName="active"><i className="icon-home"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
+              <Link to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-home"></i> Dashboard <span className="badge badge-info">NEW</span></Link>
             </li>
             <li className="nav-item">
               <Link to={ clients.constants.CATALOG_PATH } className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>

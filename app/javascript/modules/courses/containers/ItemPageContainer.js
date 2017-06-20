@@ -175,9 +175,9 @@ class ItemPageContainer extends Component {
       <div>
         {ItemPresentation}
         <RemoveConfirm isOpen={this.state.isRemoving}
-                       header={I18n.t('clients.headers.remove')}
+                       header={I18n.t('courses.headers.remove')}
                        question={I18n.t('common.questions.remove',
-                         { subject: 'client',
+                         { subject: 'course',
                            title: this.state.item.title
                          })}
                        onRemove={this.onRemoveItem}
@@ -196,7 +196,7 @@ ItemPageContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: ownProps.params.id,
-    item: ownProps.route.path == 'new' ? new models.Client() :  state[constants.NAME].activeItem.item,
+    item: ownProps.route.path == 'new' ? new models.Course() :  state[constants.NAME].activeItem.item,
     isEditing: ownProps.route.path == 'new',
     isLoading: state[constants.NAME].activeItem.loading
   };
