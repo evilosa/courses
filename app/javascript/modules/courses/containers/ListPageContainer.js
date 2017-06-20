@@ -9,7 +9,7 @@ import { toastr } from 'react-redux-toastr';
 
 import ItemsList from '../components/ItemsList';
 
-const catalogApi = new api.CatalogApi(constants.API_PATH, constants.CATALOG_PATH);
+const catalogApi = new api.CatalogApi(constants);
 
 // Container
 class ListPageContainer extends Component {

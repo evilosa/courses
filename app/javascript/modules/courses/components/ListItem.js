@@ -6,7 +6,7 @@ const ListItem = ({item, onDblClick}) => {
     <tr onDoubleClick={() => onDblClick(item.id)}>
       <td>{item.id}</td>
       <td>{item.title}</td>
-      <td>{item.client.name}</td>
+      <td>{item.client_id}</td>
       <td>{item.updated_at}</td>
       <td>
         <span className="badge badge-success">Active</span>

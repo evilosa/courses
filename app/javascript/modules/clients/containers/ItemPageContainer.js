@@ -16,7 +16,7 @@ import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
 
-const catalogApi = new api.CatalogApi(constants.API_PATH, constants.CATALOG_PATH);
+const catalogApi = new api.CatalogApi(constants);
 const { RemoveConfirm } = common;
 
 class ItemPageContainer extends Component {
@@ -74,7 +74,7 @@ class ItemPageContainer extends Component {
       .then(newItem => {
         actions.createSuccess(newItem);
         this.setState({isEditing: false});
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.created'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.created'));
         catalogApi.navigateToItem(newItem.id);
       })
       .catch(errors => {
@@ -91,7 +91,7 @@ class ItemPageContainer extends Component {
     catalogApi.update(item)
       .then(response => {
         actions.updateSuccess(response);
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.updated'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.updated'));
         this.setState({isEditing: false});
       })
       .catch(errors => {
@@ -108,7 +108,7 @@ class ItemPageContainer extends Component {
     catalogApi.remove(item)
       .then(response => {
         actions.removeSuccess(item);
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.removed'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.removed'));
         catalogApi.navigateToList();
       })
       .catch(errors => {

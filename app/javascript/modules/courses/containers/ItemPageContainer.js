@@ -16,7 +16,7 @@ import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
 
-const catalogApi = new api.CatalogApi(constants.API_PATH, constants.CATALOG_PATH);
+const catalogApi = new api.CatalogApi(constants);
 const { RemoveConfirm } = common;
 
 class ItemPageContainer extends Component {
@@ -34,6 +34,7 @@ class ItemPageContainer extends Component {
     this.removeItem = this.removeItem.bind(this);
 
     this.searchClients = this.searchClients.bind(this);
+    this.onClientSelect = this.onClientSelect.bind(this);
 
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onSaveItem = this.onSaveItem.bind(this);
@@ -70,7 +71,7 @@ class ItemPageContainer extends Component {
   searchClients(title) {
     return fetch(`/api/v1/clients/search?title=${title}`)
       .then(response => response.json())
-      .then(items => {options: items});
+      .then(items => ({options: items}));
   }
 
   createItem(item) {
@@ -82,7 +83,7 @@ class ItemPageContainer extends Component {
       .then(newItem => {
         actions.createSuccess(newItem);
         this.setState({isEditing: false});
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.created'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.created'));
         catalogApi.navigateToItem(newItem.id);
       })
       .catch(errors => {
@@ -99,7 +100,7 @@ class ItemPageContainer extends Component {
     catalogApi.update(item)
       .then(response => {
         actions.updateSuccess(response);
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.updated'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.updated'));
         this.setState({isEditing: false});
       })
       .catch(errors => {
@@ -116,7 +117,7 @@ class ItemPageContainer extends Component {
     catalogApi.remove(item)
       .then(response => {
         actions.removeSuccess(item);
-        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toast.success.removed'));
+        toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.removed'));
         catalogApi.navigateToList();
       })
       .catch(errors => {
@@ -149,7 +150,11 @@ class ItemPageContainer extends Component {
 
   onClientSelect(client) {
     const item = { ...this.state.item };
-    item.client_id = client.value;
+    if (client)
+      item.client_id = client.value;
+    else {
+      item.client_id = null;
+    }
     return this.setState({item: item});
   }
 

@@ -40,6 +40,8 @@ class Api::V1::ClientsController < Api::V1::BaseController
 
     if search_title != ''
       Client.where("title ILIKE ?", "%#{search_title}%").each { |client| result << { value: client.id, label: client.title } }
+    else
+      Client.first(50).each { |client| result << { value: client.id, label: client.title } }
     end
 
     render json: result

@@ -42,6 +42,8 @@ const ItemEdit = ({item, isLoading, searchClients, onClientSelect, onChange, onS
 
 ItemEdit.propTypes = {
   item: PropTypes.object.isRequired,
+  searchClients: PropTypes.func.isRequired,
+  onClientSelect: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 };
