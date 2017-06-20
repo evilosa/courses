@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :clients, only: [:index, :show, :create, :update, :destroy]
+      resources :clients, only: [:index, :show, :create, :update, :destroy] do
+        get 'search', on: :collection
+      end
+
       resources :courses, only: [:index, :show, :create, :update, :destroy]
     end
   end

@@ -5,6 +5,8 @@ export class Course {
     this.full_name = this.title;
     this.description = '';
     this.logo = '/img/no_image.png';
+    this.client = null;
+    this.client_id = null;
     this.active = true;
   }
 }

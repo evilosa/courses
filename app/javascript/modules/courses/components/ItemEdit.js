@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import common from '../../../components';
+import Select from 'react-select';
+
+import 'react-select/dist/react-select.css';
 
 const { FormInput } = common;
 
-const ItemEdit = ({item, isLoading, onChange, onSave, onCancel}) => {
+const ItemEdit = ({item, isLoading, searchClients, onClientSelect, onChange, onSave, onCancel}) => {
   return (
     <div className="row">
       <div className="col-md-10">
@@ -13,8 +16,10 @@ const ItemEdit = ({item, isLoading, onChange, onSave, onCancel}) => {
         <div className="row">
           <FormInput name="title" classNames='col-sm-6' value={item.title} onChange={onChange} ownRow={false}
                      title={I18n.t('activerecord.attributes.course.title')}/>
-          <FormInput name="tax_number" classNames='col-sm-6' value={item.client} onChange={onChange} ownRow={false}
-                     title={I18n.t('activerecord.attributes.course.client')}/>
+          <div className="form-group col-sm-6">
+            <label>{I18n.t('activerecord.attributes.course.client')}</label>
+            <Select.Async name="client_id" value={item.client_id} onChange={onClientSelect} loadOptions={searchClients}/>
+          </div>
         </div>
         <FormInput name="full_name" value={item.full_name} onChange={onChange}
                    title={I18n.t('activerecord.attributes.course.full_name')}/>
@@ -37,7 +42,6 @@ const ItemEdit = ({item, isLoading, onChange, onSave, onCancel}) => {
 
 ItemEdit.propTypes = {
   item: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 };

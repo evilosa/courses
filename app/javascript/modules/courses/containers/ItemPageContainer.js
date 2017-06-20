@@ -33,6 +33,8 @@ class ItemPageContainer extends Component {
     this.updateItem = this.updateItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
 
+    this.searchClients = this.searchClients.bind(this);
+
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onSaveItem = this.onSaveItem.bind(this);
     this.onToggleEdit = this.onToggleEdit.bind(this);
@@ -63,6 +65,12 @@ class ItemPageContainer extends Component {
     catalogApi.getById(id)
       .then(item => actions.fetchItemSuccess(item))
       .catch(errors => actions.fetchItemFailure(errors));
+  }
+
+  searchClients(title) {
+    return fetch(`/api/v1/clients/search?title=${title}`)
+      .then(response => response.json())
+      .then(items => {options: items});
   }
 
   createItem(item) {
@@ -139,6 +147,12 @@ class ItemPageContainer extends Component {
     return this.setState({item: localItem});
   }
 
+  onClientSelect(client) {
+    const item = { ...this.state.item };
+    item.client_id = client.value;
+    return this.setState({item: item});
+  }
+
   onSaveItem(event) {
     event.preventDefault();
 
@@ -169,7 +183,7 @@ class ItemPageContainer extends Component {
     let ItemPresentation = <ItemDetails item={this.state.item} isLoading={this.props.isLoading} onEdit={this.onToggleEdit} onRemove={this.onToggleRemove}/>;
 
     if (this.state.isEditing)
-      ItemPresentation = <ItemEdit item={this.state.item} disabled={this.props.isLoading} onSave={this.onSaveItem} onChange={this.onFieldChange} onCancel={this.onCancelEdit}/>;
+      ItemPresentation = <ItemEdit item={this.state.item} onSave={this.onSaveItem} onChange={this.onFieldChange} onCancel={this.onCancelEdit} searchClients={this.searchClients} onClientSelect={this.onClientSelect}/>;
 
     return (
       <div>
