@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import clients from '../../modules/clients/index';
+import clients from '../../modules/clients';
+import courses from '../../modules/courses';
 
 class Navigation extends Component {
 
@@ -30,7 +31,7 @@ class Navigation extends Component {
               <Link to={ clients.constants.CATALOG_PATH } className="nav-link" activeClassName="active"><i className="icon-layers"></i> Clients</Link>
             </li>
             <li className="nav-item">
-              <Link to={'/admin/courses'} className="nav-link" activeClassName="active"><i className="icon-graduation"></i> Courses</Link>
+              <Link to={ courses.constants.CATALOG_PATH } className="nav-link" activeClassName="active"><i className="icon-graduation"></i> Courses</Link>
             </li>
           </ul>
         </nav>

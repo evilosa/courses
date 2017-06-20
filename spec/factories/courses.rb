@@ -4,6 +4,6 @@ FactoryGirl.define do
     full_name { title }
     description { Faker::Lorem.paragraph }
     logo { Faker::Avatar.image }
-    client { client }
+    client
   end
 end
