@@ -3,9 +3,10 @@ import { browserHistory } from 'react-router';
 
 class CatalogApi {
 
-  constructor(api_path, catalog_path) {
-    this.api_path = api_path;
-    this.catalog_path = catalog_path;
+  constructor(constants) {
+    this.model_name = constants.MODEL_NAME;
+    this.api_path = constants.API_PATH;
+    this.catalog_path = constants.CATALOG_PATH;
 
     this.doApiRequest = this.doApiRequest.bind(this);
     this.getAll = this.getAll.bind(this);
@@ -42,7 +43,7 @@ class CatalogApi {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({client: item})
+      body: JSON.stringify({[this.model_name]: item})
     });
   };
 
@@ -52,7 +53,7 @@ class CatalogApi {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({client: item})
+      body: JSON.stringify({[this.model_name]: item})
     });
   };
 

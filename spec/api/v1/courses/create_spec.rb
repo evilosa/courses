@@ -1,7 +1,8 @@
 describe 'Course API' do
   describe 'POST #create' do
 
-    let(:valid_params) { { course: attributes_for(:course), format: :json } }
+    let!(:client) { create(:client) }
+    let!(:valid_params) { { course: attributes_for(:course).merge( client_id: client.id), format: :json } }
     let(:invalid_params) { { course: attributes_for(:course, title: nil), format: :json } }
 
     let!(:create_course) do
@@ -19,13 +20,9 @@ describe 'Course API' do
     end
 
     context 'with invalid attributes' do
-      # it 'returns 422 status code' do
-      #   create_client.call(invalid_params)
-      #   expect(response).to eq 422
-      # end
-
       it 'not save in database' do
         expect{ create_course.call(invalid_params) }.not_to change(Course, :count)
+        expect(response.status).to eq 422
       end
     end
   end

@@ -1,28 +1,28 @@
 en:
-  clients:
+  courses:
     headers:
-      list: 'Clients list'
-      new: 'New client'
-      edit: 'Edit client'
-      remove: 'Remove client'
+      list: 'Courses list'
+      new: 'New course'
+      edit: 'Edit course'
+      remove: 'Remove course'
     links:
-      list: 'Clients'
-      item: 'Client'
+      list: 'Courses'
+      item: 'Course'
   activerecord:
     models:
-      client: 'Clients'
+      course: 'Courses'
     attributes:
-      client:
+      course:
         title: 'Title'
         full_name: 'Full name'
-        tax_number: 'Tax number'
+        client: 'Client'
         description: 'Description'
         status: 'Status'
         created_at: 'Created at'
         updated_at: 'Updated at'
     errors:
       models:
-        client:
+        course:
           attributes:
             title:
               required: 'is required'
@@ -30,6 +30,6 @@ en:
             full_name:
               required: 'is required'
               blank: 'blank'
-            tax_number:
+            client:
               required: 'is required'
               blank: 'blank'

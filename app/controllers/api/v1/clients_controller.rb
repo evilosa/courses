@@ -34,6 +34,19 @@ class Api::V1::ClientsController < Api::V1::BaseController
     end
   end
 
+  def search
+    search_title = params[:title]
+    result = []
+
+    if search_title != ''
+      Client.where("title ILIKE ?", "%#{search_title}%").each { |client| result << { value: client.id, label: client.title } }
+    else
+      Client.first(50).each { |client| result << { value: client.id, label: client.title } }
+    end
+
+    render json: result
+  end
+
   private
 
   def load_client

@@ -63,7 +63,7 @@ class ListPageContainer extends Component {
       <div className="animated fadeIn">
         <div className="row">
           <div className="col-md-11">
-            <h3>{I18n.t('clients.headers.list')}</h3>
+            <h3>{I18n.t('courses.headers.list')}</h3>
             <hr/>
             <ItemsList items={items} onOpenItem={this.onOpenItem}/>
           </div>
