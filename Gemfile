@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'active_model_serializers'
 gem 'i18n-js'
-
+gem 'mysql2'
 gem 'sidekiq'
 gem 'whenever'
 gem 'thinking-sphinx'
