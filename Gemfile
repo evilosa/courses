@@ -16,15 +16,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'active_model_serializers'
 gem 'i18n-js'
-gem 'mysql2'
-gem 'sidekiq'
-gem 'whenever'
-gem 'thinking-sphinx'
 gem 'dotenv-rails'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'capistrano-dotenv-tasks', require: false
 gem 'unicorn'
-gem 'redis-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,7 +40,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
-  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano-postgresql', require: false
   gem 'capistrano3-unicorn', require: false
 end
 
