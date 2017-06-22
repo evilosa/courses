@@ -45,7 +45,7 @@ set :rvm_ruby_version, '2.4.0@courses'
  set :ssh_options, {
    keys: %w(/home/evilosa/.ssh/id_rsa),
    forward_agent: true,
-   auth_methods: %w(publickey password),
+   auth_methods: %w(publickey),
    port: 36140
  }
 #
