@@ -7,7 +7,6 @@ end
 
 gem 'rails', '~> 5.1.0.rc1'
 gem 'pg', '~>0.21'
-gem 'puma', '~> 3.7'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
