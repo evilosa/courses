@@ -176,7 +176,6 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     public_suffix (2.0.5)
-    puma (3.9.1)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -352,7 +351,6 @@ DEPENDENCIES
   mysql2
   pg (~> 0.21)
   poltergeist
-  puma (~> 3.7)
   rails (~> 5.1.0.rc1)
   rails-controller-testing
   redis-rails
