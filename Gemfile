@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.0.rc1'
-gem 'pg', '~>0.18'
+gem 'pg', '~>0.21'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'uglifier', '>= 1.3.0'
@@ -21,8 +21,6 @@ gem 'mysql2'
 gem 'sidekiq'
 gem 'whenever'
 gem 'thinking-sphinx'
-
-gem 'dotenv-rails'
 gem 'dotenv-rails'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'capistrano-dotenv-tasks', require: false
