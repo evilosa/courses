@@ -57,6 +57,10 @@
 * `bin/webpack-dev-server`
 8) Open `localhost:3000` in web browser
 
+
+### Thinking sphinx 
+1) install mysql2 `sudo apt-get install libmysqlclient-dev`
+
 ### Increasing the amount of inotify watchers for RubyMine
 
 1) `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
