@@ -4,6 +4,7 @@ require "capistrano/deploy"
 require "capistrano/rvm"
 require "capistrano/bundler"
 require 'capistrano/rails'
+require 'capistrano/postgresql'
 require 'capistrano/dotenv/tasks'
 require 'capistrano3/unicorn'
 
