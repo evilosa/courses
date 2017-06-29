@@ -11,22 +11,20 @@ gem 'sass-rails', github: "rails/sass-rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'coffee-rails', '~> 4.2'
-
 gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'active_model_serializers'
 gem 'i18n-js'
 gem 'puma'
 gem 'rubyzip'
-gem 'selenium-webdriver'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.5'
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'letter_opener'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -35,6 +33,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :deployment do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
@@ -42,6 +43,7 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.5'
   gem 'capybara', '~> 2.13.0'
   gem 'capybara-webkit'
   gem 'capybara-email'
@@ -49,7 +51,6 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'rails-controller-testing'
-
   gem 'shoulda-matchers', '~> 3.1'
   gem 'with_model'
 end
