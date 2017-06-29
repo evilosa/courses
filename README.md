@@ -2,6 +2,9 @@
 
 ## Full install for Ubuntu 16.04 LTS
 
+### Install language
+1) `sudo apt-get install language-pack-ru`
+
 ### Install git
 1) `sudo apt install git`
 
@@ -20,13 +23,15 @@
 
 1) `sudo apt-get update`
 2) `sudo apt-get install postgresql postgresql-contrib postgresql-server-dev-9.5 libpq-dev`
-3) Create db user `sudo -u postgres createuser --interactive`
-4) Login with postgresql user `sudo -i -u postgres`
-5) Open db console, run `psql`
-6) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';` Change `username` and `password` to your operating system user and preferable password.
-7) To exit from psql type `\q`
-8) To logout from postgresql user type 'logout'
-7) Create `config/database.yml` from `config/database.sample` with your user and password
+3) `sudo pg_dropcluster --stop 9.5 main`
+4) `pg_createcluster --locale ru_RU.UTF-8 --start 9.5 main`
+5) Create db user `sudo -u postgres createuser --interactive`
+6) Login with postgresql user `sudo -i -u postgres`
+7) Open db console, run `psql`
+8) In PSQL console type `ALTER USER username WITH ENCRYPTED PASSWORD 'password';` Change `username` and `password` to your operating system user and preferable password.
+9) To exit from psql type `\q`
+10) To logout from postgresql user type 'logout'
+11) Create `config/database.yml` from `config/database.sample` with your user and password
 
 ### Install QT5 for Capybara-webkit
 
