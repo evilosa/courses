@@ -294,6 +294,7 @@ DEPENDENCIES
   rails-controller-testing
   responders
   rspec-rails (~> 3.5)
+  rubyzip
   sass-rails!
   selenium-webdriver
   shoulda-matchers (~> 3.1)
