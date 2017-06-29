@@ -9,6 +9,9 @@ set :branch, 'deploy'
 ask :deploy, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
+set :stage, :production
+set :rails_env, :production
+
 set :deploy_to, '/home/deployer/courses'
 set :deploy_user, 'deployer'
 
