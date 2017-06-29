@@ -19,3 +19,5 @@ append :linked_files, 'config/database.yml'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundle', 'public/uploads'
 
 set :keep_releases, 10
+
+set :rvm_ruby_version, '2.4.1@courses'
