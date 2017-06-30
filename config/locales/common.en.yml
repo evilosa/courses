@@ -1,0 +1,25 @@
+en:
+  common:
+    headers:
+      actions: 'Actions'
+      details: 'Details'
+      toastr:
+        info: 'Info'
+        success: 'Success'
+        warning: 'Warning'
+        error: 'Error'
+    questions:
+      remove: 'Are you sure want to remove %{subject}: %{title}?'
+    messages:
+      toastr:
+        success:
+          created: 'Item created successfully'
+          updated: 'Item updated successfully'
+          removed: 'Item removed successfully'
+    buttons:
+      back: 'Back'
+      add: 'Add'
+      edit: 'Edit'
+      remove: 'Remove'
+      cancel: 'Cancel'
+      save: 'Save'

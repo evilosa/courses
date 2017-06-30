@@ -1,0 +1,35 @@
+en:
+  courses:
+    headers:
+      list: 'Courses list'
+      new: 'New course'
+      edit: 'Edit course'
+      remove: 'Remove course'
+    links:
+      list: 'Courses'
+      item: 'Course'
+  activerecord:
+    models:
+      course: 'Courses'
+    attributes:
+      course:
+        title: 'Title'
+        full_name: 'Full name'
+        client: 'Client'
+        description: 'Description'
+        status: 'Status'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+    errors:
+      models:
+        course:
+          attributes:
+            title:
+              required: 'is required'
+              blank: 'blank'
+            full_name:
+              required: 'is required'
+              blank: 'blank'
+            client:
+              required: 'is required'
+              blank: 'blank'
