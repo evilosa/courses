@@ -32,7 +32,7 @@ set :stage, :production
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-set :rvm_ruby_version, '2.4.0@courses'
+set :rvm_ruby_version, '2.4.1@courses'
 
 # Custom SSH Options
 # ==================
@@ -45,7 +45,7 @@ set :rvm_ruby_version, '2.4.0@courses'
  set :ssh_options, {
    keys: %w(/home/evilosa/.ssh/id_rsa),
    forward_agent: true,
-   auth_methods: %w(publickey),
+   auth_methods: %w(publickey password),
    port: 36140
  }
 #
