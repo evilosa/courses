@@ -15,6 +15,9 @@
     <%= javascript_include_tag '/javascripts/i18n' %>
     <%= javascript_include_tag '/javascripts/translations' %>
 
+    <% if user_signed_in? %>
+      curl -X GET -- header 'Authorization: Bearer <%= JWTWrapper.encode({user_id: current_user.id }) %>' 'http://localhost:3000/api/v1/user/auth'
+    <% end %>
   </head>
 
   <body class='app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden'>
