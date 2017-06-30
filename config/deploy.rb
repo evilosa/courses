@@ -16,7 +16,7 @@ set :deploy_to, '/home/deployer/courses'
 set :deploy_user, 'deployer'
 
 # Default value for :linked_files is []
-append :linked_files, 'config/database.yml', 'config/webpacker.yml'
+append :linked_files, 'config/database.yml', 'config/webpacker.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundle', 'public/uploads'
@@ -24,3 +24,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 set :keep_releases, 10
 
 set :rvm_ruby_version, '2.4.1@courses'
+
+# Puma
+set :puma_bind, %w(unix:///home/deployer/courses/shared/tmp/sockets/puma.sock)
+set :puma_init_active_record, true
