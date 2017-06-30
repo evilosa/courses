@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :discourse do
+    get 'sso'
+  end
+
   get '*path', to: 'home#index'
 end
