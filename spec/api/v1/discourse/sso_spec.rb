@@ -28,7 +28,9 @@ describe 'Discourse sso api' do
       # end
     end
 
-    it 'Browser redirects to sso_login'
+    it 'Browser redirects to sso_url' do
+      expect(do_request.current_path).to eq 'http://tech.evilosa.com/session/sso_login'
+    end
 
   end
 
