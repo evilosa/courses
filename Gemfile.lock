@@ -272,6 +272,7 @@ DEPENDENCIES
   active_model_serializers
   byebug
   capistrano
+  capistrano-bundler
   capistrano-rails
   capistrano-rvm
   capistrano3-puma
