@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class NavTop extends Component {
@@ -16,6 +17,11 @@ class NavTop extends Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  login(e) {
+    e.preventDefault();
+
   }
 
   sidebarToggle(e) {
@@ -72,6 +78,9 @@ class NavTop extends Component {
           <li className="nav-item hidden-md-down">
             <a className="nav-link" href="#"><i className="icon-location-pin"></i></a>
           </li>
+          <li className="nav-item hidden-md-down">
+            <Link to="/login" className="nav-link"><i className="icon-login"></i> Login</Link>
+          </li>
           <li className="nav-item dropdown">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <a onClick={this.toggle} className="nav-link avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded={this.state.dropdownOpen}>
@@ -95,6 +104,7 @@ class NavTop extends Component {
                 <DropdownItem divider />
                 <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
                 <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+
 
               </DropdownMenu>
             </Dropdown>
