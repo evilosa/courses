@@ -1,11 +1,16 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-// Containers
+// Layouts
 import MainLayout from '../components/MainLayout';
-import Login from '../components/Login';
 import LoginLayout from '../components/LoginLayout';
 
+// Users
+import Login from '../components/Login';
+import Register from '../components/Register';
+import ResetPassword from '../components/ResetPassword';
+
+// Pages
 import Dashboard from '../modules/dashboard';
 import Clients from '../modules/clients';
 import Courses from '../modules/courses';
@@ -27,7 +32,9 @@ export default (
       </Route>
     </Route>
     <Route path='login' component={LoginLayout}>
-      <IndexRoute component={Login}/>
+      <Route path='sign_in' component={Login}/>
+      <Route path='register' component={Register}/>
+      <Route path='password/new' component={ResetPassword}/>
     </Route>
   </div>
 );
