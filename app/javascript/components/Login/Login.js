@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import Utils from '../../modules/utils';
+
 import { Link } from 'react-router';
 
 class Login extends Component {
+  componentDidMount() {
+    alert(Utils.getMetaContent('csrf-token'));
+  }
+
   render() {
     return (
       <div className="container">
