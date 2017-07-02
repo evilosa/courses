@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       end
 
       resources :courses, only: [:index, :show, :create, :update, :destroy]
+
+      get 'is_signed_in', to: 'auth#is_signed_in'
     end
   end
 
