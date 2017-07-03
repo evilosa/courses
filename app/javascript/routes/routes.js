@@ -3,17 +3,12 @@ import { Route, IndexRoute } from 'react-router';
 
 // Layouts
 import MainLayout from '../components/MainLayout';
-import LoginLayout from '../components/LoginLayout';
-
-// Users
-import Login from '../components/Login';
-import Register from '../components/Register';
-import ResetPassword from '../components/ResetPassword';
 
 // Pages
 import Dashboard from '../modules/dashboard';
 import Clients from '../modules/clients';
 import Courses from '../modules/courses';
+import Auth from '../modules/auth';
 
 export default (
   <div>
@@ -31,10 +26,6 @@ export default (
         <Route path=":id" name="Course detail" component={Courses.containers.ItemPage}/>
       </Route>
     </Route>
-    <Route path='login' component={LoginLayout}>
-      <Route path='sign_in' component={Login}/>
-      <Route path='register' component={Register}/>
-      <Route path='password/new' component={ResetPassword}/>
-    </Route>
+    <Route path='sign_in' component={Auth.containers.LoginContainer}/>
   </div>
 );
