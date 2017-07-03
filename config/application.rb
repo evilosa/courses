@@ -8,8 +8,14 @@ Bundler.require(*Rails.groups)
 
 module SorcCourses
   class Application < Rails::Application
+    config.to_prepare do
+      DeviseController.respond_to :json
+    end
+
     # Use the responders controller from the responders gem
     #ActiveModelSerializers.config.adapter = :json_api
+
+    config.autoload_paths << Rails.root.join('lib')
 
     config.app_generators.scaffold_controller :responders_controller
 
@@ -24,9 +30,5 @@ module SorcCourses
     config.i18n.default_locale = :ru
 
     config.middleware.use I18n::JS::Middleware
-
-    config.to_prepare do
-      DeviseController.respond_to :html, :json
-    end
   end
 end

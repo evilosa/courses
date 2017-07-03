@@ -25,10 +25,12 @@ class Login extends Component {
 
   signIn(event) {
     event.preventDefault();
-    fetch('/users/sign_in', {
+    fetch('/users/sign_in.json', {
       method: 'POST',
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': Utils.getMetaContent('csrf-token')
       }),
       body: JSON.stringify(
         {
@@ -39,7 +41,9 @@ class Login extends Component {
           authenticity_token: Utils.getMetaContent('csrf-token')
         })}
     )
-      .then(success => alert(`Ok ${success}`))
+      .then((response, status, xhr) => {
+        alert(`Token ${response.headers['Authorization']}`);
+      })
       .catch(error => alert(error));
   }
 

@@ -2,7 +2,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   before_action :load_client, only: [:show, :update, :destroy]
 
   def index
-    respond_with @clients = Client.all
+    render json: Client.all
   end
 
   def create

@@ -3,7 +3,7 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
 
-  protect_from_forgery with: :null_session
+  protect_from_forgery prepend: true
 
   # before_action :configure_permitted_parameters, if: :devise_controller?
   #
