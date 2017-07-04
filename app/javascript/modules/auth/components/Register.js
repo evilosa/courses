@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
 const propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  password_confirmation: PropTypes.string.isRequired,
+  email: PropTypes.object.isRequired,
+  password: PropTypes.object.isRequired,
+  password_confirmation: PropTypes.object.isRequired,
   onChangeEmail: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
   onChangePasswordConfirmation: PropTypes.func.isRequired,
