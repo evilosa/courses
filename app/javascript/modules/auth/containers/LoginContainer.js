@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import Login from '../components/Login';
 
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../actionCreators';
 import * as constants from '../constants';
 
-class AuthContainer extends Component {
+class LoginContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.signIn = this.signIn.bind(this);
@@ -17,7 +18,7 @@ class AuthContainer extends Component {
     this.changePassword = this.changePassword.bind(this);
 
     this.state = {
-      login: '',
+      email: '',
       password: ''
     };
   }
@@ -40,7 +41,7 @@ class AuthContainer extends Component {
       body: JSON.stringify(
         {
           user: {
-            email: this.state.login,
+            email: this.state.email,
             password: this.state.password
           }
         })}
@@ -64,11 +65,11 @@ class AuthContainer extends Component {
 
   signUp(event) {
     event.preventDefault();
-
+    browserHistory.push('/sign_up');
   }
 
   changeEmail(event) {
-    return this.setState({login: event.target.value});
+    return this.setState({email: event.target.value});
   }
 
   changePassword(event) {
@@ -78,6 +79,8 @@ class AuthContainer extends Component {
   render() {
     return (
       <Login
+        email={this.state.email}
+        password={this.state.password}
         onEmailChanged={this.changeEmail}
         onPasswordChanged={this.changePassword}
         onSignIn={this.signIn}
@@ -96,4 +99,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

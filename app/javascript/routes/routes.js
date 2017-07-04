@@ -27,5 +27,6 @@ export default (
       </Route>
     </Route>
     <Route path='sign_in' component={Auth.containers.LoginContainer}/>
+    <Route path='sign_up' component={Auth.containers.RegisterContainer}/>
   </div>
 );

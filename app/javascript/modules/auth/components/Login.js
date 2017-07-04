@@ -8,7 +8,7 @@ const propTypes = {
   onSignUp: PropTypes.func.isRequired
 };
 
-const Login = ({onEmailChanged, onPasswordChanged, onSignIn, onForgotPassword, onSignUp}) => (
+const Login = ({email, password, onEmailChanged, onPasswordChanged, onSignIn, onForgotPassword, onSignUp}) => (
   <div className="app flex-row align-items-center">
     <div className="container">
       <div className="row justify-content-center">
@@ -20,11 +20,11 @@ const Login = ({onEmailChanged, onPasswordChanged, onSignIn, onForgotPassword, o
                 <p className="text-muted">Sign In to your account</p>
                 <div className="input-group mb-1">
                   <span className="input-group-addon"><i className="icon-user"></i></span>
-                  <input type="text" className="form-control" placeholder="Username" onChange={onEmailChanged}/>
+                  <input type="text" className="form-control" placeholder="Username" onChange={onEmailChanged} value={email}/>
                 </div>
                 <div className="input-group mb-2">
                   <span className="input-group-addon"><i className="icon-lock"></i></span>
-                  <input type="password" className="form-control" placeholder="Password" onChange={onPasswordChanged}/>
+                  <input type="password" className="form-control" placeholder="Password" onChange={onPasswordChanged} value={password}/>
                 </div>
                 <div className="row">
                   <div className="col-6">

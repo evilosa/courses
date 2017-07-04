@@ -1,3 +1,4 @@
 import LoginContainer from './LoginContainer';
+import RegisterContainer from './RegisterContainer';
 
-export default { LoginContainer }
+export default { LoginContainer, RegisterContainer }

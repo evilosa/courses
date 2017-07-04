@@ -79,7 +79,7 @@ class NavTop extends Component {
             <a className="nav-link" href="#"><i className="icon-location-pin"></i></a>
           </li>
           <li className="nav-item hidden-md-down">
-            <Link to="/login" className="nav-link"><i className="icon-login"></i> Login</Link>
+            <Link to="/sign_in" className="nav-link"><i className="icon-login"></i> Login</Link>
           </li>
           <li className="nav-item dropdown">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

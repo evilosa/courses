@@ -1,53 +1,54 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
-class Register extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card mx-2">
-              <div className="card-block p-2">
-                <h1>Register</h1>
-                <p className="text-muted">Create your account</p>
-                <div className="input-group mb-1">
-                  <span className="input-group-addon"><i className="icon-user"></i></span>
-                  <input type="text" className="form-control" placeholder="Username"/>
-                </div>
+const propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  password_confirmation: PropTypes.string.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
+  onChangePasswordConfirmation: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired
+};
 
-                <div className="input-group mb-1">
-                  <span className="input-group-addon">@</span>
-                  <input type="text" className="form-control" placeholder="Email"/>
-                </div>
+const Register = (props) => (
+  <div className="app flex-row align-items-center">
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card mx-2">
+            <div className="card-block p-2">
 
-                <div className="input-group mb-1">
-                  <span className="input-group-addon"><i className="icon-lock"></i></span>
-                  <input type="password" className="form-control" placeholder="Password"/>
-                </div>
+              <h1>Register</h1>
+              <p className="text-muted">Create your account</p>
 
-                <div className="input-group mb-2">
-                  <span className="input-group-addon"><i className="icon-lock"></i></span>
-                  <input type="password" className="form-control" placeholder="Repeat password"/>
-                </div>
-
-                <button type="button" className="btn btn-block btn-success">Create Account</button>
+              <div className="input-group mb-1">
+                <span className="input-group-addon">@</span>
+                <input type="text" className="form-control" placeholder="Email" value={props.email.value} onChange={props.onChangeEmail}/>
               </div>
-              <div className="card-footer p-2">
-                <div className="row">
-                  <div className="col-6">
-                    <button className="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-                  </div>
-                  <div className="col-6">
-                    <button className="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                  </div>
-                </div>
+              <p className="help-block small">{props.email.validation}</p>
+
+              <div className="input-group mb-1">
+                <span className="input-group-addon"><i className="icon-lock"></i></span>
+                <input type="password" className="form-control" placeholder="Password" value={props.password.value} onChange={props.onChangePassword}/>
               </div>
+              <p className="help-block small">{props.password.validation}</p>
+
+              <div className="input-group mb-2">
+                <span className="input-group-addon"><i className="icon-lock"></i></span>
+                <input type="password" className="form-control" placeholder="Repeat password" value={props.password_confirmation.value} onChange={props.onChangePasswordConfirmation}/>
+              </div>
+              <p className="help-block small">{props.password_confirmation.validation}</p>
+
+              <button type="button" className="btn btn-block btn-success" onClick={props.onSignUp}>Create Account</button>
             </div>
+
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
+
+Register.propTypes = propTypes;
 
 export default Register;
