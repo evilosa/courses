@@ -14,7 +14,7 @@ const configureStore = preloadedState => {
         compose(
           applyMiddleware(thunk, routerMiddleware(browserHistory), createLogger()),
           DevTools.instrument(),
-          autoRehydrate()
+          autoRehydrate({log: true})
         )
     );
 

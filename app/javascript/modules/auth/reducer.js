@@ -14,6 +14,9 @@ export default (state = State, action) => {
     case t.SIGN_IN_FAILURE:
       return { ...state, signedIn: false, user: null, token: null, loading: false};
 
+    case 'persist/REHYDRATE':
+      return { ...action.payload.auth };
+
     default:
       return state;
   }
