@@ -6,8 +6,8 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../actionCreators';
-
-import auth_public from '../index';
+import Api from '../../../api';
+import * as constants from '../constants';
 
 class LoginContainer extends Component {
   constructor(props, context) {
@@ -22,6 +22,8 @@ class LoginContainer extends Component {
       email: '',
       password: ''
     };
+
+    this.auth_api = new Api.AuthApi(constants);
   }
 
   signIn(event) {
@@ -31,7 +33,7 @@ class LoginContainer extends Component {
 
     const { email, password } = this.state;
 
-    auth_public.api.signIn(email, password)
+    this.auth_api.signIn(email, password)
       .then(data => {
         this.props.actions.signInSuccess(data.user, data.auth_token);
         browserHistory.goBack();
@@ -71,8 +73,8 @@ class LoginContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state[auth_public.constants.NAME].loading,
-  user: state[auth_public.constants.NAME].user
+  loading: state[constants.NAME].loading,
+  user: state[constants.NAME].user
 });
 
 const mapDispatchToProps = dispatch => ({

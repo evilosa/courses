@@ -26,7 +26,7 @@ class ItemPageContainer extends Component {
       isRemoving: false
     };
 
-    this.catalogApi = new api.CatalogApi(constants, this.params.token);
+    this.catalogApi = new api.CatalogApi(constants, this.props.token);
 
     this.fetchItem = this.fetchItem.bind(this);
     this.createItem = this.createItem.bind(this);
@@ -69,9 +69,7 @@ class ItemPageContainer extends Component {
   }
 
   searchClients(title) {
-    return fetch(`/api/v1/clients/search?title=${title}`)
-      .then(response => response.json())
-      .then(items => ({options: items}));
+    return this.catalogApi.search_by_title('clients', title);
   }
 
   createItem(item) {

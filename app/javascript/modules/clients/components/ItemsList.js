@@ -5,7 +5,7 @@ import { Table } from 'reactstrap';
 import ListItem from './ListItem';
 
 
-const ItemsList = (props) => {
+const ItemsList = ({items = [], onOpenItem}) => {
   return (
     <Table  hover>
       <thead>
@@ -18,7 +18,7 @@ const ItemsList = (props) => {
       </tr>
       </thead>
       <tbody>
-        {props.items.map(t => <ListItem key={t.id} item={t} onDblClick={() => props.onOpenItem(t.id)}/>)}
+        {items.map(t => <ListItem key={t.id} item={t} onDblClick={() => onOpenItem(t.id)}/>)}
       </tbody>
     </Table>
   );

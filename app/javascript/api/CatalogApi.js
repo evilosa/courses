@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { browserHistory } from 'react-router';
+import auth_public from '../modules/auth';
+
+const auth_const = auth_public.constants;
 
 class CatalogApi {
 
@@ -58,6 +61,18 @@ class CatalogApi {
     });
   };
 
+  search_by_title(catalog, title) {
+    return fetch(`/api/v1/${catalog}/search?title=${title}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(items => ({options: items}));
+  }
+
   doApiRequest(path, params = {}) {
     Object.assign(params, {
       headers: {
@@ -76,6 +91,9 @@ class CatalogApi {
 
         if (response.status === 200)
           return json;
+
+        if (response.status === 401)
+          return browserHistory.push(auth_const.SIGN_IN_PATH);
 
         if (response.status === 422)
           return json.then(error => { throw error.errors; });
