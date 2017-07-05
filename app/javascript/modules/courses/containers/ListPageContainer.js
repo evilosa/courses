@@ -9,12 +9,12 @@ import { toastr } from 'react-redux-toastr';
 
 import ItemsList from '../components/ItemsList';
 
-const catalogApi = new api.CatalogApi(constants);
-
 // Container
 class ListPageContainer extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.catalogApi = new api.CatalogApi(constants, this.props.token);
 
     this.fetchItems = this.fetchItems.bind(this);
     this.onAdd = this.onAdd.bind(this);
@@ -33,7 +33,7 @@ class ListPageContainer extends Component {
 
     actions.fetchItems();
 
-    catalogApi.getAll()
+    this.catalogApi.getAll()
       .then(items => actions.fetchItemsSuccess(items))
       .catch(errors => {
         actions.fetchItemsFailure(errors);
@@ -46,11 +46,11 @@ class ListPageContainer extends Component {
 
   onAdd(event) {
     event.preventDefault();
-    catalogApi.navigateToNew();
+    this.catalogApi.navigateToNew();
   }
 
   onOpenItem(id) {
-    catalogApi.navigateToItem(id);
+    this.catalogApi.navigateToItem(id);
   }
 
   //////////////////////////////////////////////
@@ -82,7 +82,8 @@ class ListPageContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    list: state[constants.NAME].list
+    list: state[constants.NAME].list,
+    token: state.auth.token
   };
 };
 

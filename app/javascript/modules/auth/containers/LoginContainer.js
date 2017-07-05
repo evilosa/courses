@@ -6,7 +6,8 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../actionCreators';
-import * as constants from '../constants';
+
+import auth_public from '../index';
 
 class LoginContainer extends Component {
   constructor(props, context) {
@@ -23,44 +24,23 @@ class LoginContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    //alert(Utils.getMetaContent('csrf-token'));
-  }
-
   signIn(event) {
     event.preventDefault();
 
     this.props.actions.signIn();
 
-    fetch('/users/sign_in.json', {
-      method: 'POST',
-      headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(
-        {
-          user: {
-            email: this.state.email,
-            password: this.state.password
-          }
-        })}
-    )
-      .then(response => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        throw ('Authorize fail');
-      })
-      .then(result => {
-        this.props.actions.signInSuccess(result.user, result.auth_token);
+    const { email, password } = this.state;
+
+    auth_public.api.signIn(email, password)
+      .then(data => {
+        this.props.actions.signInSuccess(data.user, data.auth_token);
+        browserHistory.goBack();
       })
       .catch(error => this.props.actions.signInFailure(error));
   }
 
   forgotPassword(event) {
     event.preventDefault();
-
   }
 
   signUp(event) {
@@ -91,8 +71,8 @@ class LoginContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state[constants.NAME].loading,
-  user: state[constants.NAME].user
+  loading: state[auth_public.constants.NAME].loading,
+  user: state[auth_public.constants.NAME].user
 });
 
 const mapDispatchToProps = dispatch => ({

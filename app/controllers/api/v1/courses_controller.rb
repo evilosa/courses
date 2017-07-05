@@ -2,7 +2,7 @@ class Api::V1::CoursesController < Api::V1::BaseController
   before_action :load_course, only: [:show, :update, :destroy]
 
   def index
-    respond_with @courses = Course.all
+    render json: Course.all
   end
 
   def create
