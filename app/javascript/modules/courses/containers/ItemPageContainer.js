@@ -15,8 +15,6 @@ import common from '../../../components';
 import ItemEdit from '../components/ItemEdit';
 import ItemDetails from '../components/ItemDetails';
 
-
-const catalogApi = new api.CatalogApi(constants);
 const { RemoveConfirm } = common;
 
 class ItemPageContainer extends Component {
@@ -27,6 +25,8 @@ class ItemPageContainer extends Component {
       isEditing: this.props.isEditing,
       isRemoving: false
     };
+
+    this.catalogApi = new api.CatalogApi(constants, this.props.token);
 
     this.fetchItem = this.fetchItem.bind(this);
     this.createItem = this.createItem.bind(this);
@@ -63,15 +63,13 @@ class ItemPageContainer extends Component {
 
     actions.fetchItem(id);
 
-    catalogApi.getById(id)
+    this.catalogApi.getById(id)
       .then(item => actions.fetchItemSuccess(item))
       .catch(errors => actions.fetchItemFailure(errors));
   }
 
   searchClients(title) {
-    return fetch(`/api/v1/clients/search?title=${title}`)
-      .then(response => response.json())
-      .then(items => ({options: items}));
+    return this.catalogApi.search_by_title('clients', title);
   }
 
   createItem(item) {
@@ -79,12 +77,12 @@ class ItemPageContainer extends Component {
 
     actions.create(item);
 
-    catalogApi.create(item)
+    this.catalogApi.create(item)
       .then(newItem => {
         actions.createSuccess(newItem);
         this.setState({isEditing: false});
         toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.created'));
-        catalogApi.navigateToItem(newItem.id);
+        this.catalogApi.navigateToItem(newItem.id);
       })
       .catch(errors => {
         actions.createFailure(errors);
@@ -97,7 +95,7 @@ class ItemPageContainer extends Component {
 
     actions.update(item);
 
-    catalogApi.update(item)
+    this.catalogApi.update(item)
       .then(response => {
         actions.updateSuccess(response);
         toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.updated'));
@@ -114,11 +112,11 @@ class ItemPageContainer extends Component {
 
     actions.remove(item);
 
-    catalogApi.remove(item)
+    this.catalogApi.remove(item)
       .then(response => {
         actions.removeSuccess(item);
         toastr.success(I18n.t('common.headers.toastr.success'), I18n.t('common.messages.toastr.success.removed'));
-        catalogApi.navigateToList();
+        this.catalogApi.navigateToList();
       })
       .catch(errors => {
         actions.removeFailure(item.id, errors);
@@ -136,7 +134,7 @@ class ItemPageContainer extends Component {
     const { item } = this.state;
 
     if (item.id === null)
-      catalogApi.navigateToList();
+      this.catalogApi.navigateToList();
     else
       this.setState({isEditing: false, item: this.props.item});
   }
@@ -217,7 +215,8 @@ const mapStateToProps = (state, ownProps) => {
     id: ownProps.params.id,
     item: ownProps.route.path == 'new' ? new models.Course() :  state[constants.NAME].activeItem.item,
     isEditing: ownProps.route.path == 'new',
-    isLoading: state[constants.NAME].activeItem.loading
+    isLoading: state[constants.NAME].activeItem.loading,
+    token: state.auth.token
   };
 };
 

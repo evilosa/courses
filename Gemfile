@@ -19,6 +19,9 @@ gem 'puma'
 gem 'rubyzip'
 gem 'faker'
 gem 'factory_girl_rails'
+gem 'devise'
+gem 'omniauth'
+gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
