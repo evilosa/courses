@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
+import { autoRehydrate } from 'redux-persist';
 import DevTools from '../components/DevTools';
 
 const configureStore = preloadedState => {
@@ -11,8 +12,9 @@ const configureStore = preloadedState => {
         rootReducer,
         preloadedState,
         compose(
-            applyMiddleware(thunk, routerMiddleware(browserHistory), createLogger()),
-            DevTools.instrument()
+          applyMiddleware(thunk, routerMiddleware(browserHistory), createLogger()),
+          DevTools.instrument(),
+          autoRehydrate()
         )
     );
 
