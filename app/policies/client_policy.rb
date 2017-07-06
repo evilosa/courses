@@ -11,7 +11,7 @@ class ClientPolicy
   end
 
   def show?
-    false
+    false || (self.user && self.user.has_role?(:client))
   end
 
   def new?
@@ -23,7 +23,7 @@ class ClientPolicy
   end
 
   def update?
-    false
+    false || (self.user && self.user.has_role?(:client))
   end
 
   def destroy?
