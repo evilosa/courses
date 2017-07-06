@@ -25,7 +25,7 @@ const ItemsList = ({items = [], onOpenItem}) => {
 };
 
 ItemsList.propTypes = {
-  items: PropTypes.array.isRequired,
+  items: PropTypes.array,
   onClick: PropTypes.func,
   onOpenItem: PropTypes.func.isRequired
 };
