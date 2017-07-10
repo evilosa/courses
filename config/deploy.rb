@@ -5,8 +5,8 @@ set :application, 'courses'
 set :repo_url, 'git@github.com:evilosa/sorc_courses.git'
 
 # Default branch is :master
-set :branch, 'deploy'
-ask :deploy, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, 'authorization'
+ask :authorization, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :stage, :production
