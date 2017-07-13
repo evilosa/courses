@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../components/Login';
+import LoginPage from '../components/LoginPage';
 
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -59,16 +60,19 @@ class LoginContainer extends Component {
   }
 
   render() {
+    // return (
+    //   <Login
+    //     email={this.state.email}
+    //     password={this.state.password}
+    //     onEmailChanged={this.changeEmail}
+    //     onPasswordChanged={this.changePassword}
+    //     onSignIn={this.signIn}
+    //     onForgotPassword={this.forgotPassword}
+    //     onSignUp={this.signUp}/>
+    // );
     return (
-      <Login
-        email={this.state.email}
-        password={this.state.password}
-        onEmailChanged={this.changeEmail}
-        onPasswordChanged={this.changePassword}
-        onSignIn={this.signIn}
-        onForgotPassword={this.forgotPassword}
-        onSignUp={this.signUp}/>
-    );
+      <LoginPage/>
+    )
   }
 }
 
