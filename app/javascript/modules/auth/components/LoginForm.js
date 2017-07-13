@@ -12,7 +12,7 @@ const formValidator = values => (
 );
 
 let LoginForm = (props) => {
-  const { handleSubmit } = props;
+  const { submitting, handleSubmit } = props;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -27,7 +27,7 @@ let LoginForm = (props) => {
       </div>
       <div className="row">
         <div className="col-6">
-          <button type="button" className="btn btn-primary px-2" >Login</button>
+          <button type="button" className="btn btn-primary px-2" disabled={submitting}>Login</button>
         </div>
         <div className="col-6 text-right">
           <button type="button" className="btn btn-link px-0" >Forgot password?</button>
