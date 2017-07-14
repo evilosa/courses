@@ -11,7 +11,7 @@ const LoginPage = (props) => (
               <div className="card p-2">
                 <div className="card-block">
                   <h1>Login</h1>
-                  <LoginForm/>
+                  <LoginForm onSubmit={props.signIn}/>
                 </div>
               </div>
               <div className="card card-inverse card-primary py-3 hidden-md-down" style={{ width: 44 + '%' }}>

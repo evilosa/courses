@@ -27,12 +27,12 @@ class LoginContainer extends Component {
     this.auth_api = new Api.AuthApi(constants);
   }
 
-  signIn(event) {
-    event.preventDefault();
+  signIn(values) {
+    //event.preventDefault();
 
     this.props.actions.signIn();
 
-    const { email, password } = this.state;
+    const { email, password } = values;
 
     this.auth_api.signIn(email, password)
       .then(data => {
@@ -71,7 +71,7 @@ class LoginContainer extends Component {
     //     onSignUp={this.signUp}/>
     // );
     return (
-      <LoginPage/>
+      <LoginPage signIn={this.signIn}/>
     )
   }
 }
