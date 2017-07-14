@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import validate from 'validate.js';
+import formValidator from '../../../utils/formValidator';
 
 import Fields from '../../../components/Fields';
 
@@ -8,22 +8,20 @@ const { IconField } = Fields;
 
 const constraints = {
   email: { email: true },
-  password: { length: {minimum: 2} }
+  password: { length: { minimum: 2 } }
 };
 
-const formValidator = values => (
-  validate(values, constraints) || {}
-);
-
 let LoginForm = (props) => {
-  const { submitting, handleSubmit } = props;
+  const { error, submitting, handleSubmit } = props;
+
+  console.log(props);
 
   return (
     <form onSubmit={handleSubmit(props.signIn)}>
       <p className="text-muted">Sign In to your account</p>
       <Field name="email" component={IconField} label="email"/>
       <Field name="password" component={IconField} type="password" label="password"/>
-
+      {error && <strong>{error}</strong>}
       <div className="row">
         <div className="col-6">
           <button type="submit" className="btn btn-primary px-2" disabled={submitting}>Login</button>
@@ -38,7 +36,7 @@ let LoginForm = (props) => {
 
 LoginForm = reduxForm({
   form: 'login',
-  validate: formValidator
+  validate: formValidator(constraints)
 })(LoginForm);
 
 export default LoginForm;
