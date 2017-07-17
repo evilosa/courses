@@ -33,6 +33,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem 'json_spec'
 end
 
 group :development do
@@ -49,11 +50,10 @@ group :development do
 end
 
 group :test do
-
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'capybara-email'
-  gem 'json_spec'
+
   gem 'poltergeist'
   gem 'launchy'
   gem 'rails-controller-testing'
