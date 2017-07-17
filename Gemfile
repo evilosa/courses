@@ -5,17 +5,19 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.0.rc1'
-gem 'pg', '~>0.21'
-gem 'sass-rails', github: "rails/sass-rails"
+gem 'rails', '~> 5.1.2'
+gem 'pg', '~> 0.18'
+gem 'puma', '~> 3.7'
+gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
+
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'active_model_serializers'
 gem 'i18n-js'
-gem 'puma'
+
 gem 'rubyzip'
 gem 'faker'
 gem 'factory_girl_rails'
@@ -30,6 +32,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'letter_opener'
   gem 'selenium-webdriver'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -46,15 +49,15 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.5'
-  gem 'capybara', '~> 2.13.0'
+
+  gem 'capybara'
   gem 'capybara-webkit'
   gem 'capybara-email'
   gem 'json_spec'
   gem 'poltergeist'
   gem 'launchy'
   gem 'rails-controller-testing'
-  gem 'shoulda-matchers', '~> 3.1'
+  gem 'shoulda-matchers'
   gem 'with_model'
   gem 'pundit-matchers'
 end
