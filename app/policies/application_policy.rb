@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    true
+    false
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    true
+    false
   end
 
   def edit?

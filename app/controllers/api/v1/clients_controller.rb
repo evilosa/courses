@@ -6,6 +6,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def create
+    authorize :client, :create?
     @client = Client.new(client_params)
     if (@client.save)
       render json: @client
