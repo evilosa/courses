@@ -4,7 +4,7 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def show?
-    (self.user.has_role?(:client) && self.record.users.include?(self.user)) || self.user.has_role?(:admin)
+    (self.user.has_role?(:user) && self.record.users.include?(self.user)) || (self.user.has_role?(:client) && self.record.users.include?(self.user)) || self.user.has_role?(:admin)
   end
 
   def new?
@@ -16,7 +16,7 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def update?
-    false || (self.user && self.user.has_role?(:client))
+    (self.user.has_role?(:client) && self.record.users.include?(self.user)) || self.user.has_role?(:admin)
   end
 
   def destroy?
