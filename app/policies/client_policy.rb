@@ -1,25 +1,19 @@
 class ClientPolicy < ApplicationPolicy
   def index?
-    self.user.has_role?(:admin)
+    admin?
   end
 
   def show?
-    self.record.owner?(self.user) || self.user.has_role?(:admin)
-  end
-
-  def new?
-    false
-  end
-
-  def create?
-    self.user.has_role?(:admin)
+     update? || (user? && owner?)
   end
 
   def update?
-    false || (self.user && self.user.has_role?(:client))
+    admin? || (client? && owner?)
   end
 
-  def destroy?
-    self.user.has_role?(:admin)
+  private
+
+  def owner?
+    self.record.users.include?(self.user)
   end
 end

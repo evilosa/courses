@@ -22,6 +22,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def update
+    authorize @client
     if (@client.update(client_params))
       render json: @client
     else

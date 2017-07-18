@@ -1,5 +1,11 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
+  def show
+    skip_authorization
+    super
+  end
+
   def create
+    skip_authorization
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
     yield resource if block_given?
@@ -7,6 +13,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
+    skip_authorization
     super
   end
 end

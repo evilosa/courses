@@ -7,15 +7,15 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    user?
   end
 
   def show?
-    false
+    user?
   end
 
   def create?
-    false
+    admin?
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    admin?
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    admin?
   end
 
   def scope
@@ -49,5 +49,19 @@ class ApplicationPolicy
     def resolve
       scope
     end
+  end
+
+  protected
+
+  def user?
+    self.user.has_role?(:user)
+  end
+
+  def client?
+    self.user.has_role?(:client)
+  end
+
+  def admin?
+    self.user.has_role?(:admin)
   end
 end

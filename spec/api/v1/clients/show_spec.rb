@@ -12,7 +12,15 @@ describe 'Client API' do
     let!(:admin) { create(:admin_user) }
     let!(:admin_token) { JWTWrapper.encode({ user_id: admin.id } ) }
 
-    let!(:client_item) { create(:client) }
+    let!(:client_item) {
+      client_item = create(:client)
+      client_item.users << client
+      client_item.users << user
+      client_item
+    }
+
+    let!(:other_item) { create(:client) }
+
     let(:parsed_response) { JSON.parse(response.body) }
 
     it_behaves_like 'API authenticable'
@@ -20,8 +28,18 @@ describe 'Client API' do
     context 'authenticated' do
 
       context 'user with default role' do
-        it 'return 403 status' do
+        it 'can see own record' do
           do_request(token: user_token)
+          expect(response.status).to eq 200
+          expect(parsed_response['id']).to eq(client_item.id)
+          expect(parsed_response['title']).to eq(client_item.title)
+          expect(parsed_response['full_name']).to eq(client_item.full_name)
+          expect(parsed_response['tax_number']).to eq(client_item.tax_number)
+          expect(parsed_response['description']).to eq(client_item.description)
+        end
+
+        it 'return 403 status' do
+          do_request(token: user_token, client_id: other_item.id)
           expect(response.status).to eq 403
         end
       end
@@ -52,14 +70,14 @@ describe 'Client API' do
     end
   end
 
-  def do_request(params: {}, token: '')
+  def do_request(params: {}, token: '', client_id: client_item.id)
     headers = {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
         'Authorization' => "Bearer #{token}"
     }
 
-    get "/api/v1/clients/#{client_item.id}", params: { format: :json }.merge(params), headers: headers
+    get "/api/v1/clients/#{client_id}", params: { format: :json }.merge(params), headers: headers
   end
 
 end

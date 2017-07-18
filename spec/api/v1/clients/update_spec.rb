@@ -1,51 +1,87 @@
 describe 'Client API' do
   describe 'PUT #update' do
 
-    context 'unauthorized' do
-      let!(:client) { create(:client) }
-      let(:parsed_response) { JSON.parse(response.body) }
+    let!(:user) { create(:user) }
+    let!(:user_token) { JWTWrapper.encode({ user_id: user.id } ) }
 
-      before do
-        get_request
-      end
+    let!(:client) { create(:client_user) }
+    let!(:client_token) { JWTWrapper.encode({ user_id: client.id } ) }
 
-      it 'client contains initital attributes' do
-        expect(parsed_response['id']).to eq(client.id)
-        expect(parsed_response['title']).to eq(client.title)
-        expect(parsed_response['full_name']).to eq(client.full_name)
-        expect(parsed_response['tax_number']).to eq(client.tax_number)
-        expect(parsed_response['description']).to eq(client.description)
-      end
+    let!(:admin) { create(:admin_user) }
+    let!(:admin_token) { JWTWrapper.encode({ user_id: admin.id } ) }
 
-      it 'contain updated attributes' do
-        update_request({ client: {
+    let!(:client_item) {
+      client_item = create(:client)
+      client_item.users << client
+      client_item
+    }
+
+    let!(:other_client) { create(:client) }
+
+    let!(:updated_fields) {
+      {
+        client: {
           title: 'New title',
           full_name: 'New full name',
           tax_number: 'New tax number',
-          description: 'New description'}});
+          description: 'New description'
+        }
+      }
+    }
 
-        expect(response.status).to eq 200
+    let(:parsed_response) { JSON.parse(response.body) }
 
-        get_request
+    it_behaves_like 'API authenticable'
 
-        expect(parsed_response['title']).to eq('New title')
-        expect(parsed_response['full_name']).to eq('New full name')
-        expect(parsed_response['tax_number']).to eq('New tax number')
-        expect(parsed_response['description']).to eq('New description')
+    context 'authenticated' do
+
+      context 'user with default role' do
+        it 'return 403 status' do
+          do_request(params: updated_fields, token: user_token)
+          expect(response.status).to eq 403
+        end
       end
 
-      it 'return 422 code to invalid attributes' do
-        update_request({ client: { title: ''}})
-        expect(response.status).to eq 422
+      context 'user with client role' do
+        it 'can update own record' do
+          do_request(params: updated_fields, token: client_token)
+
+          expect(response.status).to eq 200
+          expect(parsed_response['id']).to eq(client_item.id)
+          expect(parsed_response['title']).to eq(updated_fields[:client][:title])
+          expect(parsed_response['full_name']).to eq(updated_fields[:client][:full_name])
+          expect(parsed_response['tax_number']).to eq(updated_fields[:client][:tax_number])
+          expect(parsed_response['description']).to eq(updated_fields[:client][:description])
+        end
+
+        it 'can not update other client' do
+          do_request(params: updated_fields, token: client_token, client_id: other_client.id)
+          expect(response.status).to eq 403
+        end
+      end
+
+      context 'user with admin role' do
+        it 'can update client attributes' do
+          do_request(params: updated_fields, token: admin_token)
+
+          expect(response.status).to eq 200
+          expect(parsed_response['id']).to eq(client_item.id)
+          expect(parsed_response['title']).to eq(updated_fields[:client][:title])
+          expect(parsed_response['full_name']).to eq(updated_fields[:client][:full_name])
+          expect(parsed_response['tax_number']).to eq(updated_fields[:client][:tax_number])
+          expect(parsed_response['description']).to eq(updated_fields[:client][:description])
+        end
       end
     end
   end
 
-  def update_request(params = {})
-    put "/api/v1/clients/#{client.id}", params: { format: :json }.merge(params)
-  end
+  def do_request(params: {}, token: '', client_id: client_item.id)
+    headers = {
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{token}"
+    }
 
-  def get_request(params = {})
-    get "/api/v1/clients/#{client.id}", params: { format: :json }.merge(params)
+    patch "/api/v1/clients/#{client_id}", params: { format: :json }.merge(params).to_json, headers: headers
   end
 end
