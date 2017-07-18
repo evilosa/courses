@@ -2,11 +2,12 @@ class Api::V1::ClientsController < Api::V1::BaseController
   before_action :load_client, only: [:show, :update, :destroy]
 
   def index
+    authorize :client
     render json: Client.all
   end
 
   def create
-    authorize :client, :create?
+    authorize :client
     @client = Client.new(client_params)
     if (@client.save)
       render json: @client
@@ -16,6 +17,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def show
+    authorize @client
     respond_with @client
   end
 
@@ -28,6 +30,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def destroy
+    authorize @client
     if (@client.destroy)
       render json: @client.id
     else

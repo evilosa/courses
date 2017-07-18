@@ -1,10 +1,10 @@
 class ClientPolicy < ApplicationPolicy
   def index?
-    false
+    self.user.has_role?(:admin)
   end
 
   def show?
-    false || (self.user && self.user.has_role?(:client))
+    self.record.owner?(self.user) || self.user.has_role?(:admin)
   end
 
   def new?
@@ -20,6 +20,6 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    self.user.has_role?(:admin)
   end
 end
