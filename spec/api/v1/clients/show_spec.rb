@@ -12,7 +12,12 @@ describe 'Client API' do
     let!(:admin) { create(:admin_user) }
     let!(:admin_token) { JWTWrapper.encode({ user_id: admin.id } ) }
 
-    let!(:client_item) { create(:client) }
+    let!(:client_item) {
+      client_item = create(:client)
+      client_item.users << client
+      client_item
+    }
+
     let(:parsed_response) { JSON.parse(response.body) }
 
     it_behaves_like 'API authenticable'

@@ -5,8 +5,4 @@ class Client < ApplicationRecord
   has_many :users, through: :clients_users
 
   has_many :courses
-
-  def owner? user
-    false
-  end
 end
