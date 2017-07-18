@@ -1,6 +1,6 @@
 class ClientPolicy < ApplicationPolicy
   def index?
-    false
+    self.user.has_role?(:admin)
   end
 
   def show?
