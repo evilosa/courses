@@ -4,7 +4,7 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def show?
-    false || (self.user && self.user.has_role?(:client))
+    self.record.owner?(self.user) || self.user.has_role?(:admin)
   end
 
   def new?

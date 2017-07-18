@@ -17,6 +17,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def show
+    authorize @client
     respond_with @client
   end
 
