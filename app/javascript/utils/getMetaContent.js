@@ -1,4 +1,4 @@
-export const getMetaContent = (name) => {
+export default getMetaContent = (name) => {
   let metas = document.getElementsByTagName('meta');
 
   for (let i = 0; i < metas.length; i++) {

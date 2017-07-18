@@ -21,10 +21,13 @@ class AuthApi {
         })}
     )
       .then(response => {
-        if (response.status === 200) {
+
+        if (response.status === 200 || response.status === 401) {
           return response.json();
         }
-        throw ('Invalid user/password pair');
+        //throw ({ _error: 'Invalid user/password pair' });
+
+        throw (response);
       })
       .catch(error => { throw error });
   }

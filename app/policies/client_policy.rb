@@ -1,11 +1,4 @@
-class ClientPolicy
-  attr_reader :user, :client
-
-  def initialize(user, client)
-    @user = user
-    @client = client
-  end
-
+class ClientPolicy < ApplicationPolicy
   def index?
     false
   end
@@ -19,7 +12,7 @@ class ClientPolicy
   end
 
   def create?
-    false
+    self.user.has_role?(:admin)
   end
 
   def update?

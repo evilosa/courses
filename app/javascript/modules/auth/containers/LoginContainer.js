@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Login from '../components/Login';
+import LoginPage from '../components/LoginPage';
 
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+
+import { SubmissionError } from 'redux-form';
 
 import * as actionCreators from '../actionCreators';
 import Api from '../../../api';
@@ -15,30 +18,26 @@ class LoginContainer extends Component {
     this.signIn = this.signIn.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.signUp = this.signUp.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-
-    this.state = {
-      email: '',
-      password: ''
-    };
 
     this.auth_api = new Api.AuthApi(constants);
   }
 
-  signIn(event) {
-    event.preventDefault();
+  signIn(values) {
 
     this.props.actions.signIn();
 
-    const { email, password } = this.state;
+    const { email, password } = values;
 
-    this.auth_api.signIn(email, password)
+    return this.auth_api.signIn(email, password)
       .then(data => {
         this.props.actions.signInSuccess(data.user, data.auth_token);
         browserHistory.goBack();
       })
-      .catch(error => this.props.actions.signInFailure(error));
+      .catch(errors => {
+        this.props.actions.signInFailure(errors);
+
+        throw new SubmissionError(errors);
+      });
   }
 
   forgotPassword(event) {
@@ -50,25 +49,20 @@ class LoginContainer extends Component {
     browserHistory.push('/sign_up');
   }
 
-  changeEmail(event) {
-    return this.setState({email: event.target.value});
-  }
-
-  changePassword(event) {
-    return this.setState({password: event.target.value});
-  }
-
   render() {
+    // return (
+    //   <Login
+    //     email={this.state.email}
+    //     password={this.state.password}
+    //     onEmailChanged={this.changeEmail}
+    //     onPasswordChanged={this.changePassword}
+    //     onSignIn={this.signIn}
+    //     onForgotPassword={this.forgotPassword}
+    //     onSignUp={this.signUp}/>
+    // );
     return (
-      <Login
-        email={this.state.email}
-        password={this.state.password}
-        onEmailChanged={this.changeEmail}
-        onPasswordChanged={this.changePassword}
-        onSignIn={this.signIn}
-        onForgotPassword={this.forgotPassword}
-        onSignUp={this.signUp}/>
-    );
+      <LoginPage signIn={this.signIn}/>
+    )
   }
 }
 
