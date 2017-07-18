@@ -3,18 +3,22 @@ require 'rails_helper'
 describe ClientPolicy do
   subject { described_class.new(user, client) }
 
-  let!(:client) { create(:client) }
+  let(:client) {
+    client = create(:client)
+    client.users << user if user
+    client
+  }
 
   context 'being a guest' do
-    let(:user) { nil }
+    let!(:user) { nil }
 
     it { is_expected.to forbid_actions([:index, :show, :new, :create, :update, :destroy]) }
   end
 
   context 'being a client user' do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
 
-    it { is_expected.to forbid_actions([:index, :show, :new, :create, :update, :destroy]) }
+    it { is_expected.to forbid_actions([:index, :new, :create, :update, :destroy]) }
   end
 
   context 'being a client' do

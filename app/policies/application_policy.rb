@@ -54,14 +54,14 @@ class ApplicationPolicy
   protected
 
   def user?
-    self.user.has_role?(:user)
+    self.user && self.user.has_role?(:user)
   end
 
   def client?
-    self.user.has_role?(:client)
+    self.user && self.user.has_role?(:client)
   end
 
   def admin?
-    self.user.has_role?(:admin)
+    self.user && self.user.has_role?(:admin)
   end
 end
