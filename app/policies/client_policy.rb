@@ -20,6 +20,6 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    self.user.has_role?(:admin)
   end
 end

@@ -18,21 +18,21 @@ describe 'Client API' do
 
       context 'user with default role' do
         it 'return 403 status' do
-          do_request(user_token)
+          do_request(token: user_token)
           expect(response.status).to eq 403
         end
       end
 
       context 'user with client role' do
         it 'return 403 status' do
-          do_request(client_token)
+          do_request(token: client_token)
           expect(response.status).to eq 403
         end
       end
 
       context 'user with admin role' do
         it 'can see list of clients' do
-          do_request(admin_token)
+          do_request(token: admin_token)
           expect(response.status).to eq 200
           expect(response.body).to have_json_size(2)
         end
@@ -40,14 +40,14 @@ describe 'Client API' do
     end
   end
 
-  def do_request(token = '')
+  def do_request(token: '')
     headers = {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
         'Authorization' => "Bearer #{token}"
     }
 
-    get '/api/v1/clients', params: { format: :json }, headers: headers
+    get '/api/v1/clients', params: { format: :json }.to_json, headers: headers
   end
 
 end

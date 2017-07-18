@@ -7,7 +7,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def create
-    authorize :client, :create?
+    authorize :client
     @client = Client.new(client_params)
     if (@client.save)
       render json: @client
@@ -29,6 +29,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def destroy
+    authorize @client
     if (@client.destroy)
       render json: @client.id
     else

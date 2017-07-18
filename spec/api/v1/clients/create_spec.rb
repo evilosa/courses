@@ -19,31 +19,31 @@ describe 'Client API' do
 
       context 'user with default role' do
         it 'can not create clients' do
-          expect{ do_request(valid_params, user_token) }.not_to change(Client, :count)
+          expect{ do_request(params: valid_params, token: user_token) }.not_to change(Client, :count)
           expect(response.status).to eq 403
         end
       end
 
       context 'user with client role' do
         it 'can not create clients' do
-          expect{ do_request(valid_params, client_token) }.not_to change(Client, :count)
+          expect{ do_request(params: valid_params, token: client_token) }.not_to change(Client, :count)
           expect(response.status).to eq 403
         end
       end
 
       context 'user with admin role' do
         it 'can create clients' do
-          expect{ do_request(valid_params, admin_token) }.to change(Client, :count).by(1)
+          expect{ do_request(params: valid_params, token: admin_token) }.to change(Client, :count).by(1)
         end
 
         it 'can not create client with invalid attributes' do
-          expect{ do_request(invalid_params, admin_token) }.not_to change(Client, :count)
+          expect{ do_request(params: invalid_params, token: admin_token) }.not_to change(Client, :count)
         end
       end
     end
   end
 
-  def do_request(params = {}, token = '')
+  def do_request(params: {}, token: '')
     headers = {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
