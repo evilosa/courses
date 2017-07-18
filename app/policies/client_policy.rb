@@ -11,6 +11,10 @@ class ClientPolicy < ApplicationPolicy
     admin? || (client? && owner?)
   end
 
+  def search?
+    admin?
+  end
+
   private
 
   def owner?

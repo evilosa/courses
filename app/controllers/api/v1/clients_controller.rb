@@ -40,6 +40,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def search
+    authorize :client
     search_title = params[:title]
     result = []
 
